@@ -259,28 +259,16 @@ app.use(
 );
 
 
+
 /* =========================================================
-   MAIN SERVER TEST
+   SERVE LINGUA DEUTSCH CONNECT WEBSITE
 ========================================================= */
 
-app.get(
-    "/",
-    (req, res) => {
+app.use(express.static(path.join(__dirname, "..")));
 
-        res.json({
-
-            success: true,
-
-            message:
-                "Lingua Deutsch Connect backend is running.",
-
-            serverTime:
-                new Date().toISOString()
-
-        });
-
-    }
-);
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "index.html"));
+});
 
 
 /* =========================================================
