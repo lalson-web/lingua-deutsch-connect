@@ -1,0 +1,6564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="LINGUA DEUTSCH CONNECT Online Learning Dashboard"
+    >
+
+    <title>
+        LDC Online Learning | Dashboard
+    </title>
+
+    <style>
+
+        /* =========================================================
+           LINGUA DEUTSCH CONNECT
+           ONLINE STUDENT DASHBOARD
+        ========================================================= */
+
+        :root {
+
+            --gold: #d4af37;
+            --gold-light: #e5c75f;
+            --gold-dark: #a98a24;
+
+            --black: #050505;
+            --black-2: #0b0b0b;
+            --black-3: #111111;
+            --black-4: #171717;
+
+            --white: #ffffff;
+            --text: #f5f5f5;
+            --muted: #999999;
+            --muted-2: #707070;
+
+            --green: #35c978;
+            --red: #ef5350;
+            --blue: #4f8cff;
+
+            --border: rgba(255,255,255,.08);
+            --gold-border: rgba(212,175,55,.25);
+
+            --sidebar-width: 260px;
+
+            --shadow:
+                0 20px 60px rgba(0,0,0,.35);
+
+            --radius: 18px;
+
+        }
+
+
+        * {
+
+            margin: 0;
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        html {
+
+            scroll-behavior: smooth;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(212,175,55,.08),
+                    transparent 35%
+                ),
+                var(--black);
+
+            color: var(--text);
+
+            font-family:
+                Inter,
+                Arial,
+                Helvetica,
+                sans-serif;
+
+        }
+
+
+        button,
+        input,
+        textarea {
+
+            font: inherit;
+
+        }
+
+
+        button {
+
+            cursor: pointer;
+
+        }
+
+
+        a {
+
+            color: inherit;
+            text-decoration: none;
+
+        }
+
+
+        /* =========================================================
+           SIDEBAR
+        ========================================================= */
+
+        .sidebar {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            bottom: 0;
+
+            width: var(--sidebar-width);
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #0a0a0a,
+                    #050505
+                );
+
+            border-right:
+                1px solid var(--border);
+
+            z-index: 1000;
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 24px 16px;
+
+            transition:
+                transform .3s ease;
+
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding:
+                0 10px
+                24px;
+
+            border-bottom:
+                1px solid var(--border);
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .brand-mark {
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--gold),
+                    var(--gold-dark)
+                );
+
+            color: #000;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+            font-weight: 900;
+
+        }
+
+
+        .brand-text {
+
+            min-width: 0;
+
+        }
+
+
+        .brand-title {
+
+            color: var(--gold);
+
+            font-size: 14px;
+
+            font-weight: 900;
+
+            letter-spacing: .8px;
+
+        }
+
+
+        .brand-subtitle {
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            margin-top: 3px;
+
+        }
+
+
+        .nav {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+
+            flex: 1;
+
+        }
+
+
+        .nav-button {
+
+            width: 100%;
+
+            border: 0;
+
+            background: transparent;
+
+            color: #aaa;
+
+            padding: 13px 14px;
+
+            border-radius: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            text-align: left;
+
+            transition: .2s ease;
+
+        }
+
+
+        .nav-button:hover {
+
+            background:
+                rgba(212,175,55,.08);
+
+            color: var(--white);
+
+        }
+
+
+        .nav-button.active {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(212,175,55,.16),
+                    rgba(212,175,55,.05)
+                );
+
+            color: var(--gold);
+
+            border:
+                1px solid
+                rgba(212,175,55,.15);
+
+        }
+
+
+        .nav-icon {
+
+            width: 22px;
+
+            text-align: center;
+
+            font-size: 17px;
+
+        }
+
+
+        .sidebar-footer {
+
+            border-top:
+                1px solid var(--border);
+
+            padding-top: 16px;
+
+        }
+
+
+        .student-mini {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 10px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .avatar {
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--gold),
+                    var(--gold-dark)
+                );
+
+            color: #000;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 900;
+
+            flex-shrink: 0;
+
+            overflow: hidden;
+
+        }
+
+
+        .avatar img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+        }
+
+
+        .mini-name {
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+        }
+
+
+        .mini-role {
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            margin-top: 2px;
+
+        }
+
+
+        .logout-button {
+
+            width: 100%;
+
+            padding: 11px 14px;
+
+            border-radius: 11px;
+
+            border:
+                1px solid
+                rgba(239,83,80,.2);
+
+            background:
+                rgba(239,83,80,.05);
+
+            color: #ef8c89;
+
+            text-align: left;
+
+        }
+
+
+        .logout-button:hover {
+
+            background:
+                rgba(239,83,80,.12);
+
+        }
+
+
+        /* =========================================================
+           MOBILE HEADER
+        ========================================================= */
+
+        .mobile-header {
+
+            display: none;
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 68px;
+
+            background:
+                rgba(5,5,5,.95);
+
+            backdrop-filter: blur(15px);
+
+            border-bottom:
+                1px solid var(--border);
+
+            z-index: 900;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 18px;
+
+        }
+
+
+        .mobile-brand {
+
+            color: var(--gold);
+
+            font-weight: 900;
+
+            font-size: 14px;
+
+        }
+
+
+        .menu-button {
+
+            border: 0;
+
+            background:
+                var(--black-3);
+
+            color: var(--gold);
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 10px;
+
+            font-size: 20px;
+
+        }
+
+
+        .sidebar-overlay {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0,0,0,.7);
+
+            z-index: 950;
+
+        }
+
+
+        /* =========================================================
+           MAIN
+        ========================================================= */
+
+        .main {
+
+            margin-left: var(--sidebar-width);
+
+            min-height: 100vh;
+
+        }
+
+
+        .topbar {
+
+            height: 76px;
+
+            border-bottom:
+                1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding:
+                0 34px;
+
+            background:
+                rgba(5,5,5,.55);
+
+            backdrop-filter: blur(15px);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 500;
+
+        }
+
+
+        .page-title {
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+        }
+
+
+        .page-subtitle {
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            margin-top: 3px;
+
+        }
+
+
+        .top-profile {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .content {
+
+            padding: 32px;
+
+            max-width: 1500px;
+
+            margin: 0 auto;
+
+        }
+
+
+        /* =========================================================
+           SECTIONS
+        ========================================================= */
+
+        .section {
+
+            display: none;
+
+            animation:
+                sectionIn .25s ease;
+
+        }
+
+
+        .section.active {
+
+            display: block;
+
+        }
+
+
+        @keyframes sectionIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(8px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* =========================================================
+           WELCOME
+        ========================================================= */
+
+        .welcome-card {
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #17130a,
+                    #0e0e0e 60%
+                );
+
+            border:
+                1px solid
+                var(--gold-border);
+
+            border-radius:
+                var(--radius);
+
+            padding: 32px;
+
+            margin-bottom: 24px;
+
+        }
+
+
+        .welcome-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            right: -90px;
+            top: -130px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(212,175,55,.12);
+
+            box-shadow:
+                0 0 0 35px rgba(212,175,55,.025),
+                0 0 0 70px rgba(212,175,55,.018);
+
+        }
+
+
+        .welcome-label {
+
+            color: var(--gold);
+
+            text-transform: uppercase;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            font-weight: 800;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .welcome-card h1 {
+
+            font-size:
+                clamp(25px, 4vw, 38px);
+
+            line-height: 1.15;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .welcome-card p {
+
+            color: #aaa;
+
+            max-width: 650px;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* =========================================================
+           STATISTICS
+        ========================================================= */
+
+        .stats-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 16px;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .stat-card {
+
+            background:
+                var(--black-2);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius);
+
+            padding: 21px;
+
+            min-height: 125px;
+
+        }
+
+
+        .stat-icon {
+
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background:
+                rgba(212,175,55,.1);
+
+            color: var(--gold);
+
+            margin-bottom: 14px;
+
+        }
+
+
+        .stat-value {
+
+            font-size: 25px;
+
+            font-weight: 900;
+
+        }
+
+
+        .stat-label {
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            margin-top: 3px;
+
+        }
+
+
+        /* =========================================================
+           SECTION HEADERS
+        ========================================================= */
+
+        .section-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .section-heading {
+
+            font-size: 22px;
+
+            font-weight: 850;
+
+        }
+
+
+        .section-description {
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            margin-top: 4px;
+
+        }
+
+
+        /* =========================================================
+           COURSE GRID
+        ========================================================= */
+
+        .courses-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+        }
+
+
+        .course-card {
+
+            background:
+                var(--black-2);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius);
+
+            overflow: hidden;
+
+            transition:
+                transform .2s ease,
+                border-color .2s ease;
+
+        }
+
+
+        .course-card:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color:
+                var(--gold-border);
+
+        }
+
+
+        .course-image {
+
+            height: 150px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #181818,
+                    #0b0b0b
+                );
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+        }
+
+
+        .course-image img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+        }
+
+
+        .course-placeholder {
+
+            font-size: 40px;
+
+            color:
+                rgba(212,175,55,.45);
+
+        }
+
+
+        .level-badge {
+
+            position: absolute;
+
+            top: 12px;
+            left: 12px;
+
+            background:
+                rgba(0,0,0,.8);
+
+            color: var(--gold);
+
+            border:
+                1px solid
+                rgba(212,175,55,.3);
+
+            border-radius: 7px;
+
+            padding:
+                5px 9px;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+        }
+
+
+        .course-body {
+
+            padding: 18px;
+
+        }
+
+
+        .course-title {
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+            margin-bottom: 7px;
+
+        }
+
+.course-description {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+    min-height: 38px;
+   display: -webkit-box;
+-webkit-line-clamp: 2;
+line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+}
+        .course-meta {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin:
+                15px 0 8px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+        }
+
+
+        .progress-track {
+
+            height: 7px;
+
+            background:
+                #222;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+        }
+
+
+        .progress-fill {
+
+            height: 100%;
+
+            width: 0%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--gold-dark),
+                    var(--gold-light)
+                );
+
+            border-radius: inherit;
+
+            transition:
+                width .5s ease;
+
+        }
+
+
+        .course-footer {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-top: 15px;
+
+        }
+
+
+        .progress-percent {
+
+            color: var(--gold);
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+        }
+
+
+        .primary-button {
+
+            border: 0;
+
+            background:
+                var(--gold);
+
+            color: #000;
+
+            padding:
+                9px 14px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+
+            font-weight: 850;
+
+            transition: .2s ease;
+
+        }
+
+
+        .primary-button:hover {
+
+            background:
+                var(--gold-light);
+
+            transform:
+                translateY(-1px);
+
+        }
+
+
+        .secondary-button {
+
+            border:
+                1px solid var(--border);
+
+            background:
+                var(--black-3);
+
+            color: var(--text);
+
+            padding:
+                9px 14px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        .secondary-button:hover {
+
+            border-color:
+                var(--gold-border);
+
+            color: var(--gold);
+
+        }
+
+
+        /* =========================================================
+           COURSE DETAIL
+        ========================================================= */
+
+        .course-hero {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #17130a,
+                    #0c0c0c
+                );
+
+            border:
+                1px solid var(--gold-border);
+
+            border-radius:
+                var(--radius);
+
+            padding: 28px;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .back-button {
+
+            border: 0;
+
+            background: transparent;
+
+            color: var(--gold);
+
+            padding: 0;
+
+            margin-bottom: 18px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+        }
+
+
+        .course-hero h2 {
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .course-hero p {
+
+            color: #aaa;
+
+            line-height: 1.65;
+
+            max-width: 850px;
+
+        }
+
+
+        .module {
+
+            background:
+                var(--black-2);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                15px;
+
+            margin-bottom: 13px;
+
+            overflow: hidden;
+
+        }
+
+
+        .module-header {
+
+            padding: 17px 19px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            background:
+                rgba(255,255,255,.015);
+
+        }
+
+
+        .module-title {
+
+            font-weight: 800;
+
+        }
+
+
+        .module-description {
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            margin-top: 4px;
+
+        }
+
+
+        .lessons {
+
+            border-top:
+                1px solid var(--border);
+
+        }
+
+
+        .lesson-row {
+
+            padding:
+                14px 19px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.04);
+
+            transition: .2s ease;
+
+        }
+
+
+        .lesson-row:last-child {
+
+            border-bottom: 0;
+
+        }
+
+
+        .lesson-row:hover {
+
+            background:
+                rgba(212,175,55,.04);
+
+        }
+
+
+        .lesson-status {
+
+            width: 30px;
+            height: 30px;
+
+            border-radius: 50%;
+
+            background:
+                #1c1c1c;
+
+            color: var(--muted);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            font-size: 12px;
+
+        }
+
+
+        .lesson-status.completed {
+
+            background:
+                rgba(53,201,120,.12);
+
+            color: var(--green);
+
+        }
+
+
+        .lesson-info {
+
+            flex: 1;
+
+            min-width: 0;
+
+        }
+
+
+        .lesson-name {
+
+            font-size: 13px;
+
+            font-weight: 750;
+
+        }
+
+
+        .lesson-details {
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            margin-top: 4px;
+
+        }
+
+
+        .lesson-progress {
+
+            width: 90px;
+
+        }
+
+
+        .lesson-progress .progress-track {
+
+            height: 5px;
+
+        }
+
+
+        /* =========================================================
+           LESSON VIEW
+        ========================================================= */
+
+        .lesson-layout {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                300px;
+
+            gap: 20px;
+
+        }
+
+
+        .lesson-main {
+
+            min-width: 0;
+
+        }
+
+
+        .lesson-sidebar {
+
+            background:
+                var(--black-2);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius);
+
+            padding: 18px;
+
+            height: fit-content;
+
+            position: sticky;
+
+            top: 100px;
+
+        }
+
+
+        .lesson-video {
+
+            background:
+                #000;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius);
+
+            overflow: hidden;
+
+            margin-bottom: 20px;
+
+            min-height: 300px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .lesson-video iframe,
+        .lesson-video video {
+
+            width: 100%;
+
+            min-height: 420px;
+
+            border: 0;
+
+        }
+
+
+        .video-placeholder {
+
+            color: var(--muted);
+
+            padding: 60px;
+
+            text-align: center;
+
+        }
+
+
+        .video-placeholder strong {
+
+            display: block;
+
+            color: var(--gold);
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .lesson-content-card {
+
+            background:
+                var(--black-2);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius);
+
+            padding: 25px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .lesson-content-card h2 {
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .lesson-description {
+
+            color: var(--muted);
+
+            line-height: 1.6;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .content-body {
+
+            line-height: 1.8;
+
+            color: #ddd;
+
+            white-space: pre-wrap;
+
+        }
+
+
+        .lesson-actions {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-top: 24px;
+
+        }
+
+
+        .complete-button {
+
+            border: 0;
+
+            background:
+                var(--green);
+
+            color: #000;
+
+            padding:
+                11px 16px;
+
+            border-radius: 9px;
+
+            font-weight: 850;
+
+            font-size: 12px;
+
+        }
+
+
+        .save-progress-button {
+
+            border:
+                1px solid var(--gold-border);
+
+            background:
+                rgba(212,175,55,.06);
+
+            color: var(--gold);
+
+            padding:
+                11px 16px;
+
+            border-radius: 9px;
+
+            font-weight: 800;
+
+            font-size: 12px;
+
+        }
+
+
+        .materials-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 9px;
+
+            margin-top: 13px;
+
+        }
+
+
+        .material {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 11px;
+
+            background:
+                #151515;
+
+            border-radius: 9px;
+
+        }
+
+
+        .material-icon {
+
+            color: var(--gold);
+
+        }
+
+
+        .material-info {
+
+            flex: 1;
+
+        }
+
+
+        .material-title {
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        .material-type {
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+        }
+
+
+        .lesson-sidebar h3 {
+
+            font-size: 15px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .side-progress-value {
+
+            font-size: 28px;
+
+            color: var(--gold);
+
+            font-weight: 900;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .side-progress-label {
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            margin-top: 8px;
+
+        }
+
+
+        /* =========================================================
+           LEARNING TIME
+        ========================================================= */
+
+        .time-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .time-card {
+
+            background:
+                var(--black-2);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius);
+
+            padding: 24px;
+
+        }
+
+
+        .time-label {
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .time-value {
+
+            color: var(--gold);
+
+            font-size: 32px;
+
+            font-weight: 900;
+
+        }
+
+
+        /* =========================================================
+           TABLE
+        ========================================================= */
+
+        .table-card {
+
+            background:
+                var(--black-2);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius);
+
+            overflow: hidden;
+
+        }
+
+
+        .table-wrapper {
+
+            overflow-x: auto;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 650px;
+
+        }
+
+
+        th {
+
+            text-align: left;
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            padding:
+                14px 18px;
+
+            background:
+                #151515;
+
+        }
+
+
+        td {
+
+            padding:
+                15px 18px;
+
+            border-top:
+                1px solid rgba(255,255,255,.05);
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================================================
+           PARTICIPATION
+        ========================================================= */
+
+        .participation-box {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #17130a,
+                    #0d0d0d
+                );
+
+            border:
+                1px solid var(--gold-border);
+
+            border-radius:
+                var(--radius);
+
+            padding: 25px;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .participation-box h3 {
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .participation-box p {
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .participation-form {
+
+            display: flex;
+
+            gap: 10px;
+
+            max-width: 600px;
+
+        }
+
+
+        .input {
+
+            width: 100%;
+
+            background:
+                #101010;
+
+            border:
+                1px solid var(--border);
+
+            color: var(--white);
+
+            padding:
+                12px 14px;
+
+            border-radius: 9px;
+
+            outline: none;
+
+        }
+
+
+        .input:focus {
+
+            border-color:
+                var(--gold);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(212,175,55,.08);
+
+        }
+
+
+        /* =========================================================
+           PROFILE
+        ========================================================= */
+
+        .profile-card {
+
+            max-width: 850px;
+
+            background:
+                var(--black-2);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius);
+
+            padding: 28px;
+
+        }
+
+
+        .profile-top {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            padding-bottom: 22px;
+
+            border-bottom:
+                1px solid var(--border);
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .large-avatar {
+
+            width: 76px;
+            height: 76px;
+
+            border-radius: 50%;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--gold),
+                    var(--gold-dark)
+                );
+
+            color: #000;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 26px;
+
+            font-weight: 900;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .large-avatar img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+        }
+
+
+        .profile-name {
+
+            font-size: 22px;
+
+            font-weight: 850;
+
+        }
+
+
+        .profile-email {
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            margin-top: 4px;
+
+        }
+
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 16px;
+
+        }
+
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+
+        }
+
+
+        .form-group.full {
+
+            grid-column:
+                1 / -1;
+
+        }
+
+
+        .form-label {
+
+            color: #aaa;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =========================================================
+           EMPTY / LOADING
+        ========================================================= */
+
+        .loading {
+
+            padding: 50px 20px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+        }
+
+
+        .spinner {
+
+            width: 30px;
+            height: 30px;
+
+            border:
+                3px solid
+                rgba(212,175,55,.15);
+
+            border-top-color:
+                var(--gold);
+
+            border-radius: 50%;
+
+            animation:
+                spin .8s linear infinite;
+
+            margin:
+                0 auto 14px;
+
+        }
+
+
+        @keyframes spin {
+
+            to {
+
+                transform:
+                    rotate(360deg);
+
+            }
+
+        }
+
+
+        .empty {
+
+            background:
+                var(--black-2);
+
+            border:
+                1px dashed
+                rgba(255,255,255,.1);
+
+            border-radius:
+                var(--radius);
+
+            padding: 45px 20px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+        }
+
+
+        .empty-icon {
+
+            font-size: 34px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .empty h3 {
+
+            color: var(--text);
+
+            margin-bottom: 6px;
+
+        }
+
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        .toast-container {
+
+            position: fixed;
+
+            right: 22px;
+            bottom: 22px;
+
+            z-index: 3000;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 9px;
+
+        }
+
+
+        .toast {
+
+            min-width: 270px;
+
+            max-width: 400px;
+
+            background:
+                #171717;
+
+            border:
+                1px solid var(--border);
+
+            box-shadow:
+                var(--shadow);
+
+            border-radius: 12px;
+
+            padding: 14px 16px;
+
+            font-size: 12px;
+
+            animation:
+                toastIn .25s ease;
+
+        }
+
+
+        .toast.success {
+
+            border-color:
+                rgba(53,201,120,.3);
+
+        }
+
+
+        .toast.error {
+
+            border-color:
+                rgba(239,83,80,.3);
+
+        }
+
+
+        .toast-title {
+
+            font-weight: 800;
+
+            margin-bottom: 3px;
+
+        }
+
+
+        .toast-message {
+
+            color: var(--muted);
+
+        }
+
+
+        @keyframes toastIn {
+
+            from {
+
+                opacity: 0;
+                transform:
+                    translateY(10px);
+
+            }
+
+            to {
+
+                opacity: 1;
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 1150px) {
+
+            .stats-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+
+            .courses-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+
+            }
+
+
+            .sidebar.open {
+
+                transform:
+                    translateX(0);
+
+            }
+
+
+            .sidebar-overlay.show {
+
+                display: block;
+
+            }
+
+
+            .mobile-header {
+
+                display: flex;
+
+            }
+
+
+            .main {
+
+                margin-left: 0;
+
+                padding-top: 68px;
+
+            }
+
+
+            .topbar {
+
+                display: none;
+
+            }
+
+
+            .content {
+
+                padding: 22px 18px;
+
+            }
+
+
+            .lesson-layout {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .lesson-sidebar {
+
+                position: static;
+
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .stats-grid,
+            .courses-grid,
+            .time-grid,
+            .form-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .welcome-card {
+
+                padding: 24px;
+
+            }
+
+
+            .welcome-card h1 {
+
+                font-size: 27px;
+
+            }
+
+
+            .section-heading {
+
+                font-size: 19px;
+
+            }
+
+
+            .course-image {
+
+                height: 170px;
+
+            }
+
+
+            .participation-form {
+
+                flex-direction: column;
+
+            }
+
+
+            .lesson-video iframe,
+            .lesson-video video {
+
+                min-height: 230px;
+
+            }
+
+
+            .lesson-row {
+
+                align-items: flex-start;
+
+            }
+
+
+            .lesson-progress {
+
+                display: none;
+
+            }
+
+
+            .toast-container {
+
+                left: 15px;
+                right: 15px;
+                bottom: 15px;
+
+            }
+
+
+            .toast {
+
+                min-width: 0;
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         MOBILE HEADER
+    ========================================================= -->
+
+    <header class="mobile-header">
+
+        <div class="mobile-brand">
+
+            LINGUA DEUTSCH CONNECT
+
+        </div>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
+
+    </header>
+
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =========================================================
+         SIDEBAR
+    ========================================================= -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                LD
+            </div>
+
+            <div class="brand-text">
+
+                <div class="brand-title">
+                    LINGUA DEUTSCH
+                </div>
+
+                <div class="brand-subtitle">
+                    ONLINE LEARNING
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <nav class="nav">
+
+            <button
+                class="nav-button active"
+                data-section="dashboard"
+            >
+
+                <span class="nav-icon">⌂</span>
+
+                <span>Dashboard</span>
+
+            </button>
+
+
+            <button
+                class="nav-button"
+                data-section="courses"
+            >
+
+                <span class="nav-icon">▣</span>
+
+                <span>My Courses</span>
+
+            </button>
+
+
+            <button
+                class="nav-button"
+                data-section="learning-time"
+            >
+
+                <span class="nav-icon">◷</span>
+
+                <span>Learning Time</span>
+
+            </button>
+
+
+            <button
+                class="nav-button"
+                data-section="participation"
+            >
+
+                <span class="nav-icon">✓</span>
+
+                <span>Participation</span>
+
+            </button>
+
+
+            <button
+                class="nav-button"
+                data-section="profile"
+            >
+
+                <span class="nav-icon">●</span>
+
+                <span>My Profile</span>
+
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="student-mini">
+
+                <div
+                    class="avatar"
+                    id="sidebarAvatar"
+                >
+                    ?
+                </div>
+
+                <div>
+
+                    <div
+                        class="mini-name"
+                        id="sidebarStudentName"
+                    >
+                        Student
+                    </div>
+
+                    <div class="mini-role">
+                        Online Student
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="logout-button"
+                id="logoutButton"
+            >
+
+                ↪ &nbsp; Log out
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================================
+         MAIN
+    ========================================================= -->
+
+    <main class="main">
+
+
+        <!-- =====================================================
+             TOPBAR
+        ===================================================== -->
+
+        <div class="topbar">
+
+            <div>
+
+                <div
+                    class="page-title"
+                    id="pageTitle"
+                >
+                    Dashboard
+                </div>
+
+                <div class="page-subtitle">
+                    Your LDC online learning space
+                </div>
+
+            </div>
+
+
+            <div class="top-profile">
+
+                <div
+                    class="avatar"
+                    id="topAvatar"
+                >
+                    ?
+                </div>
+
+                <span
+                    id="topStudentName"
+                    style="
+                        font-size:13px;
+                        font-weight:700;
+                    "
+                >
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="content">
+
+
+            <!-- =================================================
+                 DASHBOARD
+            ================================================= -->
+
+            <section
+                class="section active"
+                id="section-dashboard"
+            >
+
+                <div class="welcome-card">
+
+                    <div class="welcome-label">
+                        LINGUA DEUTSCH CONNECT
+                    </div>
+
+                    <h1>
+                        Willkommen,
+                        <span
+                            id="welcomeName"
+                            style="color:var(--gold);"
+                        >
+                            Student
+                        </span>
+                        👋
+                    </h1>
+
+                    <p>
+                        Keep learning, complete your lessons,
+                        improve your German and follow your
+                        progress from one place.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="stats-grid"
+                    id="dashboardStats"
+                >
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            📚
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="statCourses"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            Enrolled Courses
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            ✓
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="statCompleted"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            Completed Lessons
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            ◷
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="statLearningTime"
+                        >
+                            0m
+                        </div>
+
+                        <div class="stat-label">
+                            Total Learning Time
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            ✦
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="statParticipation"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            Participation Records
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="section-header">
+
+                    <div>
+
+                        <div class="section-heading">
+                            Continue Learning
+                        </div>
+
+                        <div class="section-description">
+                            Pick up where you left off.
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="secondary-button"
+                        id="viewAllCoursesButton"
+                    >
+                        View all courses
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="courses-grid"
+                    id="dashboardCourses"
+                ></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 COURSES
+            ================================================= -->
+
+            <section
+                class="section"
+                id="section-courses"
+            >
+
+                <div class="section-header">
+
+                    <div>
+
+                        <div class="section-heading">
+                            My Courses
+                        </div>
+
+                        <div class="section-description">
+                            All courses you're enrolled in.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="courses-grid"
+                    id="allCourses"
+                ></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 COURSE DETAIL
+            ================================================= -->
+
+            <section
+                class="section"
+                id="section-course-detail"
+            >
+
+                <div id="courseDetailContainer"></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 LESSON
+            ================================================= -->
+
+            <section
+                class="section"
+                id="section-lesson"
+            >
+
+                <div id="lessonContainer"></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 LEARNING TIME
+            ================================================= -->
+
+            <section
+                class="section"
+                id="section-learning-time"
+            >
+
+                <div class="section-header">
+
+                    <div>
+
+                        <div class="section-heading">
+                            Learning Time
+                        </div>
+
+                        <div class="section-description">
+                            Track your time spent learning online.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="time-grid">
+
+                    <div class="time-card">
+
+                        <div class="time-label">
+                            Total Learning Time
+                        </div>
+
+                        <div
+                            class="time-value"
+                            id="totalLearningTime"
+                        >
+                            0m
+                        </div>
+
+                    </div>
+
+
+                    <div class="time-card">
+
+                        <div class="time-label">
+                            Learning Today
+                        </div>
+
+                        <div
+                            class="time-value"
+                            id="todayLearningTime"
+                        >
+                            0m
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="section-header">
+
+                    <div>
+
+                        <div class="section-heading">
+                            Recent Sessions
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div
+                        class="table-wrapper"
+                        id="learningSessionsTable"
+                    ></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PARTICIPATION
+            ================================================= -->
+
+            <section
+                class="section"
+                id="section-participation"
+            >
+
+                <div class="section-header">
+
+                    <div>
+
+                        <div class="section-heading">
+                            Participation
+                        </div>
+
+                        <div class="section-description">
+                            Submit participation codes provided
+                            by your LDC teacher or course.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="participation-box">
+
+                    <h3>
+                        Submit a Participation Code
+                    </h3>
+
+                    <p>
+                        Enter the code exactly as provided.
+                        Each code can only be submitted once.
+                    </p>
+
+
+                    <form
+                        class="participation-form"
+                        id="participationForm"
+                    >
+
+                        <input
+                            class="input"
+                            id="participationCode"
+                            type="text"
+                            placeholder="Enter participation code"
+                            autocomplete="off"
+                            required
+                        >
+
+                        <button
+                            class="primary-button"
+                            type="submit"
+                        >
+                            Submit Code
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <div class="section-header">
+
+                    <div>
+
+                        <div class="section-heading">
+                            Participation History
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div
+                        class="table-wrapper"
+                        id="participationTable"
+                    ></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROFILE
+            ================================================= -->
+
+            <section
+                class="section"
+                id="section-profile"
+            >
+
+                <div class="section-header">
+
+                    <div>
+
+                        <div class="section-heading">
+                            My Profile
+                        </div>
+
+                        <div class="section-description">
+                            Manage your online student information.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-card">
+
+                    <div class="profile-top">
+
+                        <div
+                            class="large-avatar"
+                            id="profileAvatar"
+                        >
+                            ?
+                        </div>
+
+                        <div>
+
+                            <div
+                                class="profile-name"
+                                id="profileName"
+                            >
+                                Student
+                            </div>
+
+                            <div
+                                class="profile-email"
+                                id="profileEmail"
+                            >
+                                -
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <form id="profileForm">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label class="form-label">
+                                    First Name
+                                </label>
+
+                                <input
+                                    class="input"
+                                    id="profileFirstName"
+                                    type="text"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label class="form-label">
+                                    Last Name
+                                </label>
+
+                                <input
+                                    class="input"
+                                    id="profileLastName"
+                                    type="text"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label class="form-label">
+                                    Email
+                                </label>
+
+                                <input
+                                    class="input"
+                                    id="profileEmailInput"
+                                    type="email"
+                                    disabled
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label class="form-label">
+                                    Phone
+                                </label>
+
+                                <input
+                                    class="input"
+                                    id="profilePhone"
+                                    type="text"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label class="form-label">
+                                    Profile Photo URL
+                                </label>
+
+                                <input
+                                    class="input"
+                                    id="profilePhoto"
+                                    type="url"
+                                    placeholder="https://..."
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            style="
+                                margin-top:20px;
+                                display:flex;
+                                justify-content:flex-end;
+                            "
+                        >
+
+                            <button
+                                class="primary-button"
+                                type="submit"
+                            >
+                                Save Changes
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================================
+         TOAST
+    ========================================================= -->
+
+    <div
+        class="toast-container"
+        id="toastContainer"
+    ></div>
+
+
+    <script>
+
+        "use strict";
+
+
+        /* =========================================================
+           CONFIGURATION
+        ========================================================= */
+
+        const API_URL =
+            "http://localhost:5000/api";
+
+        const TOKEN_KEY =
+            "ldc_online_student_token";
+
+
+        /* =========================================================
+           STATE
+        ========================================================= */
+
+        let dashboardData = null;
+
+        let coursesData = [];
+
+        let currentCourse = null;
+
+        let currentLesson = null;
+
+        let currentSessionId = null;
+
+        let heartbeatTimer = null;
+
+
+        /* =========================================================
+           DOM HELPERS
+        ========================================================= */
+
+        const $ =
+            selector =>
+                document.querySelector(selector);
+
+
+        const $$ =
+            selector =>
+                document.querySelectorAll(selector);
+
+
+        /* =========================================================
+           AUTH
+        ========================================================= */
+
+        function getToken() {
+
+            return localStorage.getItem(
+                TOKEN_KEY
+            );
+
+        }
+
+
+        function requireToken() {
+
+            const token =
+                getToken();
+
+            if (!token) {
+
+                window.location.href =
+                    "online-login.html";
+
+                return false;
+
+            }
+
+            return true;
+
+        }
+
+
+        /* =========================================================
+           API
+        ========================================================= */
+
+        async function apiFetch(
+            endpoint,
+            options = {}
+        ) {
+
+            const token =
+                getToken();
+
+
+            const headers = {
+
+                ...(options.headers || {}),
+
+                "Content-Type":
+                    "application/json"
+
+            };
+
+
+            if (token) {
+
+                headers.Authorization =
+                    `Bearer ${token}`;
+
+            }
+
+
+            let response;
+
+
+            try {
+
+                response =
+                    await fetch(
+                        API_URL + endpoint,
+                        {
+                            ...options,
+                            headers
+                        }
+                    );
+
+            } catch (error) {
+
+                throw new Error(
+                    "Could not connect to the LDC server."
+                );
+
+            }
+
+
+            let data = null;
+
+
+            try {
+
+                data =
+                    await response.json();
+
+            } catch {
+
+                data = null;
+
+            }
+
+
+            if (
+                response.status === 401 ||
+                response.status === 403
+            ) {
+
+                localStorage.removeItem(
+                    TOKEN_KEY
+                );
+
+                window.location.href =
+                    "online-login.html";
+
+                throw new Error(
+                    data?.message ||
+                    "Your session has expired."
+                );
+
+            }
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data?.message ||
+                    "Something went wrong."
+                );
+
+            }
+
+
+            return data;
+
+        }
+
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        function showToast(
+            message,
+            type = "success",
+            title = ""
+        ) {
+
+            const container =
+                $("#toastContainer");
+
+
+            const toast =
+                document.createElement(
+                    "div"
+                );
+
+            toast.className =
+                `toast ${type}`;
+
+
+            toast.innerHTML = `
+
+                <div class="toast-title">
+                    ${
+                        escapeHtml(
+                            title ||
+                            (
+                                type === "error"
+                                    ? "Error"
+                                    : "Success"
+                            )
+                        )
+                    }
+                </div>
+
+                <div class="toast-message">
+                    ${escapeHtml(message)}
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                toast
+            );
+
+
+            setTimeout(
+                () => {
+
+                    toast.remove();
+
+                },
+                4000
+            );
+
+        }
+
+
+        /* =========================================================
+           ESCAPE HTML
+        ========================================================= */
+
+        function escapeHtml(value) {
+
+            return String(
+                value ?? ""
+            )
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =========================================================
+           FORMATTERS
+        ========================================================= */
+
+        function formatNumber(value) {
+
+            return Number(
+                value || 0
+            ).toLocaleString();
+
+        }
+
+
+        function formatDuration(seconds) {
+
+            seconds =
+                Math.max(
+                    0,
+                    Number(seconds || 0)
+                );
+
+
+            const hours =
+                Math.floor(
+                    seconds / 3600
+                );
+
+
+            const minutes =
+                Math.floor(
+                    (seconds % 3600) / 60
+                );
+
+
+            if (hours > 0) {
+
+                return `${hours}h ${minutes}m`;
+
+            }
+
+
+            return `${minutes}m`;
+
+        }
+
+
+        function formatDate(value) {
+
+            if (!value) {
+
+                return "—";
+
+            }
+
+
+            const date =
+                new Date(value);
+
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+
+                return String(value);
+
+            }
+
+
+            return date.toLocaleString(
+                [],
+                {
+                    dateStyle: "medium",
+                    timeStyle: "short"
+                }
+            );
+
+        }
+
+
+        function initials(name) {
+
+            const parts =
+                String(
+                    name || "Student"
+                )
+                    .trim()
+                    .split(/\s+/)
+                    .filter(Boolean);
+
+
+            if (!parts.length) {
+
+                return "S";
+
+            }
+
+
+            return parts
+                .slice(0, 2)
+                .map(
+                    part =>
+                        part
+                            .charAt(0)
+                            .toUpperCase()
+                )
+                .join("");
+
+        }
+
+
+        /* =========================================================
+           AVATAR
+        ========================================================= */
+
+        function setAvatar(
+            element,
+            name,
+            photo
+        ) {
+
+            if (!element) {
+
+                return;
+
+            }
+
+
+            if (photo) {
+
+                element.innerHTML = `
+
+                    <img
+                        src="${escapeHtml(photo)}"
+                        alt="${escapeHtml(name)}"
+                        onerror="this.parentElement.textContent='${escapeHtml(initials(name))}'"
+                    >
+
+                `;
+
+                return;
+
+            }
+
+
+            element.textContent =
+                initials(name);
+
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        const pageTitles = {
+
+            dashboard:
+                "Dashboard",
+
+            courses:
+                "My Courses",
+
+            "learning-time":
+                "Learning Time",
+
+            participation:
+                "Participation",
+
+            profile:
+                "My Profile",
+
+            "course-detail":
+                "Course",
+
+            lesson:
+                "Lesson"
+
+        };
+
+
+        function showSection(
+            section,
+            options = {}
+        ) {
+
+            $$(".section")
+                .forEach(
+                    item =>
+                        item.classList.remove(
+                            "active"
+                        )
+                );
+
+
+            const target =
+                $(`#section-${section}`);
+
+
+            if (target) {
+
+                target.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            $$(".nav-button")
+                .forEach(
+                    button => {
+
+                        button.classList.toggle(
+                            "active",
+                            button.dataset.section ===
+                                section
+                        );
+
+                    }
+                );
+
+
+            $("#pageTitle").textContent =
+                pageTitles[section] ||
+                "Dashboard";
+
+
+            if (
+                !options.keepMobile
+            ) {
+
+                closeMobileMenu();
+
+            }
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+
+            if (section === "courses") {
+
+                loadCourses();
+
+            }
+
+
+            if (
+                section === "learning-time"
+            ) {
+
+                loadLearningTime();
+
+            }
+
+
+            if (
+                section === "participation"
+            ) {
+
+                loadParticipation();
+
+            }
+
+
+            if (section === "profile") {
+
+                loadProfile();
+
+            }
+
+        }
+
+
+        /* =========================================================
+           MOBILE MENU
+        ========================================================= */
+
+        function openMobileMenu() {
+
+            $("#sidebar")
+                .classList.add("open");
+
+            $("#sidebarOverlay")
+                .classList.add("show");
+
+        }
+
+
+        function closeMobileMenu() {
+
+            $("#sidebar")
+                .classList.remove("open");
+
+            $("#sidebarOverlay")
+                .classList.remove("show");
+
+        }
+
+
+        $("#menuButton")
+            .addEventListener(
+                "click",
+                openMobileMenu
+            );
+
+
+        $("#sidebarOverlay")
+            .addEventListener(
+                "click",
+                closeMobileMenu
+            );
+
+
+        /* =========================================================
+           NAV BUTTONS
+        ========================================================= */
+
+        $$(".nav-button")
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            showSection(
+                                button.dataset.section
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        $("#viewAllCoursesButton")
+            .addEventListener(
+                "click",
+                () => {
+
+                    showSection(
+                        "courses"
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           DASHBOARD
+        ========================================================= */
+
+        async function loadDashboard() {
+
+            try {
+
+                const data =
+                    await apiFetch(
+                        "/online/student/dashboard"
+                    );
+
+
+                dashboardData =
+                    data;
+
+
+                renderStudent(
+                    data.student
+                );
+
+
+                renderDashboardStats(
+                    data.statistics
+                );
+
+
+               try {
+
+    const coursesResponse =
+        await apiFetch("/online/student/courses");
+
+    coursesData =
+        Array.isArray(coursesResponse.courses)
+            ? coursesResponse.courses
+            : [];
+
+} catch (error) {
+
+    console.warn("Could not load course details:", error);
+
+    coursesData =
+        Array.isArray(data.courses)
+            ? data.courses
+            : [];
+
+}
+
+renderCourses(
+    $("#dashboardCourses"),
+    coursesData.slice(0, 3)
+);
+
+
+            } catch (error) {
+
+                console.error(
+                    "Dashboard error:",
+                    error
+                );
+
+
+                $("#dashboardCourses")
+                    .innerHTML = `
+
+                        <div
+                            class="empty"
+                            style="grid-column:1/-1;"
+                        >
+
+                            <div class="empty-icon">
+                                ⚠️
+                            </div>
+
+                            <h3>
+                                Could not load your dashboard
+                            </h3>
+
+                            <p>
+                                ${escapeHtml(error.message)}
+                            </p>
+
+                        </div>
+
+                    `;
+
+            }
+
+        }
+
+
+        function renderStudent(
+            student
+        ) {
+
+            if (!student) {
+
+                return;
+
+            }
+
+
+            const name =
+                student.name ||
+                `${student.firstName || ""} ${student.lastName || ""}`
+                    .trim() ||
+                "Student";
+
+
+            $("#welcomeName")
+                .textContent =
+                student.firstName ||
+                name;
+
+
+            $("#sidebarStudentName")
+                .textContent =
+                name;
+
+
+            $("#topStudentName")
+                .textContent =
+                name;
+
+
+            setAvatar(
+                $("#sidebarAvatar"),
+                name,
+                student.profilePhoto
+            );
+
+
+            setAvatar(
+                $("#topAvatar"),
+                name,
+                student.profilePhoto
+            );
+
+        }
+
+
+        function renderDashboardStats(
+            statistics
+        ) {
+
+            if (!statistics) {
+
+                return;
+
+            }
+
+
+            $("#statCourses")
+                .textContent =
+                formatNumber(
+                    statistics.enrolledCourses
+                );
+
+
+            $("#statCompleted")
+                .textContent =
+                formatNumber(
+                    statistics.completedLessons
+                );
+
+
+            $("#statLearningTime")
+                .textContent =
+                formatDuration(
+                    statistics.totalLearningSeconds
+                );
+
+
+            $("#statParticipation")
+                .textContent =
+                formatNumber(
+                    statistics.participationCount
+                );
+
+        }
+
+
+        /* =========================================================
+           COURSE CARD
+        ========================================================= */
+
+        function renderCourses(
+            container,
+            courses
+        ) {
+
+            if (!container) {
+
+                return;
+
+            }
+
+
+            if (
+                !Array.isArray(courses) ||
+                courses.length === 0
+            ) {
+
+                container.innerHTML = `
+
+                    <div
+                        class="empty"
+                        style="grid-column:1/-1;"
+                    >
+
+                        <div class="empty-icon">
+                            📚
+                        </div>
+
+                        <h3>
+                            No courses yet
+                        </h3>
+
+                        <p>
+                            Your enrolled online courses
+                            will appear here.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            container.innerHTML =
+                courses
+                    .map(
+                        course =>
+                            courseCardHtml(
+                                course
+                            )
+                    )
+                    .join("");
+
+
+            container
+                .querySelectorAll(
+                    "[data-open-course]"
+                )
+                .forEach(
+                    button => {
+
+                        button.addEventListener(
+                            "click",
+                            () => {
+
+                                openCourse(
+                                    Number(
+                                        button.dataset.openCourse
+                                    )
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+        }
+
+
+        function courseCardHtml(
+            course
+        ) {
+
+            const progress =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        Number(
+                            course.progress || 0
+                        )
+                    )
+                );
+
+
+            const thumbnail =
+                course.thumbnail;
+
+
+            return `
+
+                <article class="course-card">
+
+                    <div class="course-image">
+
+                        ${
+                            thumbnail
+                                ? `
+                                    <img
+                                        src="${escapeHtml(thumbnail)}"
+                                        alt="${escapeHtml(course.title)}"
+                                    >
+                                `
+                                : `
+                                    <div class="course-placeholder">
+                                        📚
+                                    </div>
+                                `
+                        }
+
+                        ${
+                            course.level
+                                ? `
+                                    <span class="level-badge">
+                                        ${escapeHtml(course.level)}
+                                    </span>
+                                `
+                                : ""
+                        }
+
+                    </div>
+
+
+                    <div class="course-body">
+
+                        <div class="course-title">
+                            ${escapeHtml(course.title)}
+                        </div>
+
+                        <div class="course-description">
+                            ${
+                                escapeHtml(
+                                    course.description ||
+                                    "Continue your German learning journey."
+                                )
+                            }
+                        </div>
+
+
+                        <div class="course-meta">
+
+                            <span>
+                                ${formatNumber(course.completedLessons || 0)}
+                                /
+                                ${formatNumber(course.totalLessons || 0)}
+                                lessons
+                            </span>
+
+                            <span>
+                                ${progress}%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-fill"
+                                style="width:${progress}%"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="course-footer">
+
+                            <span class="progress-percent">
+                                ${progress}% complete
+                            </span>
+
+                            <button
+                                class="primary-button"
+                                data-open-course="${Number(course.id)}"
+                            >
+                                ${
+                                    progress > 0
+                                        ? "Continue"
+                                        : "Start Course"
+                                }
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            `;
+
+        }
+
+
+        /* =========================================================
+           COURSES
+        ========================================================= */
+
+        async function loadCourses() {
+
+            const container =
+                $("#allCourses");
+
+
+            container.innerHTML = loadingHtml();
+
+
+            try {
+
+                const data =
+                    await apiFetch(
+                        "/online/student/courses"
+                    );
+
+
+                coursesData =
+                    Array.isArray(
+                        data.courses
+                    )
+                        ? data.courses
+                        : [];
+
+
+                renderCourses(
+                    container,
+                    coursesData
+                );
+
+
+            } catch (error) {
+
+                container.innerHTML =
+                    errorHtml(
+                        error.message
+                    );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           OPEN COURSE
+        ========================================================= */
+
+        async function openCourse(
+            courseId
+        ) {
+
+            showSection(
+                "course-detail"
+            );
+
+
+            const container =
+                $("#courseDetailContainer");
+
+
+            container.innerHTML =
+                loadingHtml();
+
+
+            try {
+
+                const data =
+                    await apiFetch(
+                        `/online/student/courses/${courseId}`
+                    );
+
+
+                currentCourse =
+                    data.course;
+
+
+                renderCourseDetail(
+                    currentCourse
+                );
+
+
+            } catch (error) {
+
+                container.innerHTML =
+                    errorHtml(
+                        error.message
+                    );
+
+            }
+
+        }
+
+
+        function renderCourseDetail(
+            course
+        ) {
+
+            const modules =
+                Array.isArray(
+                    course.modules
+                )
+                    ? course.modules
+                    : [];
+
+
+            const allLessons =
+                modules.flatMap(
+                    module =>
+                        Array.isArray(
+                            module.lessons
+                        )
+                            ? module.lessons
+                            : []
+                );
+
+
+            const completed =
+                allLessons.filter(
+                    lesson =>
+                        Number(
+                            lesson.completed
+                        ) === 1
+                ).length;
+
+
+            const total =
+                allLessons.length;
+
+
+            const overallProgress =
+                total > 0
+                    ? Math.round(
+                        (
+                            completed /
+                            total
+                        ) * 100
+                    )
+                    : 0;
+
+
+            $("#courseDetailContainer")
+                .innerHTML = `
+
+                    <div class="course-hero">
+
+                        <button
+                            class="back-button"
+                            id="backToCourses"
+                        >
+                            ← Back to My Courses
+                        </button>
+
+                        <div
+                            style="
+                                color:var(--gold);
+                                font-size:11px;
+                                font-weight:800;
+                                letter-spacing:1px;
+                                margin-bottom:7px;
+                            "
+                        >
+                            ${
+                                escapeHtml(
+                                    course.level ||
+                                    "ONLINE COURSE"
+                                )
+                            }
+                        </div>
+
+                        <h2>
+                            ${escapeHtml(course.title)}
+                        </h2>
+
+                        <p>
+                            ${
+                                escapeHtml(
+                                    course.description ||
+                                    "Continue learning with LDC."
+                                )
+                            }
+                        </p>
+
+
+                        <div
+                            style="
+                                margin-top:22px;
+                                max-width:650px;
+                            "
+                        >
+
+                            <div
+                                style="
+                                    display:flex;
+                                    justify-content:space-between;
+                                    color:var(--muted);
+                                    font-size:11px;
+                                    margin-bottom:7px;
+                                "
+                            >
+
+                                <span>
+                                    Course progress
+                                </span>
+
+                                <strong
+                                    style="color:var(--gold);"
+                                >
+                                    ${overallProgress}%
+                                </strong>
+
+                            </div>
+
+                            <div class="progress-track">
+
+                                <div
+                                    class="progress-fill"
+                                    style="
+                                        width:${overallProgress}%;
+                                    "
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        ${
+                            modules.length
+                                ? modules
+                                    .map(
+                                        (
+                                            module,
+                                            index
+                                        ) =>
+                                            moduleHtml(
+                                                module,
+                                                index
+                                            )
+                                    )
+                                    .join("")
+                                : `
+                                    <div class="empty">
+
+                                        <div class="empty-icon">
+                                            📖
+                                        </div>
+
+                                        <h3>
+                                            No lessons yet
+                                        </h3>
+
+                                        <p>
+                                            Lessons will appear
+                                            here when your course
+                                            content is published.
+                                        </p>
+
+                                    </div>
+                                `
+                        }
+
+                    </div>
+
+                `;
+
+
+            $("#backToCourses")
+                ?.addEventListener(
+                    "click",
+                    () => {
+
+                        showSection(
+                            "courses"
+                        );
+
+                    }
+                );
+
+
+            $("#courseDetailContainer")
+                .querySelectorAll(
+                    "[data-open-lesson]"
+                )
+                .forEach(
+                    button => {
+
+                        button.addEventListener(
+                            "click",
+                            () => {
+
+                                openLesson(
+                                    Number(
+                                        button.dataset.openLesson
+                                    )
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+        }
+
+
+        function moduleHtml(
+            module,
+            index
+        ) {
+
+            const lessons =
+                Array.isArray(
+                    module.lessons
+                )
+                    ? module.lessons
+                    : [];
+
+
+            return `
+
+                <div class="module">
+
+                    <div class="module-header">
+
+                        <div>
+
+                            <div class="module-title">
+                                Module
+                                ${
+                                    Number(
+                                        module.module_order
+                                    ) ||
+                                    index + 1
+                                }:
+                                ${escapeHtml(module.title)}
+                            </div>
+
+                            ${
+                                module.description
+                                    ? `
+                                        <div class="module-description">
+                                            ${escapeHtml(module.description)}
+                                        </div>
+                                    `
+                                    : ""
+                            }
+
+                        </div>
+
+                        <span
+                            style="
+                                color:var(--muted);
+                                font-size:10px;
+                            "
+                        >
+                            ${lessons.length}
+                            lesson${lessons.length === 1 ? "" : "s"}
+                        </span>
+
+                    </div>
+
+
+                    <div class="lessons">
+
+                        ${
+                            lessons.length
+                                ? lessons
+                                    .map(
+                                        lesson =>
+                                            lessonHtml(
+                                                lesson
+                                            )
+                                    )
+                                    .join("")
+                                : `
+                                    <div
+                                        style="
+                                            padding:18px;
+                                            color:var(--muted);
+                                            font-size:12px;
+                                        "
+                                    >
+                                        No lessons in this module yet.
+                                    </div>
+                                `
+                        }
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+
+        function lessonHtml(
+            lesson
+        ) {
+
+            const completed =
+                Number(
+                    lesson.completed
+                ) === 1;
+
+
+            const progress =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        Number(
+                            lesson.progress || 0
+                        )
+                    )
+                );
+
+
+            return `
+
+                <div class="lesson-row">
+
+                    <div
+                        class="lesson-status ${
+                            completed
+                                ? "completed"
+                                : ""
+                        }"
+                    >
+
+                        ${
+                            completed
+                                ? "✓"
+                                : "▶"
+                        }
+
+                    </div>
+
+
+                    <div class="lesson-info">
+
+                        <div class="lesson-name">
+
+                            ${escapeHtml(lesson.title)}
+
+                        </div>
+
+                        <div class="lesson-details">
+
+                            ${
+                                lesson.duration_minutes
+                                    ? `${lesson.duration_minutes} min`
+                                    : "Lesson"
+                            }
+
+                            ${
+                                completed
+                                    ? " • Completed"
+                                    : progress > 0
+                                        ? ` • ${progress}% complete`
+                                        : ""
+                            }
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="lesson-progress">
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-fill"
+                                style="width:${progress}%"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="secondary-button"
+                        data-open-lesson="${Number(lesson.id)}"
+                    >
+                        Open
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* =========================================================
+           OPEN LESSON
+        ========================================================= */
+
+        async function openLesson(
+            lessonId
+        ) {
+
+            showSection(
+                "lesson"
+            );
+
+
+            const container =
+                $("#lessonContainer");
+
+
+            container.innerHTML =
+                loadingHtml();
+
+
+            try {
+
+                const data =
+                    await apiFetch(
+                        `/online/student/lessons/${lessonId}`
+                    );
+
+
+                currentLesson =
+                    data.lesson;
+
+
+                renderLesson(
+                    currentLesson
+                );
+                 trackVideoProgress();
+
+                await startLearningSession(
+                    lessonId
+                );
+
+
+            } catch (error) {
+
+                container.innerHTML =
+                    errorHtml(
+                        error.message
+                    );
+
+            }
+
+        }
+
+
+        function renderLesson(
+            lesson
+        ) {
+
+            const progress =
+                lesson.progress ||
+                {};
+
+
+            const percentage =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        Number(
+                            progress.progress || 0
+                        )
+                    )
+                );
+
+
+            const materials =
+                Array.isArray(
+                    lesson.materials
+                )
+                    ? lesson.materials
+                    : [];
+
+
+            $("#lessonContainer")
+                .innerHTML = `
+
+                    <div
+                        style="
+                            margin-bottom:16px;
+                        "
+                    >
+
+                        <button
+                            class="back-button"
+                            id="backToCourse"
+                        >
+                            ← Back to Course
+                        </button>
+
+                    </div>
+
+
+                    <div class="lesson-layout">
+
+
+                        <div class="lesson-main">
+
+
+                            <div class="lesson-video">
+
+                                ${renderVideo(
+                                    lesson.videoUrl
+                                )}
+
+                            </div>
+
+
+                            <div class="lesson-content-card">
+
+                                <div
+                                    style="
+                                        color:var(--gold);
+                                        font-size:10px;
+                                        font-weight:800;
+                                        text-transform:uppercase;
+                                        letter-spacing:1px;
+                                        margin-bottom:7px;
+                                    "
+                                >
+                                    ${
+                                        escapeHtml(
+                                            lesson.courseLevel ||
+                                            "ONLINE LESSON"
+                                        )
+                                    }
+                                </div>
+
+
+                                <h2>
+                                    ${escapeHtml(lesson.title)}
+                                </h2>
+
+
+                                ${
+                                    lesson.moduleTitle
+                                        ? `
+                                            <div
+                                                style="
+                                                    color:var(--muted);
+                                                    font-size:11px;
+                                                    margin-top:5px;
+                                                "
+                                            >
+                                                ${escapeHtml(lesson.moduleTitle)}
+                                            </div>
+                                        `
+                                        : ""
+                                }
+
+
+                                ${
+                                    lesson.description
+                                        ? `
+                                            <div class="lesson-description">
+                                                ${escapeHtml(lesson.description)}
+                                            </div>
+                                        `
+                                        : ""
+                                }
+
+
+                                ${
+                                    lesson.content
+                                        ? `
+                                            <div class="content-body">
+                                                ${escapeHtml(lesson.content)}
+                                            </div>
+                                        `
+                                        : `
+                                            <div
+                                                style="
+                                                    color:var(--muted);
+                                                    font-size:12px;
+                                                "
+                                            >
+                                                No additional lesson text
+                                                has been added yet.
+                                            </div>
+                                        `
+                                }
+
+
+                                ${
+                                    materials.length
+                                        ? `
+                                            <div
+                                                style="
+                                                    margin-top:25px;
+                                                "
+                                            >
+
+                                                <h3>
+                                                    Lesson Materials
+                                                </h3>
+
+                                                <div class="materials-list">
+
+                                                    ${
+                                                        materials
+                                                            .map(
+                                                                material =>
+                                                                    materialHtml(
+                                                                        material
+                                                                    )
+                                                            )
+                                                            .join("")
+                                                    }
+
+                                                </div>
+
+                                            </div>
+                                        `
+                                        : ""
+                                }
+
+
+                                ${
+                                    lesson.pdfUrl
+                                        ? `
+                                            <div
+                                                class="lesson-actions"
+                                            >
+
+                                                <a
+                                                    class="secondary-button"
+                                                    href="${escapeHtml(lesson.pdfUrl)}"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    📄 Open Lesson PDF
+                                                </a>
+
+                                            </div>
+                                        `
+                                        : ""
+                                }
+
+
+                                <div class="lesson-actions">
+
+                                    <button
+                                        class="complete-button"
+                                        id="completeLessonButton"
+                                    >
+                                        ✓ Mark Lesson Complete
+                                    </button>
+
+
+                                    <button
+                                        class="save-progress-button"
+                                        id="saveProgressButton"
+                                    >
+                                        Save Progress
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <aside class="lesson-sidebar">
+
+                            <h3>
+                                Your Progress
+                            </h3>
+
+
+                            <div
+                                class="side-progress-value"
+                                id="lessonProgressValue"
+                            >
+                                ${percentage}%
+                            </div>
+
+
+                            <div class="progress-track">
+
+                                <div
+                                    class="progress-fill"
+                                    id="lessonProgressBar"
+                                    style="
+                                        width:${percentage}%;
+                                    "
+                                ></div>
+
+                            </div>
+
+
+                            <div class="side-progress-label">
+                                ${
+                                    Number(
+                                        progress.completed
+                                    ) === 1
+                                        ? "Lesson completed ✓"
+                                        : "Keep going — you're making progress."
+                                }
+                            </div>
+
+
+                            <div
+                                style="
+                                    margin-top:25px;
+                                    padding-top:18px;
+                                    border-top:1px solid var(--border);
+                                "
+                            >
+
+                                <div
+                                    style="
+                                        color:var(--muted);
+                                        font-size:10px;
+                                        text-transform:uppercase;
+                                        letter-spacing:1px;
+                                    "
+                                >
+                                    Course
+                                </div>
+
+                                <div
+                                    style="
+                                        margin-top:5px;
+                                        font-weight:800;
+                                        font-size:13px;
+                                    "
+                                >
+                                    ${escapeHtml(
+                                        lesson.courseTitle
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                            ${
+                                lesson.durationMinutes
+                                    ? `
+                                        <div
+                                            style="
+                                                margin-top:18px;
+                                                color:var(--muted);
+                                                font-size:11px;
+                                            "
+                                        >
+                                            ⏱
+                                            ${lesson.durationMinutes}
+                                            minutes
+                                        </div>
+                                    `
+                                    : ""
+                            }
+
+                        </aside>
+
+                    </div>
+
+                `;
+
+
+            $("#backToCourse")
+                ?.addEventListener(
+                    "click",
+                    () => {
+
+                        if (
+                            currentCourse &&
+                            currentCourse.id
+                        ) {
+
+                            openCourse(
+                                currentCourse.id
+                            );
+
+                        } else {
+
+                            showSection(
+                                "courses"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+            $("#completeLessonButton")
+                ?.addEventListener(
+                    "click",
+                    () => {
+
+                        saveLessonProgress(
+                            100,
+                            0,
+                            true
+                        );
+
+                    }
+                );
+
+
+           $("#saveProgressButton")
+    ?.addEventListener("click", () => {
+
+        const video = document.getElementById("lessonVideo");
+
+        if (video && video.duration && !Number.isNaN(video.duration)) {
+
+            const pct = Math.round((video.currentTime / video.duration) * 100);
+
+            saveLessonProgress(
+                Math.max(pct, Number(currentLesson?.progress?.progress || 0)),
+                Math.floor(video.currentTime),
+                false
+            );
+
+        } else {
+
+            saveLessonProgress(
+                Number(currentLesson?.progress?.progress || 0),
+                Number(currentLesson?.progress?.last_position || 0),
+                false
+            );
+
+        }
+
+    });
+
+        }
+
+
+
+
+function renderVideo(videoUrl) {
+
+    if (!videoUrl) {
+
+        return `
+            <div class="video-placeholder">
+
+                <strong>
+                    No video attached
+                </strong>
+
+                <span>
+                    Your teacher has not added
+                    a video to this lesson yet.
+                </span>
+
+            </div>
+        `;
+
+    }
+
+    let url = String(videoUrl).trim();
+
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        url = "http://localhost:5000" + (url.startsWith("/") ? url : "/" + url);
+    }
+
+    const youtube = url.match(
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})/
+    );
+
+    if (youtube) {
+        return `
+            <iframe
+                src="https://www.youtube.com/embed/${youtube[1]}"
+                style="width:100%;aspect-ratio:16/9;border:0;border-radius:10px;"
+                allowfullscreen
+            ></iframe>
+        `;
+    }
+
+    const vimeo = url.match(/vimeo\.com\/(\d+)/);
+
+    if (vimeo) {
+        return `
+            <iframe
+                src="https://player.vimeo.com/video/${vimeo[1]}"
+                style="width:100%;aspect-ratio:16/9;border:0;border-radius:10px;"
+                allowfullscreen
+            ></iframe>
+        `;
+    }
+
+      return `
+        <video
+            id="lessonVideo"
+            controls
+            preload="metadata"
+            style="width:100%;max-height:480px;border-radius:10px;background:#000;"
+            src="${url}"
+        >
+            Your browser does not support this video.
+        </video>
+    `;
+
+}
+        function getYouTubeId(
+            url
+        ) {
+
+            const patterns = [
+
+                /youtube\.com\/watch\?v=([^&]+)/i,
+
+                /youtube\.com\/embed\/([^?&]+)/i,
+
+                /youtu\.be\/([^?&]+)/i,
+
+                /youtube\.com\/shorts\/([^?&]+)/i
+
+            ];
+
+
+            for (
+                const pattern of patterns
+            ) {
+
+                const match =
+                    url.match(
+                        pattern
+                    );
+
+
+                if (match) {
+
+                    return match[1];
+
+                }
+
+            }
+
+
+            return null;
+
+        }
+
+
+        function materialHtml(
+            material
+        ) {
+
+            const url =
+                material.url;
+
+
+            return `
+
+                <a
+                    class="material"
+                    href="${escapeHtml(url || "#")}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <span class="material-icon">
+                        📎
+                    </span>
+
+                    <span class="material-info">
+
+                        <span class="material-title">
+                            ${escapeHtml(
+                                material.title ||
+                                material.file_name ||
+                                "Material"
+                            )}
+                        </span>
+
+                        <span class="material-type">
+                            ${escapeHtml(
+                                material.type ||
+                                "Resource"
+                            )}
+                        </span>
+
+                    </span>
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+            `;
+
+        }
+
+
+        /* =========================================================
+           LESSON PROGRESS
+        ========================================================= */
+
+        async function saveLessonProgress(
+            progressValue,
+            lastPosition,
+            completed
+        ) {
+
+            if (
+                !currentLesson
+            ) {
+
+                return;
+
+            }
+
+
+            try {
+
+                const data =
+                    await apiFetch(
+                        `/online/student/lessons/${currentLesson.id}/progress`,
+                        {
+                            method: "POST",
+
+                            body:
+                                JSON.stringify({
+
+                                    videoSeconds:
+                                        getCurrentVideoSeconds(),
+
+                                    progress:
+                                        progressValue,
+
+                                    completed:
+                                        completed,
+
+                                    lastPosition:
+                                        lastPosition
+
+                                })
+
+                        }
+                    );
+
+
+                if (
+                    data.progress
+                ) {
+
+                    currentLesson.progress =
+                        data.progress;
+
+                }
+
+
+                updateLessonProgressUi(
+                    progressValue,
+                    completed
+                );
+
+
+                showToast(
+                    completed
+                        ? "Lesson marked as completed."
+                        : "Your lesson progress was saved."
+                );
+
+
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    "error"
+                );
+
+            }
+
+        }
+
+
+        function updateLessonProgressUi(
+            progress,
+            completed
+        ) {
+
+            const percentage =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        Number(progress || 0)
+                    )
+                );
+
+
+            const value =
+                $("#lessonProgressValue");
+
+
+            const bar =
+                $("#lessonProgressBar");
+
+
+            if (value) {
+
+                value.textContent =
+                    `${percentage}%`;
+
+            }
+
+
+            if (bar) {
+
+                bar.style.width =
+                    `${percentage}%`;
+
+            }
+
+
+            const label =
+                document.querySelector(
+                    ".side-progress-label"
+                );
+
+
+            if (label) {
+
+                label.textContent =
+                    completed ||
+                    percentage >= 100
+                        ? "Lesson completed ✓"
+                        : "Keep going — you're making progress.";
+
+            }
+
+        }
+
+
+        function getCurrentVideoSeconds() {
+
+            const video =
+                $("#lessonVideo");
+
+
+            if (
+                video &&
+                Number.isFinite(
+                    video.currentTime
+                )
+            ) {
+
+                return Math.floor(
+                    video.currentTime
+                );
+
+            }
+
+
+            return Number(
+                currentLesson?.progress?.video_seconds ||
+                0
+            );
+
+        }
+
+function trackVideoProgress() {
+
+    const video = document.getElementById("lessonVideo");
+
+    if (!video || !currentLesson) return;
+
+    let lastSaved = 0;
+    const lessonId = currentLesson.id;
+
+    // Resume where the student stopped
+    const resumeAt = Number(currentLesson.progress?.last_position || 0);
+
+    video.addEventListener("loadedmetadata", () => {
+        if (resumeAt > 0 && resumeAt < video.duration - 2) {
+            video.currentTime = resumeAt;
+        }
+    });
+
+    async function send(completed) {
+
+        if (!video.duration || Number.isNaN(video.duration)) return;
+
+        const previous = Number(currentLesson?.progress?.progress || 0);
+
+const percent = completed
+    ? 100
+    : Math.max(
+        previous,
+        Math.round((video.currentTime / video.duration) * 100)
+    );
+
+        try {
+
+            const data = await apiFetch(
+                `/online/student/lessons/${lessonId}/progress`,
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        videoSeconds: Math.floor(video.currentTime),
+                        lastPosition: Math.floor(video.currentTime),
+                        progress: percent,
+                        completed
+                    })
+                }
+            );
+
+            if (data.progress && currentLesson && currentLesson.id === lessonId) {
+                currentLesson.progress = data.progress;
+            }
+
+            updateLessonProgressUi(percent, completed);
+
+        } catch (error) {
+            console.warn("Progress not saved:", error.message);
+        }
+
+    }
+
+    // Save about every 10 seconds of playback
+    video.addEventListener("timeupdate", () => {
+        if (Math.abs(video.currentTime - lastSaved) >= 10) {
+            lastSaved = video.currentTime;
+            send(false);
+        }
+    });
+
+    video.addEventListener("pause", () => {
+        if (!video.ended) send(false);
+    });
+
+    video.addEventListener("ended", () => send(true));
+
+}
+        /* =========================================================
+           LEARNING SESSION
+        ========================================================= */
+
+        async function startLearningSession(
+            lessonId
+        ) {
+
+            stopHeartbeat();
+
+
+            try {
+
+                const data =
+                    await apiFetch(
+                        "/online/student/sessions/start",
+                        {
+                            method: "POST",
+
+                            body:
+                                JSON.stringify({
+                                    lessonId
+                                })
+
+                        }
+                    );
+
+
+                currentSessionId =
+                    data.session?.id ||
+                    null;
+
+
+                if (
+                    currentSessionId
+                ) {
+
+                    heartbeatTimer =
+                        setInterval(
+                            heartbeatSession,
+                            60000
+                        );
+
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    "Could not start learning session:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        async function heartbeatSession() {
+
+            if (
+                !currentSessionId
+            ) {
+
+                return;
+
+            }
+
+
+            try {
+
+                await apiFetch(
+                    `/online/student/sessions/${currentSessionId}/heartbeat`,
+                    {
+                        method: "POST"
+                    }
+                );
+
+            } catch (error) {
+
+                console.warn(
+                    "Learning heartbeat failed:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        async function endLearningSession() {
+
+            if (
+                !currentSessionId
+            ) {
+
+                return;
+
+            }
+
+
+            const sessionId =
+                currentSessionId;
+
+
+            currentSessionId =
+                null;
+
+
+            stopHeartbeat();
+
+
+            try {
+
+                await apiFetch(
+                    `/online/student/sessions/${sessionId}/end`,
+                    {
+                        method: "POST"
+                    }
+                );
+
+            } catch (error) {
+
+                console.warn(
+                    "Could not end learning session:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        function stopHeartbeat() {
+
+            if (
+                heartbeatTimer
+            ) {
+
+                clearInterval(
+                    heartbeatTimer
+                );
+
+                heartbeatTimer =
+                    null;
+
+            }
+
+        }
+
+
+        /*
+         * Try to close the active session when
+         * the student leaves the page.
+         */
+
+        window.addEventListener(
+            "beforeunload",
+            () => {
+
+                if (
+                    currentSessionId
+                ) {
+
+                    const token =
+                        getToken();
+
+
+                    if (token) {
+
+                        fetch(
+                            `${API_URL}/online/student/sessions/${currentSessionId}/end`,
+                            {
+                                method: "POST",
+
+                                headers: {
+
+                                    Authorization:
+                                        `Bearer ${token}`,
+
+                                    "Content-Type":
+                                        "application/json"
+
+                                },
+
+                                keepalive: true
+
+                            }
+                        )
+                            .catch(
+                                () => {}
+                            );
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           LEARNING TIME
+        ========================================================= */
+
+        async function loadLearningTime() {
+
+            const table =
+                $("#learningSessionsTable");
+
+
+            table.innerHTML =
+                loadingHtml();
+
+
+            try {
+
+                const data =
+                    await apiFetch(
+                        "/online/student/learning-time"
+                    );
+
+
+                $("#totalLearningTime")
+                    .textContent =
+                    formatDuration(
+                        data.totalSeconds
+                    );
+
+
+                $("#todayLearningTime")
+                    .textContent =
+                    formatDuration(
+                        data.todaySeconds
+                    );
+
+
+                renderLearningSessions(
+                    data.recentSessions
+                );
+
+
+            } catch (error) {
+
+                table.innerHTML =
+                    errorHtml(
+                        error.message
+                    );
+
+            }
+
+        }
+
+
+        function renderLearningSessions(
+            sessions
+        ) {
+
+            const table =
+                $("#learningSessionsTable");
+
+
+            if (
+                !Array.isArray(sessions) ||
+                sessions.length === 0
+            ) {
+
+                table.innerHTML =
+                    emptyTableHtml(
+                        "◷",
+                        "No learning sessions yet",
+                        "Your learning activity will appear here."
+                    );
+
+                return;
+
+            }
+
+
+            table.innerHTML = `
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Lesson
+                            </th>
+
+                            <th>
+                                Started
+                            </th>
+
+                            <th>
+                                Duration
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        ${
+                            sessions
+                                .map(
+                                    session =>
+                                        `
+                                            <tr>
+
+                                                <td>
+                                                    <strong>
+                                                        ${escapeHtml(
+                                                            session.lesson_title ||
+                                                            "General learning"
+                                                        )}
+                                                    </strong>
+                                                </td>
+
+                                                <td>
+                                                    ${escapeHtml(
+                                                        formatDate(
+                                                            session.started_at
+                                                        )
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    ${formatDuration(
+                                                        session.duration_seconds
+                                                    )}
+                                                </td>
+
+                                                <td>
+
+                                                    ${
+                                                        session.ended_at
+                                                            ? `
+                                                                <span
+                                                                    style="
+                                                                        color:var(--muted);
+                                                                    "
+                                                                >
+                                                                    Completed
+                                                                </span>
+                                                            `
+                                                            : `
+                                                                <span
+                                                                    style="
+                                                                        color:var(--green);
+                                                                    "
+                                                                >
+                                                                    Active
+                                                                </span>
+                                                            `
+                                                    }
+
+                                                </td>
+
+                                            </tr>
+                                        `
+                                )
+                                .join("")
+                        }
+
+                    </tbody>
+
+                </table>
+
+            `;
+
+        }
+
+
+        /* =========================================================
+           PARTICIPATION
+        ========================================================= */
+
+        async function loadParticipation() {
+
+            const table =
+                $("#participationTable");
+
+
+            table.innerHTML =
+                loadingHtml();
+
+
+            try {
+
+                const data =
+                    await apiFetch(
+                        "/online/student/participation"
+                    );
+
+
+                renderParticipation(
+                    data.participation
+                );
+
+
+            } catch (error) {
+
+                table.innerHTML =
+                    errorHtml(
+                        error.message
+                    );
+
+            }
+
+        }
+
+
+        function renderParticipation(
+            participation
+        ) {
+
+            const table =
+                $("#participationTable");
+
+
+            if (
+                !Array.isArray(
+                    participation
+                ) ||
+                participation.length === 0
+            ) {
+
+                table.innerHTML =
+                    emptyTableHtml(
+                        "✓",
+                        "No participation records",
+                        "Submitted participation codes will appear here."
+                    );
+
+                return;
+
+            }
+
+
+            table.innerHTML = `
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Code
+                            </th>
+
+                            <th>
+                                Course
+                            </th>
+
+                            <th>
+                                Level
+                            </th>
+
+                            <th>
+                                Submitted
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        ${
+                            participation
+                                .map(
+                                    item =>
+                                        `
+
+                                            <tr>
+
+                                                <td>
+
+                                                    <strong
+                                                        style="
+                                                            color:var(--gold);
+                                                            letter-spacing:.7px;
+                                                        "
+                                                    >
+                                                        ${escapeHtml(
+                                                            item.code
+                                                        )}
+                                                    </strong>
+
+                                                </td>
+
+                                                <td>
+                                                    ${escapeHtml(
+                                                        item.course_title ||
+                                                        "General"
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    ${escapeHtml(
+                                                        item.course_level ||
+                                                        "—"
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    ${escapeHtml(
+                                                        formatDate(
+                                                            item.submitted_at
+                                                        )
+                                                    )}
+                                                </td>
+
+                                            </tr>
+
+                                        `
+                                )
+                                .join("")
+                        }
+
+                    </tbody>
+
+                </table>
+
+            `;
+
+        }
+
+
+        $("#participationForm")
+            .addEventListener(
+                "submit",
+                async event => {
+
+                    event.preventDefault();
+
+
+                    const input =
+                        $("#participationCode");
+
+
+                    const code =
+                        input.value
+                            .trim()
+                            .toUpperCase();
+
+
+                    if (!code) {
+
+                        return;
+
+                    }
+
+
+                    const button =
+                        event.submitter;
+
+
+                    button.disabled =
+                        true;
+
+                    button.textContent =
+                        "Submitting...";
+
+
+                    try {
+
+                        const data =
+                            await apiFetch(
+                                "/online/student/participation",
+                                {
+                                    method: "POST",
+
+                                    body:
+                                        JSON.stringify({
+                                            code
+                                        })
+
+                                }
+                            );
+
+
+                        showToast(
+                            data.message ||
+                            "Participation recorded successfully."
+                        );
+
+
+                        input.value = "";
+
+
+                        loadParticipation();
+
+
+                    } catch (error) {
+
+                        showToast(
+                            error.message,
+                            "error"
+                        );
+
+                    } finally {
+
+                        button.disabled =
+                            false;
+
+                        button.textContent =
+                            "Submit Code";
+
+                    }
+
+                }
+            );
+
+
+        /* =========================================================
+           PROFILE
+        ========================================================= */
+
+        async function loadProfile() {
+
+            try {
+
+                const data =
+                    await apiFetch(
+                        "/online/student/profile"
+                    );
+
+
+                const student =
+                    data.student;
+
+
+                fillProfile(
+                    student
+                );
+
+
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    "error"
+                );
+
+            }
+
+        }
+
+
+        function fillProfile(
+            student
+        ) {
+
+            if (!student) {
+
+                return;
+
+            }
+
+
+            const name =
+                student.name ||
+                `${student.firstName || ""} ${student.lastName || ""}`
+                    .trim();
+
+
+            $("#profileName")
+                .textContent =
+                name || "Student";
+
+
+            $("#profileEmail")
+                .textContent =
+                student.email || "—";
+
+
+            $("#profileFirstName")
+                .value =
+                student.firstName || "";
+
+
+            $("#profileLastName")
+                .value =
+                student.lastName || "";
+
+
+            $("#profileEmailInput")
+                .value =
+                student.email || "";
+
+
+            $("#profilePhone")
+                .value =
+                student.phone || "";
+
+
+            $("#profilePhoto")
+                .value =
+                student.profilePhoto || "";
+
+
+            setAvatar(
+                $("#profileAvatar"),
+                name,
+                student.profilePhoto
+            );
+
+        }
+
+
+        $("#profileForm")
+            .addEventListener(
+                "submit",
+                async event => {
+
+                    event.preventDefault();
+
+
+                    const button =
+                        event.submitter;
+
+
+                    button.disabled =
+                        true;
+
+                    button.textContent =
+                        "Saving...";
+
+
+                    try {
+
+                        const data =
+                            await apiFetch(
+                                "/online/student/profile",
+                                {
+                                    method: "PATCH",
+
+                                    body:
+                                        JSON.stringify({
+
+                                            firstName:
+                                                $("#profileFirstName")
+                                                    .value
+                                                    .trim(),
+
+                                            lastName:
+                                                $("#profileLastName")
+                                                    .value
+                                                    .trim(),
+
+                                            phone:
+                                                $("#profilePhone")
+                                                    .value
+                                                    .trim(),
+
+                                            profilePhoto:
+                                                $("#profilePhoto")
+                                                    .value
+                                                    .trim()
+
+                                        })
+
+                                }
+                            );
+
+
+                        fillProfile(
+                            data.student
+                        );
+
+
+                        renderStudent(
+                            data.student
+                        );
+
+
+                        showToast(
+                            data.message ||
+                            "Profile updated successfully."
+                        );
+
+
+                    } catch (error) {
+
+                        showToast(
+                            error.message,
+                            "error"
+                        );
+
+                    } finally {
+
+                        button.disabled =
+                            false;
+
+                        button.textContent =
+                            "Save Changes";
+
+                    }
+
+                }
+            );
+
+
+        /* =========================================================
+           LOGOUT
+        ========================================================= */
+
+        $("#logoutButton")
+            .addEventListener(
+                "click",
+                async () => {
+
+                    const token =
+                        getToken();
+
+
+                    try {
+
+                        if (token) {
+
+                            await apiFetch(
+                                "/online/student/logout",
+                                {
+                                    method: "POST"
+                                }
+                            );
+
+                        }
+
+                    } catch {
+                        /* Token will still be removed. */
+                    }
+
+
+                    localStorage.removeItem(
+                        TOKEN_KEY
+                    );
+
+
+                    window.location.href =
+                        "online-login.html";
+
+                }
+            );
+
+
+        /* =========================================================
+           GENERIC HTML
+        ========================================================= */
+
+        function loadingHtml() {
+
+            return `
+
+                <div class="loading">
+
+                    <div class="spinner"></div>
+
+                    Loading...
+
+                </div>
+
+            `;
+
+        }
+
+
+        function errorHtml(
+            message
+        ) {
+
+            return `
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        Something went wrong
+                    </h3>
+
+                    <p>
+                        ${escapeHtml(message)}
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+
+        function emptyTableHtml(
+            icon,
+            title,
+            description
+        ) {
+
+            return `
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        ${icon}
+                    </div>
+
+                    <h3>
+                        ${escapeHtml(title)}
+                    </h3>
+
+                    <p>
+                        ${escapeHtml(description)}
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* =========================================================
+           INITIALIZATION
+        ========================================================= */
+
+        async function initialize() {
+
+            if (!requireToken()) {
+
+                return;
+
+            }
+
+
+            await loadDashboard();
+
+        }
+
+
+        initialize();
+
+    </script>
+
+</body>
+
+</html>

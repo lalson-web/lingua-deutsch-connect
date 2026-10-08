@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Student login - LINGUA DEUTSCH CONNECT"
+    >
+
+    <meta
+        name="theme-color"
+        content="#101010"
+    >
+
+    <title>Student Login | LINGUA DEUTSCH CONNECT</title>
+
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         STYLES
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/auth.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     TOP NAVIGATION
+========================================================= -->
+
+<header class="auth-navbar">
+
+    <div class="auth-navbar-inner">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="../index.html"
+            class="auth-logo"
+            aria-label="LINGUA DEUTSCH CONNECT Home"
+        >
+
+            <img
+                src="../assets/logo/logo.jpg"
+                alt="LINGUA DEUTSCH CONNECT logo"
+            >
+
+        </a>
+
+
+        <!-- BACK HOME -->
+
+        <a
+            href="../index.html"
+            class="back-home"
+        >
+
+            <span aria-hidden="true">←</span>
+
+            <span>Back to LDC</span>
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     MAIN AUTH PAGE
+========================================================= -->
+
+<main class="auth-page">
+
+
+    <!-- =====================================================
+         LOGIN CARD
+    ====================================================== -->
+
+    <section
+        class="auth-card"
+        aria-labelledby="loginTitle"
+    >
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="auth-header">
+
+
+            <div
+                class="auth-icon"
+                aria-hidden="true"
+            >
+
+                🎓
+
+            </div>
+
+
+            <span class="auth-label">
+
+                STUDENT AREA
+
+            </span>
+
+
+            <h1 id="loginTitle">
+
+                Welcome back.
+
+            </h1>
+
+
+            <p>
+
+                Log in to continue your German learning journey
+                with LINGUA DEUTSCH CONNECT.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             LOGIN FORM
+        ================================================== -->
+
+        <form
+            id="loginForm"
+            class="auth-form"
+            novalidate
+        >
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="loginEmail">
+
+                    Email address
+
+                </label>
+
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    name="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    inputmode="email"
+                    spellcheck="false"
+                    autocapitalize="none"
+                    required
+                    aria-required="true"
+                >
+
+            </div>
+
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="loginPassword">
+
+                    Password
+
+                </label>
+
+
+                <div class="password-wrapper">
+
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                        aria-required="true"
+                    >
+
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="toggleLoginPassword"
+                        aria-label="Show password"
+                        aria-controls="loginPassword"
+                        aria-pressed="false"
+                    >
+
+                        Show
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MESSAGE -->
+
+            <div
+                class="form-message"
+                id="loginMessage"
+                role="alert"
+                aria-live="polite"
+                hidden
+            ></div>
+
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="auth-primary-btn"
+                id="loginBtn"
+            >
+
+                <span class="login-btn-text">
+
+                    Log In
+
+                </span>
+
+                <span
+                    class="login-btn-arrow"
+                    aria-hidden="true"
+                >
+
+                    →
+
+                </span>
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- =================================================
+             REGISTER
+        ================================================== -->
+
+        <div class="register-prompt">
+
+
+            <p>
+
+                Don't have a student account?
+
+            </p>
+
+
+            <a
+                href="register.html"
+                class="auth-secondary-btn"
+            >
+
+                <span>
+
+                    Create Student Account
+
+                </span>
+
+                <span aria-hidden="true">
+
+                    →
+
+                </span>
+
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================================
+             DIVIDER
+        ================================================== -->
+
+        <div
+            class="auth-divider"
+            aria-hidden="true"
+        >
+
+            <span>OR</span>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ADMIN AREA
+        ================================================== -->
+
+        <div class="admin-login-box">
+
+
+            <div
+                class="admin-login-icon"
+                aria-hidden="true"
+            >
+
+                🛡️
+
+            </div>
+
+
+            <div class="admin-login-content">
+
+              <strong>Classroom Admin</strong>
+
+                <p>
+
+                   Management access for in-person LINGUA DEUTSCH CONNECT classes.
+
+                </p>
+
+            </div>
+
+
+            <a
+                href="admin-login.html"
+                class="admin-login-btn"
+            >
+
+                <span>
+
+                    Admin Login
+
+                </span>
+
+                <span aria-hidden="true">
+
+                    →
+
+                </span>
+
+            </a>
+
+        </div>
+
+
+<!-- ONLINE STUDENT -->
+
+<div class="admin-login-box">
+
+    <div class="admin-login-icon" aria-hidden="true">🌐</div>
+
+    <div class="admin-login-content">
+        <strong>Online Students</strong>
+        <p>Access your online German course, video lessons and progress.</p>
+    </div>
+
+    <a href="online-login.html" class="admin-login-btn">
+        <span>Online Student Login</span>
+        <span aria-hidden="true">→</span>
+    </a>
+
+</div>
+
+
+<!-- ONLINE ADMIN -->
+
+<div class="admin-login-box">
+
+    <div class="admin-login-icon" aria-hidden="true">🔐</div>
+
+    <div class="admin-login-content">
+        <strong>Online Admin</strong>
+        <p>Management access for the online learning platform.</p>
+    </div>
+
+    <a href="online-admin-login.html" class="admin-login-btn">
+        <span>Online Admin Login</span>
+        <span aria-hidden="true">→</span>
+    </a>
+
+</div>
+        <!-- =================================================
+             ACCESS CODE NOTICE
+        ================================================== -->
+
+        <div class="access-notice">
+
+
+            <span
+                class="notice-icon"
+                aria-hidden="true"
+            >
+
+                🔑
+
+            </span>
+
+
+            <div>
+
+                <strong>
+
+                    New student?
+
+                </strong>
+
+
+                <p>
+
+                    Registration requires the unique access code
+                    provided by LINGUA DEUTSCH CONNECT after payment.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SCHOOL TAGLINE
+        ================================================== -->
+
+        <div class="auth-tagline">
+
+            <span>Deutsch lernen.</span>
+
+            <span>Deutsch sprechen.</span>
+
+            <span>Deutsch leben.</span>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="auth-footer">
+
+
+    <p>
+
+        © 2026 LINGUA DEUTSCH CONNECT.
+        All rights reserved.
+
+    </p>
+
+
+    <p>
+
+        German language learning in Kigali, Rwanda.
+
+    </p>
+
+</footer>
+
+
+
+<!-- =========================================================
+     AUTH JAVASCRIPT
+========================================================= -->
+
+<script src="../js/auth.js"></script>
+
+</body>
+
+</html>

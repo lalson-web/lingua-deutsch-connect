@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LDC Classes</title>
+
+    <link rel="stylesheet" href="../css/auth.css">
+
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-light: #e4c65a;
+            --black: #000;
+            --dark: #0b0b0b;
+            --dark-2: #111;
+            --dark-3: #181818;
+            --white: #fff;
+            --muted: #999;
+            --green: #36c76f;
+            --red: #e05252;
+            --blue: #4b8cff;
+            --border: rgba(212,175,55,.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--black);
+            color: var(--white);
+            font-family: "DM Sans", Arial, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           TOPBAR
+        ===================================================== */
+
+        .classes-topbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            min-height: 72px;
+            padding: 0 5%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: var(--gold);
+            color: var(--black);
+
+            box-shadow: 0 4px 20px rgba(0,0,0,.35);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 900;
+        }
+
+        .brand img {
+            width: 42px;
+            height: 42px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topbar-btn {
+            border: 1px solid rgba(0,0,0,.18);
+            background: rgba(0,0,0,.08);
+            color: var(--black);
+
+            padding: 9px 15px;
+            border-radius: 8px;
+
+            font-weight: 800;
+            transition: .2s;
+        }
+
+        .topbar-btn:hover {
+            background: var(--black);
+            color: var(--gold);
+        }
+
+        /* =====================================================
+           CONTAINER
+        ===================================================== */
+
+        .classes-container {
+            width: min(1180px, 92%);
+            margin: auto;
+        }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .classes-hero {
+            padding: 60px 0 35px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            padding: 7px 12px;
+
+            border: 1px solid var(--border);
+            border-radius: 999px;
+
+            color: var(--gold);
+            background: rgba(212,175,55,.06);
+
+            font-size: .76rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .classes-hero h1 {
+            margin-top: 18px;
+
+            max-width: 780px;
+
+            font-family: "Space Grotesk", Arial, sans-serif;
+            font-size: clamp(2.5rem,5vw,4.5rem);
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .classes-hero h1 span {
+            color: var(--gold);
+        }
+
+        .classes-hero p {
+            max-width: 700px;
+            margin-top: 18px;
+
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        .page-message {
+            display: none;
+
+            margin-bottom: 25px;
+            padding: 14px 16px;
+
+            border-radius: 10px;
+            border: 1px solid var(--border);
+
+            background: var(--dark-2);
+
+            font-weight: 700;
+        }
+
+        .page-message.show {
+            display: block;
+        }
+
+        .page-message.success {
+            color: var(--green);
+            border-color: rgba(54,199,111,.35);
+        }
+
+        .page-message.error {
+            color: var(--red);
+            border-color: rgba(224,82,82,.35);
+        }
+
+        .page-message.info {
+            color: var(--blue);
+            border-color: rgba(75,140,255,.35);
+        }
+
+        /* =====================================================
+           FILTERS
+        ===================================================== */
+
+        .filters-card {
+            margin-bottom: 25px;
+            padding: 22px;
+
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: 1fr 180px 180px;
+            gap: 12px;
+        }
+
+        .filter-field label {
+            display: block;
+            margin-bottom: 7px;
+
+            color: var(--muted);
+            font-size: .78rem;
+            font-weight: 800;
+        }
+
+        .filter-field input,
+        .filter-field select {
+            width: 100%;
+            height: 46px;
+
+            padding: 0 13px;
+
+            background: var(--black);
+            color: var(--white);
+
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 9px;
+
+            outline: none;
+        }
+
+        .filter-field input:focus,
+        .filter-field select:focus {
+            border-color: var(--gold);
+        }
+
+        /* =====================================================
+           STATISTICS
+        ===================================================== */
+
+        .class-stats {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 13px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            padding: 20px;
+
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: 13px;
+        }
+
+        .stat-card small {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--muted);
+        }
+
+        .stat-card strong {
+            font-size: 1.6rem;
+        }
+
+        /* =====================================================
+           CLASS GRID
+        ===================================================== */
+
+        .section-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px;
+
+            margin-bottom: 18px;
+        }
+
+        .section-heading h2 {
+            font-family: "Space Grotesk", Arial, sans-serif;
+            font-size: 1.6rem;
+        }
+
+        .section-heading p {
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 17px;
+        }
+
+        .class-card {
+            position: relative;
+
+            padding: 22px;
+
+            background: var(--dark);
+            border: 1px solid rgba(212,175,55,.16);
+            border-radius: 16px;
+
+            transition: .2s ease;
+        }
+
+        .class-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(212,175,55,.5);
+        }
+
+        .class-level {
+            display: inline-flex;
+
+            padding: 6px 9px;
+
+            background: rgba(212,175,55,.1);
+            color: var(--gold);
+
+            border-radius: 7px;
+
+            font-size: .72rem;
+            font-weight: 900;
+        }
+
+        .class-card h3 {
+            margin-top: 14px;
+            font-size: 1.25rem;
+        }
+
+        .class-description {
+            min-height: 42px;
+            margin-top: 7px;
+
+            color: var(--muted);
+            font-size: .86rem;
+            line-height: 1.5;
+        }
+
+        .class-info {
+            display: grid;
+            gap: 8px;
+
+            margin-top: 18px;
+            padding-top: 17px;
+
+            border-top: 1px solid rgba(255,255,255,.07);
+        }
+
+        .class-info-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+
+            font-size: .83rem;
+        }
+
+        .class-info-row span:first-child {
+            color: var(--muted);
+        }
+
+        .class-info-row span:last-child {
+            text-align: right;
+            font-weight: 700;
+        }
+
+        .capacity-bar {
+            height: 6px;
+            margin-top: 13px;
+
+            background: #222;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .capacity-fill {
+            height: 100%;
+            width: 0;
+
+            background: var(--gold);
+            border-radius: inherit;
+
+            transition: width .4s ease;
+        }
+
+        .class-actions {
+            display: flex;
+            gap: 9px;
+            margin-top: 18px;
+        }
+
+        .class-btn {
+            flex: 1;
+
+            min-height: 43px;
+            padding: 0 12px;
+
+            border-radius: 8px;
+
+            font-weight: 800;
+            font-size: .82rem;
+        }
+
+        .class-btn.primary {
+            background: var(--gold);
+            color: var(--black);
+            border: 1px solid var(--gold);
+        }
+
+        .class-btn.secondary {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,.13);
+        }
+
+        .class-btn:hover {
+            opacity: .88;
+        }
+
+        /* =====================================================
+           EMPTY / LOADING
+        ===================================================== */
+
+        .empty-state {
+            padding: 45px 20px;
+
+            text-align: center;
+            color: var(--muted);
+
+            background: var(--dark);
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: 15px;
+        }
+
+        .empty-state strong {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--white);
+        }
+
+        .loading {
+            padding: 45px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .spinner {
+            width: 27px;
+            height: 27px;
+
+            margin: 0 auto 10px;
+
+            border: 3px solid rgba(255,255,255,.1);
+            border-top-color: var(--gold);
+
+            border-radius: 50%;
+
+            animation: spin .8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            padding: 45px 0;
+
+            text-align: center;
+            color: #666;
+            font-size: .8rem;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 950px) {
+
+            .class-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .filters {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .filters .filter-field:first-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .class-stats {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .class-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .brand span {
+                display: none;
+            }
+
+            .topbar-btn {
+                padding: 8px 10px;
+                font-size: .75rem;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .filters .filter-field:first-child {
+                grid-column: auto;
+            }
+
+            .classes-hero {
+                padding-top: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="classes-topbar">
+
+    <a href="dashboard.html" class="brand">
+        <img
+            src="../assets/logo/logo.jpg"
+            alt="Lingua Deutsch Connect"
+        >
+
+        <span>
+            LINGUA DEUTSCH CONNECT
+        </span>
+    </a>
+
+    <nav class="topbar-actions">
+
+        <a href="dashboard.html" class="topbar-btn">
+            Dashboard
+        </a>
+
+        <a href="attendance.html" class="topbar-btn">
+            Attendance
+        </a>
+
+        <button
+            type="button"
+            id="logoutBtn"
+            class="topbar-btn"
+        >
+            Logout
+        </button>
+
+    </nav>
+
+</header>
+
+
+<main class="classes-container">
+
+    <!-- HERO -->
+
+    <section class="classes-hero">
+
+        <span class="hero-label">
+            ● LDC Classes
+        </span>
+
+        <h1>
+            Your class.
+            <span>Your learning journey.</span>
+        </h1>
+
+        <p>
+            View your enrolled classes, schedules, teachers and
+            class information in one place.
+        </p>
+
+    </section>
+
+
+    <!-- MESSAGE -->
+
+    <div
+        id="classesMessage"
+        class="page-message"
+        role="alert"
+        aria-live="polite"
+    ></div>
+
+
+    <!-- FILTERS -->
+
+    <section class="filters-card">
+
+        <div class="filters">
+
+            <div class="filter-field">
+
+                <label for="classSearch">
+                    Search
+                </label>
+
+                <input
+                    type="search"
+                    id="classSearch"
+                    placeholder="Search classes..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="filter-field">
+
+                <label for="levelFilter">
+                    Level
+                </label>
+
+                <select id="levelFilter">
+
+                    <option value="all">
+                        All levels
+                    </option>
+
+                    <option value="A1">A1</option>
+                    <option value="A2">A2</option>
+                    <option value="B1">B1</option>
+                    <option value="B2">B2</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-field">
+
+                <label for="statusFilter">
+                    Status
+                </label>
+
+                <select id="statusFilter">
+
+                    <option value="all">
+                        All statuses
+                    </option>
+
+                    <option value="active">
+                        Active
+                    </option>
+
+                    <option value="upcoming">
+                        Upcoming
+                    </option>
+
+                    <option value="completed">
+                        Completed
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+
+    <section class="class-stats">
+
+        <div class="stat-card">
+            <small>My Classes</small>
+            <strong id="totalClasses">0</strong>
+        </div>
+
+        <div class="stat-card">
+            <small>Active Classes</small>
+            <strong id="activeClasses">0</strong>
+        </div>
+
+        <div class="stat-card">
+            <small>Current Level</small>
+            <strong id="currentLevel">—</strong>
+        </div>
+
+        <div class="stat-card">
+            <small>Attendance</small>
+            <strong id="classAttendance">0%</strong>
+        </div>
+
+    </section>
+
+
+    <!-- CLASSES -->
+
+    <section>
+
+        <div class="section-heading">
+
+            <div>
+                <h2>My Classes</h2>
+
+                <p>
+                    Your enrolled LDC classes.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div id="classGrid" class="class-grid">
+
+            <div class="loading">
+                <div class="spinner"></div>
+                Loading classes...
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    © <span id="currentYear"></span>
+    Lingua Deutsch Connect.
+    Learn German. Speak German. Live German.
+
+</footer>
+
+
+<script>
+    document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
+</script>
+
+<script src="../js/classes.js"></script>
+
+</body>
+</html>

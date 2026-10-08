@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Class | Teacher Portal | LINGUA DEUTSCH CONNECT</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/teacher.css"
+    >
+
+</head>
+
+<body class="teacher-class-page">
+
+    <div class="teacher-layout">
+
+        <aside class="teacher-sidebar">
+
+            <div class="sidebar-brand">
+
+                <img
+                    src="../assets/logo/logo.jpg"
+                    alt="LINGUA DEUTSCH CONNECT"
+                >
+
+                <div>
+                    <strong>LDC</strong>
+                    <span>Teacher Portal</span>
+                </div>
+
+            </div>
+
+
+            <nav class="teacher-nav">
+
+                <a
+                    href="teacher-dashboard.html"
+                    class="teacher-nav-link"
+                >
+                    <span>⌂</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a
+                    href="teacher-dashboard.html"
+                    class="teacher-nav-link active"
+                >
+                    <span>▦</span>
+                    <span>My Classes</span>
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <a
+                    href="../index.html"
+                    class="sidebar-home"
+                >
+                    ← Main Website
+                </a>
+
+                <button
+                    type="button"
+                    id="teacherClassLogout"
+                    class="logout-btn"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <main class="teacher-main">
+
+            <header class="class-header">
+
+                <div>
+
+                    <a
+                        href="teacher-dashboard.html"
+                        class="back-link"
+                    >
+                        ← Back to Dashboard
+                    </a>
+
+                    <span
+                        class="eyebrow"
+                        id="classLevel"
+                    >
+                        GERMAN CLASS
+                    </span>
+
+                    <h1 id="classTitle">
+                        Loading class...
+                    </h1>
+
+                    <p id="classMeta">
+                        Loading class information...
+                    </p>
+
+                </div>
+
+
+                <div class="class-header-actions">
+
+                    <button
+                        type="button"
+                        id="generateAttendanceCodeBtn"
+                        class="primary-btn"
+                    >
+                        <span>Generate Attendance Code</span>
+                        <span>+</span>
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <div
+                id="classMessage"
+                class="dashboard-message"
+                hidden
+            ></div>
+
+
+            <section class="class-overview-grid">
+
+                <article class="teacher-stat-card">
+
+                    <div class="stat-icon">
+                        👨‍🎓
+                    </div>
+
+                    <div>
+                        <span>STUDENTS</span>
+                        <strong id="classStudentsCount">0</strong>
+                    </div>
+
+                </article>
+
+
+                <article class="teacher-stat-card">
+
+                    <div class="stat-icon">
+                        📚
+                    </div>
+
+                    <div>
+                        <span>LESSONS</span>
+                        <strong id="classLessonsCount">0</strong>
+                    </div>
+
+                </article>
+
+
+                <article class="teacher-stat-card">
+
+                    <div class="stat-icon">
+                        📝
+                    </div>
+
+                    <div>
+                        <span>TESTS</span>
+                        <strong id="classTestsCount">0</strong>
+                    </div>
+
+                </article>
+
+
+                <article class="teacher-stat-card">
+
+                    <div class="stat-icon">
+                        ◷
+                    </div>
+
+                    <div>
+                        <span>ATTENDANCE</span>
+                        <strong id="classAttendanceCount">—</strong>
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <nav class="class-tabs">
+
+                <button
+                    type="button"
+                    class="class-tab active"
+                    data-tab="lessons"
+                >
+                    Lessons
+                </button>
+
+                <button
+                    type="button"
+                    class="class-tab"
+                    data-tab="students"
+                >
+                    Students
+                </button>
+
+                <button
+                    type="button"
+                    class="class-tab"
+                    data-tab="attendance"
+                >
+                    Attendance
+                </button>
+
+                <button
+                    type="button"
+                    class="class-tab"
+                    data-tab="tests"
+                >
+                    Tests
+                </button>
+
+                <button
+                    type="button"
+                    class="class-tab"
+                    data-tab="materials"
+                >
+                    Materials
+                </button>
+
+            </nav>
+
+
+            <!-- LESSONS -->
+
+            <section
+                id="class-tab-lessons"
+                class="class-tab-panel active"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="eyebrow">
+                            COURSE CONTENT
+                        </span>
+
+                        <h2>Lessons</h2>
+
+                        <p>
+                            Create and manage lessons for this class.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="addLessonBtn"
+                        class="primary-btn"
+                    >
+                        <span>+ Add Lesson</span>
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="lessonsList"
+                    class="teacher-data-table-wrap"
+                >
+                    <div class="loading-card">
+                        Loading lessons...
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- STUDENTS -->
+
+            <section
+                id="class-tab-students"
+                class="class-tab-panel"
+                hidden
+            >
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="eyebrow">
+                            CLASS MEMBERS
+                        </span>
+
+                        <h2>Students</h2>
+
+                        <p>
+                            Students assigned to this class.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="studentsList"
+                    class="teacher-data-table-wrap"
+                >
+                    <div class="loading-card">
+                        Loading students...
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- ATTENDANCE -->
+
+            <section
+                id="class-tab-attendance"
+                class="class-tab-panel"
+                hidden
+            >
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="eyebrow">
+                            DAILY TRACKING
+                        </span>
+
+                        <h2>Attendance</h2>
+
+                        <p>
+                            Mark and review attendance for this class.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="attendancePanel"
+                    class="teacher-data-table-wrap"
+                >
+                    <div class="loading-card">
+                        Loading attendance...
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- TESTS -->
+
+            <section
+                id="class-tab-tests"
+                class="class-tab-panel"
+                hidden
+            >
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="eyebrow">
+                            ASSESSMENT
+                        </span>
+
+                        <h2>Tests</h2>
+
+                        <p>
+                            Create weekly tests and enter student marks.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="addTestBtn"
+                        class="primary-btn"
+                    >
+                        <span>+ Create Test</span>
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="testsList"
+                    class="teacher-data-table-wrap"
+                >
+                    <div class="loading-card">
+                        Loading tests...
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- MATERIALS -->
+
+            <section
+                id="class-tab-materials"
+                class="class-tab-panel"
+                hidden
+            >
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="eyebrow">
+                            LEARNING MATERIALS
+                        </span>
+
+                        <h2>Materials</h2>
+
+                        <p>
+                            Manage PDFs, links, videos and other resources.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="feature-placeholder">
+
+                    <div class="placeholder-icon">
+                        📎
+                    </div>
+
+                    <h3>Class Materials</h3>
+
+                    <p>
+                        Materials can be attached to individual lessons.
+                        Open the Lessons tab to manage lesson resources.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- LESSON MODAL -->
+
+    <div
+        id="lessonModal"
+        class="modal-overlay"
+        hidden
+    >
+
+        <div class="teacher-modal">
+
+            <div class="modal-header">
+
+                <div>
+                    <span class="eyebrow">
+                        COURSE CONTENT
+                    </span>
+
+                    <h2 id="lessonModalTitle">
+                        Add Lesson
+                    </h2>
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeLessonModal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="lessonForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group full">
+                        <label for="lessonTitle">
+                            Lesson Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="lessonTitle"
+                            required
+                            placeholder="e.g. Perfekt mit haben"
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="lessonOrder">
+                            Lesson Number
+                        </label>
+
+                        <input
+                            type="number"
+                            id="lessonOrder"
+                            min="1"
+                            value="1"
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="lessonDuration">
+                            Duration (minutes)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="lessonDuration"
+                            min="1"
+                            value="60"
+                        >
+                    </div>
+
+
+                    <div class="form-group full">
+                        <label for="lessonDescription">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="lessonDescription"
+                            rows="3"
+                            placeholder="Short lesson description..."
+                        ></textarea>
+                    </div>
+
+
+                    <div class="form-group full">
+                        <label for="lessonContent">
+                            Teacher Notes / Lesson Content
+                        </label>
+
+                        <textarea
+                            id="lessonContent"
+                            rows="8"
+                            placeholder="Write the lesson notes here..."
+                        ></textarea>
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="lessonFormMessage"
+                    class="form-message"
+                    hidden
+                ></div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="outline-btn"
+                        id="cancelLessonBtn"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                        id="saveLessonBtn"
+                    >
+                        Save Lesson
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script src="../js/teacher-class.js"></script>
+
+</body>
+</html> 

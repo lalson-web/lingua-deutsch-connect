@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Lesson | Lingua Deutsch Connect</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/lesson.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         TOPBAR
+    ====================================================== -->
+
+    <header class="lesson-topbar">
+
+        <div class="lesson-topbar-inner">
+
+            <a
+                href="dashboard.html"
+                class="lesson-logo"
+            >
+                <img
+                    src="../assets/logo/logo.jpg"
+                    alt="Lingua Deutsch Connect"
+                >
+            </a>
+
+            <div class="lesson-topbar-center">
+
+                <span id="lessonLevel">
+                    German
+                </span>
+
+                <span class="topbar-separator">
+                    /
+                </span>
+
+                <span id="lessonModule">
+                    Module
+                </span>
+
+            </div>
+
+            <a
+                href="dashboard.html"
+                class="back-dashboard"
+            >
+                ← Dashboard
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="lesson-page">
+
+        <!-- =================================================
+             LOADING
+        ================================================== -->
+
+        <div
+            id="lessonLoading"
+            class="lesson-loading"
+        >
+
+            <div class="loading-spinner"></div>
+
+            <h2>
+                Loading lesson...
+            </h2>
+
+            <p>
+                Please wait while we prepare your lesson.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             ERROR
+        ================================================== -->
+
+        <div
+            id="lessonError"
+            class="lesson-error"
+            hidden
+        >
+
+            <div class="error-icon">
+                !
+            </div>
+
+            <h2>
+                Lesson unavailable
+            </h2>
+
+            <p id="lessonErrorMessage">
+                We couldn't load this lesson.
+            </p>
+
+            <a
+                href="dashboard.html"
+                class="primary-button"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             LESSON CONTENT
+        ================================================== -->
+
+        <section
+            id="lessonContent"
+            class="lesson-content"
+            hidden
+        >
+
+            <!-- =============================================
+                 BREADCRUMB
+            ============================================== -->
+
+            <div class="lesson-breadcrumb">
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+
+                <span>›</span>
+
+                <span id="breadcrumbCourse">
+                    German
+                </span>
+
+                <span>›</span>
+
+                <span id="breadcrumbModule">
+                    Module
+                </span>
+
+            </div>
+
+
+            <!-- =============================================
+                 HERO
+            ============================================== -->
+
+            <section class="lesson-hero">
+
+                <div class="lesson-hero-text">
+
+                    <div class="lesson-badge-row">
+
+                        <span
+                            id="lessonLevelBadge"
+                            class="level-badge"
+                        >
+                            A1
+                        </span>
+
+                        <span
+                            id="lessonStatusBadge"
+                            class="status-badge"
+                        >
+                            Not started
+                        </span>
+
+                    </div>
+
+                    <h1 id="lessonTitle">
+                        Lesson
+                    </h1>
+
+                    <p id="lessonDescription">
+                        Your German lesson.
+                    </p>
+
+                    <div class="lesson-meta-row">
+
+                        <span>
+                            ⏱
+                            <strong id="lessonDuration">
+                                0 min
+                            </strong>
+                        </span>
+
+                        <span>
+                            ⭐
+                            <strong id="lessonXP">
+                                0 XP
+                            </strong>
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="lesson-hero-icon">
+                    📖
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 PROGRESS
+            ============================================== -->
+
+            <section class="lesson-progress-card">
+
+                <div class="progress-header">
+
+                    <div>
+
+                        <strong>
+                            Lesson Progress
+                        </strong>
+
+                        <span id="lessonProgressText">
+                            0%
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="progress-track">
+
+                    <div
+                        id="lessonProgressBar"
+                        class="progress-fill"
+                        style="width: 0%;"
+                    ></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 LESSON BODY
+            ============================================== -->
+
+            <section class="lesson-main-card">
+
+                <div class="lesson-main-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            LESSON
+                        </span>
+
+                        <h2>
+                            Lerninhalt
+                        </h2>
+
+                    </div>
+
+                </div>
+
+                <div
+                    id="lessonBody"
+                    class="lesson-body"
+                >
+
+                    <p>
+                        Loading lesson content...
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 MATERIALS
+            ============================================== -->
+
+            <section
+                id="materialsSection"
+                class="materials-card"
+                hidden
+            >
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            MATERIALS
+                        </span>
+
+                        <h2>
+                            Lernmaterialien
+                        </h2>
+
+                    </div>
+
+                </div>
+
+                <div
+                    id="materialsList"
+                    class="materials-list"
+                ></div>
+
+            </section>
+
+
+            <!-- =============================================
+                 EXERCISES
+            ============================================== -->
+
+            <section
+                id="exerciseSection"
+                class="exercise-card"
+                hidden
+            >
+
+                <div class="exercise-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            ÜBUNG
+                        </span>
+
+                        <h2>
+                            Teste dein Wissen
+                        </h2>
+
+                    </div>
+
+                    <div
+                        id="exerciseCounter"
+                        class="exercise-counter"
+                    >
+                        Frage 1 / 5
+                    </div>
+
+                </div>
+
+
+                <!-- Exercise Progress -->
+
+                <div class="exercise-progress">
+
+                    <div class="exercise-progress-track">
+
+                        <div
+                            id="exerciseProgressBar"
+                            class="exercise-progress-fill"
+                            style="width: 0%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Question -->
+
+                <div
+                    id="exerciseQuestion"
+                    class="exercise-question"
+                >
+
+                    <h3>
+                        Loading question...
+                    </h3>
+
+                </div>
+
+
+                <!-- Answer Options -->
+
+                <div
+                    id="exerciseOptions"
+                    class="exercise-options"
+                ></div>
+
+
+                <!-- Feedback -->
+
+                <div
+                    id="exerciseFeedback"
+                    class="exercise-feedback"
+                    hidden
+                >
+
+                    <div
+                        id="exerciseFeedbackIcon"
+                        class="feedback-icon"
+                    >
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong id="exerciseFeedbackTitle">
+                            Correct!
+                        </strong>
+
+                        <p id="exerciseFeedbackText">
+                            Great job!
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Exercise Buttons -->
+
+                <div class="exercise-actions">
+
+                    <button
+                        type="button"
+                        id="checkAnswerBtn"
+                        class="primary-button"
+                    >
+                        Check Answer
+                        <span>✓</span>
+                    </button>
+
+                    <button
+                        type="button"
+                        id="nextQuestionBtn"
+                        class="primary-button"
+                        hidden
+                    >
+                        Next Question
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 EXERCISE RESULT
+            ============================================== -->
+
+            <section
+                id="exerciseResult"
+                class="exercise-result-card"
+                hidden
+            >
+
+                <div class="result-icon">
+                    🎉
+                </div>
+
+                <span class="section-label">
+                    EXERCISE COMPLETE
+                </span>
+
+                <h2>
+                    Great work!
+                </h2>
+
+                <p id="exerciseResultText">
+                    You completed the exercises.
+                </p>
+
+                <div class="exercise-score">
+
+                    <span>
+                        Your Score
+                    </span>
+
+                    <strong id="exerciseScore">
+                        0%
+                    </strong>
+
+                </div>
+
+                <div class="exercise-xp">
+
+                    <span>
+                        ⭐ XP Earned
+                    </span>
+
+                    <strong id="exerciseXpEarned">
+                        +0 XP
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 LESSON ACTION
+            ============================================== -->
+
+            <section class="lesson-action-card">
+
+                <div class="action-text">
+
+                    <span class="section-label">
+                        YOUR PROGRESS
+                    </span>
+
+                    <h2 id="actionTitle">
+                        Ready to learn?
+                    </h2>
+
+                    <p id="actionDescription">
+                        Complete this lesson to earn your XP.
+                    </p>
+
+                </div>
+
+                <div class="action-buttons">
+
+                    <button
+                        type="button"
+                        id="saveProgressBtn"
+                        class="secondary-button"
+                    >
+                        Save Progress
+                    </button>
+
+                    <button
+                        type="button"
+                        id="completeLessonBtn"
+                        class="primary-button"
+                    >
+                        Complete Lesson
+                        <span>✓</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 COMPLETION MESSAGE
+            ============================================== -->
+
+            <section
+                id="completionCard"
+                class="completion-card"
+                hidden
+            >
+
+                <div class="completion-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span class="section-label">
+                        LESSON COMPLETE
+                    </span>
+
+                    <h2>
+                        Great job! 🎉
+                    </h2>
+
+                    <p id="completionMessage">
+                        You completed this lesson.
+                    </p>
+
+                </div>
+
+                <div class="completion-actions">
+
+                    <a
+                        href="dashboard.html"
+                        class="primary-button"
+                    >
+                        Back to Dashboard
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="../js/lesson.js"></script>
+
+</body>
+
+</html>

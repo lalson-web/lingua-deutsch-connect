@@ -1,0 +1,6066 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
+
+<title>
+    LINGUA DEUTSCH CONNECT | Admin Dashboard
+</title>
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+/* =========================================================
+   DESIGN SYSTEM
+========================================================= */
+
+:root {
+
+    --gold: #d4af37;
+    --gold-light: #e5c65a;
+    --gold-dark: #b89220;
+    --gold-soft: rgba(212, 175, 55, .12);
+    --gold-border: rgba(212, 175, 55, .35);
+
+    --black: #000000;
+    --black-soft: #070707;
+    --panel: #101010;
+    --panel-2: #151515;
+    --panel-3: #1b1b1b;
+    --panel-hover: #202020;
+
+    --border: #292929;
+    --border-light: #353535;
+
+    --text: #ffffff;
+    --text-soft: #d2d2d2;
+    --text-muted: #929292;
+    --text-dark: #666;
+
+    --green: #35c978;
+    --green-bg: rgba(53, 201, 120, .12);
+
+    --red: #ef5350;
+    --red-bg: rgba(239, 83, 80, .12);
+
+    --orange: #f0ad32;
+    --orange-bg: rgba(240, 173, 50, .12);
+
+    --blue: #5c8ff5;
+    --blue-bg: rgba(92, 143, 245, .12);
+
+    --radius-sm: 7px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 18px;
+
+    --shadow:
+        0 12px 40px rgba(0, 0, 0, .35);
+
+    --shadow-gold:
+        0 8px 30px rgba(212, 175, 55, .12);
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    background: var(--black);
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: "DM Sans", Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 85% 0%,
+            rgba(212, 175, 55, .08),
+            transparent 27%
+        ),
+        radial-gradient(
+            circle at 0% 45%,
+            rgba(212, 175, 55, .035),
+            transparent 24%
+        ),
+        var(--black);
+
+    color: var(--text);
+
+    overflow-x: hidden;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: .45;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.hidden {
+    display: none !important;
+}
+
+::selection {
+    background: var(--gold);
+    color: #000;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #3b3b3b #080808;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #080808;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3b3b3b;
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.admin-navbar {
+    width: 100%;
+    min-height: 76px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #050505,
+            #0b0b0b
+        );
+
+    color: var(--text);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 34px;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    border-bottom: 1px solid var(--border);
+
+    box-shadow:
+        0 8px 35px rgba(0, 0, 0, .45);
+}
+
+.admin-navbar::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: -1px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(212, 175, 55, .55),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+.admin-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    min-width: 0;
+}
+
+.admin-brand img {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 10px;
+
+    object-fit: cover;
+
+    border: 1px solid var(--gold-border);
+
+    box-shadow:
+        0 0 0 3px rgba(212, 175, 55, .04);
+}
+
+.admin-brand-text {
+    min-width: 0;
+}
+
+.admin-brand-text h1 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    color: var(--text);
+
+    letter-spacing: .3px;
+}
+
+.admin-brand-text span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-btn {
+    appearance: none;
+
+    border: 1px solid var(--gold);
+
+    background: var(--gold);
+
+    color: #000;
+
+    padding: 10px 18px;
+
+    min-height: 40px;
+
+    border-radius: var(--radius-sm);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        color .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+.logout-btn:hover {
+    transform: translateY(-2px);
+
+    background: var(--gold-light);
+
+    border-color: var(--gold-light);
+
+    box-shadow:
+        0 7px 24px rgba(212, 175, 55, .22);
+}
+
+.logout-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.admin-container {
+    width: min(1450px, calc(100% - 44px));
+
+    margin: 0 auto;
+
+    padding: 38px 0 90px;
+}
+
+.page-heading {
+    margin-bottom: 30px;
+}
+
+.page-heading h2 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 34px;
+    line-height: 1.15;
+
+    margin-bottom: 9px;
+
+    letter-spacing: -.6px;
+
+    color: var(--text);
+}
+
+.page-heading h2::after {
+    content: "";
+
+    display: block;
+
+    width: 48px;
+    height: 3px;
+
+    background: var(--gold);
+
+    border-radius: 99px;
+
+    margin-top: 12px;
+}
+
+.page-heading p {
+    color: var(--text-muted);
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.admin-section {
+    position: relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111111,
+            #0c0c0c
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+
+    padding: 25px;
+
+    margin-bottom: 26px;
+
+    box-shadow:
+        0 8px 35px rgba(0, 0, 0, .25);
+
+    overflow: hidden;
+}
+
+.admin-section::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(212, 175, 55, .35),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+.section-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 18px;
+
+    margin-bottom: 21px;
+
+    flex-wrap: wrap;
+}
+
+.section-title {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    letter-spacing: -.25px;
+
+    color: var(--text);
+}
+
+.section-description {
+    color: var(--text-muted);
+
+    font-size: 14px;
+
+    margin-top: 5px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   BUTTON SYSTEM
+========================================================= */
+
+.btn {
+    appearance: none;
+
+    border: 1px solid transparent;
+
+    border-radius: var(--radius-sm);
+
+    padding: 10px 15px;
+
+    min-height: 39px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    white-space: nowrap;
+
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        border-color .18s ease,
+        color .18s ease,
+        box-shadow .18s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+
+/* PRIMARY */
+
+.btn-primary {
+    background: var(--gold);
+
+    color: #000;
+
+    border-color: var(--gold);
+
+    box-shadow:
+        0 4px 15px rgba(212, 175, 55, .10);
+}
+
+.btn-primary:hover {
+    background: var(--gold-light);
+
+    border-color: var(--gold-light);
+
+    box-shadow:
+        0 8px 24px rgba(212, 175, 55, .20);
+}
+
+
+/* DARK */
+
+.btn-dark {
+    background: #080808;
+
+    color: var(--gold);
+
+    border-color: var(--border-light);
+}
+
+.btn-dark:hover {
+    background: var(--gold);
+
+    color: #000;
+
+    border-color: var(--gold);
+
+    box-shadow: var(--shadow-gold);
+}
+
+
+/* BLUE */
+
+.btn-blue {
+    background: #1a2c4e;
+
+    color: #78a7ff;
+
+    border-color: #31518a;
+}
+
+.btn-blue:hover {
+    background: var(--blue);
+
+    color: #fff;
+
+    border-color: var(--blue);
+}
+
+
+/* DANGER */
+
+.btn-danger {
+    background: var(--red-bg);
+
+    color: var(--red);
+
+    border-color: rgba(239, 83, 80, .35);
+}
+
+.btn-danger:hover {
+    background: var(--red);
+
+    color: #fff;
+
+    border-color: var(--red);
+
+    box-shadow:
+        0 7px 20px rgba(239, 83, 80, .15);
+}
+
+
+/* SECONDARY */
+
+.btn-secondary {
+    background: #181818;
+
+    color: var(--text-soft);
+
+    border-color: #363636;
+}
+
+.btn-secondary:hover {
+    background: var(--gold);
+
+    color: #000;
+
+    border-color: var(--gold);
+}
+
+
+/* SMALL */
+
+.btn-small {
+    min-height: 32px;
+
+    padding: 6px 10px;
+
+    border-radius: 6px;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 27px;
+}
+
+.stat-card {
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #0e0e0e
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+
+    padding: 22px;
+
+    box-shadow:
+        0 7px 28px rgba(0, 0, 0, .28);
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.stat-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 3px;
+    height: 100%;
+
+    background: var(--gold);
+
+    opacity: .75;
+}
+
+.stat-card::after {
+    content: "";
+
+    position: absolute;
+
+    right: -28px;
+    bottom: -28px;
+
+    width: 95px;
+    height: 95px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(212, 175, 55, .055);
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+
+    border-color: var(--gold-border);
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, .38),
+        0 0 25px rgba(212, 175, 55, .04);
+}
+
+.stat-label {
+    color: var(--text-muted);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: .6px;
+
+    margin-bottom: 9px;
+}
+
+.stat-value {
+    position: relative;
+    z-index: 1;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 31px;
+
+    font-weight: 700;
+
+    color: var(--gold);
+}
+
+
+/* =========================================================
+   COURSE GRID
+========================================================= */
+
+.course-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+}
+
+.course-card {
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-md);
+
+    padding: 19px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #101010
+        );
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.course-card:hover {
+    border-color: var(--gold-border);
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .35);
+}
+
+.course-card.selected {
+    border: 2px solid var(--gold);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(212, 175, 55, .12),
+            #111
+        );
+
+    box-shadow:
+        0 10px 30px rgba(212, 175, 55, .10);
+}
+
+.course-level {
+    display: inline-flex;
+
+    align-items: center;
+
+    background: var(--gold);
+
+    color: #000;
+
+    padding: 5px 9px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    margin-bottom: 11px;
+
+    letter-spacing: .3px;
+}
+
+.course-card h3 {
+    font-family: "Space Grotesk", sans-serif;
+
+    margin-bottom: 7px;
+
+    font-size: 18px;
+
+    color: var(--text);
+}
+
+.course-card p {
+    color: var(--text-muted);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    min-height: 40px;
+}
+
+
+/* =========================================================
+   LMS BUILDER
+========================================================= */
+
+#lmsBuilder {
+    margin-top: 24px;
+}
+
+.builder-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 19px;
+
+    padding-bottom: 17px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.builder-header h3 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 21px;
+
+    color: var(--gold);
+}
+
+.builder-description {
+    color: var(--text-muted);
+
+    font-size: 13px;
+
+    margin-top: 4px;
+}
+
+.module-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.module-card {
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-md);
+
+    overflow: hidden;
+
+    background: #0d0d0d;
+}
+
+.module-header {
+    background:
+        linear-gradient(
+            90deg,
+            #181818,
+            #121212
+        );
+
+    padding: 16px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.module-header h3,
+.module-header h4 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 16px;
+
+    color: var(--text);
+}
+
+.module-header p {
+    color: var(--text-muted);
+
+    font-size: 12px;
+
+    margin-top: 3px;
+}
+
+.module-actions {
+    display: flex;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+}
+
+.module-number {
+    display: inline-block;
+
+    color: var(--gold);
+
+    font-size: 10px;
+
+    margin-bottom: 4px;
+
+    text-transform: uppercase;
+
+    font-weight: 700;
+}
+
+.lesson-list {
+    padding: 13px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.lesson-item {
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    padding: 11px 12px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    background: #111;
+
+    transition:
+        background .15s ease,
+        border-color .15s ease;
+}
+
+.lesson-item:hover {
+    background: #171717;
+
+    border-color: var(--gold-border);
+}
+
+.lesson-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.lesson-order {
+    min-width: 27px;
+    height: 27px;
+
+    border-radius: 7px;
+
+    background: var(--gold);
+
+    color: #000;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.lesson-item strong {
+    font-size: 14px;
+
+    color: var(--text);
+}
+
+.lesson-meta {
+    color: var(--text-muted);
+
+    font-size: 12px;
+
+    margin-top: 3px;
+}
+
+.lesson-actions {
+    display: flex;
+
+    gap: 6px;
+}
+
+
+/* =========================================================
+   FORMS
+========================================================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: var(--text-soft);
+}
+
+.form-control {
+    width: 100%;
+
+    border: 1px solid var(--border-light);
+
+    border-radius: var(--radius-sm);
+
+    padding: 11px 12px;
+
+    min-height: 42px;
+
+    background: #090909;
+
+    color: var(--text);
+
+    outline: none;
+
+    transition:
+        border-color .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
+}
+
+.form-control::placeholder {
+    color: #5f5f5f;
+}
+
+.form-control:hover {
+    border-color: #4a4a4a;
+
+    background: #0c0c0c;
+}
+
+.form-control:focus {
+    border-color: var(--gold);
+
+    box-shadow:
+        0 0 0 3px rgba(212, 175, 55, .10);
+
+    background: #0d0d0d;
+}
+
+textarea.form-control {
+    resize: vertical;
+
+    min-height: 110px;
+
+    line-height: 1.55;
+}
+
+select.form-control {
+    cursor: pointer;
+}
+
+select.form-control option {
+    background: #111;
+
+    color: #fff;
+}
+
+input[type="date"],
+input[type="datetime-local"] {
+    color-scheme: dark;
+}
+
+.form-actions {
+    display: flex;
+
+    gap: 9px;
+
+    justify-content: flex-end;
+
+    flex-wrap: wrap;
+
+    margin-top: 19px;
+
+    padding-top: 17px;
+
+    border-top: 1px solid var(--border);
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-row {
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 19px;
+
+    flex-wrap: wrap;
+}
+
+.search-row .form-control {
+    max-width: 500px;
+}
+
+
+/* =========================================================
+   TABLES
+========================================================= */
+
+.table-wrap {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-md);
+
+    background: #090909;
+
+    scrollbar-width: thin;
+}
+
+.table-wrap::-webkit-scrollbar {
+    height: 7px;
+}
+
+.table-wrap::-webkit-scrollbar-track {
+    background: #090909;
+}
+
+.table-wrap::-webkit-scrollbar-thumb {
+    background: #3a3a3a;
+
+    border-radius: 20px;
+}
+
+.table-wrap::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+}
+
+table {
+    width: 100%;
+
+    border-collapse: separate;
+
+    border-spacing: 0;
+
+    min-width: 820px;
+}
+
+th,
+td {
+    padding: 14px 13px;
+
+    border-bottom: 1px solid var(--border);
+
+    text-align: left;
+
+    font-size: 13px;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+}
+
+th {
+    background:
+        linear-gradient(
+            90deg,
+            #151515,
+            #0e0e0e
+        );
+
+    color: var(--gold);
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .65px;
+
+    font-weight: 700;
+
+    border-bottom: 1px solid var(--gold-border);
+}
+
+thead tr th:first-child {
+    border-top-left-radius: 10px;
+}
+
+thead tr th:last-child {
+    border-top-right-radius: 10px;
+}
+
+tbody tr {
+    background: #0d0d0d;
+
+    transition:
+        background .15s ease;
+}
+
+tbody tr:nth-child(even) {
+    background: #101010;
+}
+
+tbody tr:hover {
+    background:
+        rgba(212, 175, 55, .055);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+td {
+    color: var(--text-soft);
+}
+
+td:first-child {
+    font-weight: 700;
+
+    color: var(--text);
+}
+
+td:last-child {
+    text-align: right;
+}
+
+
+/* =========================================================
+   TABLE ACTION BUTTONS
+========================================================= */
+
+.table-action-group {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 6px;
+}
+
+.table-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 31px;
+
+    padding: 6px 10px;
+
+    border-radius: 7px;
+
+    border: 1px solid transparent;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    transition:
+        background .18s ease,
+        color .18s ease,
+        border-color .18s ease,
+        transform .18s ease,
+        box-shadow .18s ease;
+}
+
+.table-btn:hover {
+    transform: translateY(-1px);
+}
+
+
+/* EDIT */
+
+.table-btn.edit,
+button[data-action="edit-student"],
+.edit-student-btn {
+    background: var(--gold-soft);
+
+    color: var(--gold);
+
+    border-color: var(--gold-border);
+}
+
+.table-btn.edit:hover,
+button[data-action="edit-student"]:hover,
+.edit-student-btn:hover {
+    background: var(--gold);
+
+    color: #000;
+
+    border-color: var(--gold);
+
+    box-shadow:
+        0 5px 16px rgba(212, 175, 55, .15);
+}
+
+
+/* DELETE */
+
+.table-btn.delete,
+button[data-action="delete-student"],
+.delete-student-btn {
+    background: var(--red-bg);
+
+    color: var(--red);
+
+    border-color: rgba(239, 83, 80, .30);
+}
+
+.table-btn.delete:hover,
+button[data-action="delete-student"]:hover,
+.delete-student-btn:hover {
+    background: var(--red);
+
+    color: #fff;
+
+    border-color: var(--red);
+
+    box-shadow:
+        0 5px 16px rgba(239, 83, 80, .15);
+}
+
+
+/* COPY */
+
+button[data-action="copy-code"],
+.copy-code-btn {
+    background: #181818;
+
+    color: var(--text-soft);
+
+    border-color: #383838;
+}
+
+button[data-action="copy-code"]:hover,
+.copy-code-btn:hover {
+    background: var(--gold);
+
+    color: #000;
+
+    border-color: var(--gold);
+}
+
+
+/* =========================================================
+   STATUS BADGES
+========================================================= */
+
+.status-badge {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px 9px;
+
+    border-radius: 999px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    text-transform: capitalize;
+
+    border: 1px solid transparent;
+}
+
+.status-badge::before {
+    content: "";
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    margin-right: 6px;
+
+    background: currentColor;
+}
+
+
+/* ACTIVE */
+
+.status-badge.active,
+.status-active {
+    background: var(--green-bg);
+
+    color: var(--green);
+
+    border-color: rgba(53, 201, 120, .22);
+}
+
+
+/* INACTIVE */
+
+.status-badge.inactive,
+.status-inactive {
+    background: var(--red-bg);
+
+    color: var(--red);
+
+    border-color: rgba(239, 83, 80, .22);
+}
+
+
+/* PAID */
+
+.status-badge.paid,
+.status-paid {
+    background: var(--green-bg);
+
+    color: var(--green);
+
+    border-color: rgba(53, 201, 120, .22);
+}
+
+
+/* PENDING */
+
+.status-badge.pending,
+.status-pending {
+    background: var(--orange-bg);
+
+    color: var(--orange);
+
+    border-color: rgba(240, 173, 50, .22);
+}
+
+
+/* PARTIAL */
+
+.status-badge.partial {
+    background: var(--blue-bg);
+
+    color: var(--blue);
+
+    border-color: rgba(92, 143, 245, .22);
+}
+
+
+/* OVERDUE */
+
+.status-badge.overdue {
+    background: var(--red-bg);
+
+    color: var(--red);
+
+    border-color: rgba(239, 83, 80, .22);
+}
+
+
+/* =========================================================
+   TEACHER MANAGEMENT
+========================================================= */
+
+.teacher-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+}
+
+.teacher-card {
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-md);
+
+    padding: 19px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #101010
+        );
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.teacher-card:hover {
+    border-color: var(--gold-border);
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .35);
+}
+
+.teacher-card-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-bottom: 15px;
+}
+
+.teacher-card-header h3 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 17px;
+
+    margin-bottom: 3px;
+
+    color: var(--text);
+}
+
+.teacher-card-header p {
+    color: var(--text-muted);
+
+    font-size: 12px;
+
+    word-break: break-word;
+}
+
+.teacher-avatar {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--gold),
+            var(--gold-dark)
+        );
+
+    color: #000;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    flex-shrink: 0;
+
+    box-shadow:
+        0 5px 18px rgba(212, 175, 55, .12);
+}
+
+.teacher-name {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    margin-bottom: 3px;
+
+    color: var(--text);
+}
+
+.teacher-specialization {
+    color: var(--gold);
+
+    font-size: 12px;
+}
+
+.teacher-contact {
+    color: var(--text-muted);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin-bottom: 14px;
+
+    word-break: break-word;
+}
+
+.teacher-info {
+    color: var(--text-muted);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin-bottom: 13px;
+}
+
+.teacher-info p {
+    margin-bottom: 4px;
+}
+
+.teacher-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+}
+
+.teacher-stat {
+    background: #0a0a0a;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    padding: 10px;
+}
+
+.teacher-stat strong {
+    display: block;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 19px;
+
+    color: var(--gold);
+}
+
+.teacher-stat span {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+
+    margin-top: 2px;
+}
+
+.teacher-actions {
+    display: flex;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+}
+
+.teacher-assignments {
+    margin-top: 13px;
+
+    border-top: 1px solid var(--border);
+
+    padding-top: 12px;
+
+    margin-bottom: 13px;
+}
+
+.assignment-title {
+    font-size: 10px;
+
+    color: var(--gold);
+
+    font-weight: 700;
+
+    margin-bottom: 7px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .5px;
+}
+
+.assignment-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.assignment-item {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 8px;
+
+    background: #0b0b0b;
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    padding: 8px 9px;
+
+    font-size: 11px;
+
+    color: var(--text-soft);
+}
+
+.remove-assignment-btn {
+    border: 1px solid transparent;
+
+    background: var(--red-bg);
+
+    color: var(--red);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    padding: 3px 6px;
+
+    border-radius: 5px;
+}
+
+.remove-assignment-btn:hover {
+    background: var(--red);
+
+    color: #fff;
+
+    border-color: var(--red);
+}
+
+.empty-small {
+    color: var(--text-muted);
+
+    font-size: 11px;
+}
+
+.error-text {
+    color: var(--red);
+
+    font-size: 11px;
+}
+
+.teacher-empty {
+    border: 1px dashed #3a3a3a;
+
+    border-radius: 11px;
+
+    padding: 38px 20px;
+
+    text-align: center;
+
+    color: var(--text-muted);
+
+    grid-column: 1 / -1;
+
+    background: #0b0b0b;
+}
+
+.teacher-empty strong {
+    display: block;
+
+    color: var(--gold);
+
+    margin-bottom: 5px;
+}
+
+
+/* =========================================================
+   ACCESS CODE
+========================================================= */
+
+.generated-code {
+    margin-top: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #171717,
+            #090909
+        );
+
+    color: var(--gold);
+
+    border-radius: var(--radius-md);
+
+    padding: 17px;
+
+    font-family: monospace;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    text-align: center;
+
+    letter-spacing: 2px;
+
+    border: 1px solid var(--gold-border);
+
+    box-shadow:
+        inset 0 0 20px rgba(212, 175, 55, .025);
+}
+
+
+/* =========================================================
+   EXERCISE MANAGER
+========================================================= */
+
+.exercise-manager {
+    margin-top: 25px;
+
+    border-top: 1px solid var(--border);
+
+    padding-top: 25px;
+}
+
+.exercise-manager-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 18px;
+}
+
+.exercise-manager-header h2 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 21px;
+
+    margin: 4px 0;
+
+    color: var(--text);
+}
+
+.exercise-manager-header p {
+    color: var(--text-muted);
+
+    font-size: 13px;
+}
+
+.section-label {
+    font-size: 10px;
+
+    color: var(--gold);
+
+    text-transform: uppercase;
+
+    font-weight: 700;
+
+    letter-spacing: .5px;
+}
+
+.exercise-summary {
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 18px;
+}
+
+.exercise-summary > div {
+    background: #101010;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    padding: 10px 14px;
+
+    font-size: 12px;
+
+    color: var(--text-soft);
+}
+
+.exercise-summary strong {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 17px;
+
+    margin-right: 4px;
+
+    color: var(--gold);
+}
+
+.exercise-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+.exercise-card {
+    border: 1px solid var(--border);
+
+    border-radius: 11px;
+
+    padding: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #101010
+        );
+
+    transition:
+        border-color .18s ease,
+        transform .18s ease;
+}
+
+.exercise-card:hover {
+    border-color: var(--gold-border);
+
+    transform: translateY(-2px);
+}
+
+.exercise-card-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 10px;
+}
+
+.exercise-type {
+    background: var(--gold);
+
+    color: #000;
+
+    border-radius: 5px;
+
+    padding: 4px 7px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.exercise-points {
+    color: var(--text-muted);
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.exercise-card h3 {
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    margin-bottom: 7px;
+
+    color: var(--text);
+}
+
+.exercise-card > p {
+    color: var(--text-muted);
+
+    font-size: 12px;
+
+    margin-bottom: 12px;
+}
+
+.exercise-card-actions {
+    display: flex;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+}
+
+.mc-option-row {
+    display: flex;
+
+    gap: 7px;
+
+    margin-bottom: 7px;
+}
+
+.mc-option-input {
+    flex: 1;
+
+    border: 1px solid var(--border-light);
+
+    border-radius: 7px;
+
+    padding: 9px 10px;
+
+    background: #090909;
+
+    color: var(--text);
+
+    outline: none;
+}
+
+.mc-option-input::placeholder {
+    color: #5f5f5f;
+}
+
+.mc-option-input:focus {
+    border-color: var(--gold);
+
+    box-shadow:
+        0 0 0 3px rgba(212, 175, 55, .10);
+}
+
+.remove-mc-option {
+    width: 36px;
+
+    border: 1px solid rgba(239, 83, 80, .28);
+
+    border-radius: 7px;
+
+    background: var(--red-bg);
+
+    color: var(--red);
+
+    font-weight: 700;
+}
+
+.remove-mc-option:hover {
+    background: var(--red);
+
+    color: #fff;
+
+    border-color: var(--red);
+}
+
+
+/* =========================================================
+   CLASS MANAGEMENT
+========================================================= */
+
+.class-toolbar {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 20px;
+}
+
+.class-toolbar .form-control {
+    flex: 1;
+
+    min-width: 220px;
+}
+
+.class-toolbar select {
+    width: auto;
+
+    min-width: 150px;
+}
+
+.class-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+}
+
+.class-card {
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-md);
+
+    padding: 19px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #101010
+        );
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.class-card:hover {
+    border-color: var(--gold-border);
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .35);
+}
+
+.class-card-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-bottom: 14px;
+}
+
+.class-card h3 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 18px;
+
+    margin-bottom: 4px;
+
+    color: var(--text);
+}
+
+.class-card-header p {
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+.class-course-label {
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+.class-level {
+    display: inline-block;
+
+    background: var(--gold);
+
+    color: #000;
+
+    border-radius: 5px;
+
+    padding: 4px 8px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    margin-bottom: 6px;
+}
+
+.class-card-info {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+
+    margin: 14px 0;
+}
+
+.class-card-info div {
+    background: #0a0a0a;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    padding: 10px;
+}
+
+.class-card-info span {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 3px;
+}
+
+.class-card-info strong {
+    display: block;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 13px;
+
+    word-break: break-word;
+
+    color: var(--text);
+}
+
+.class-meta-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+
+    margin: 14px 0;
+}
+
+.class-meta-item {
+    background: #0a0a0a;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    padding: 10px;
+}
+
+.class-meta-item span {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .35px;
+
+    margin-bottom: 3px;
+}
+
+.class-meta-item strong {
+    display: block;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 14px;
+
+    word-break: break-word;
+
+    color: var(--text);
+}
+
+.class-description {
+    color: var(--text-muted);
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    margin-bottom: 14px;
+}
+
+.class-capacity {
+    margin: 13px 0;
+}
+
+.capacity-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 6px;
+
+    font-size: 11px;
+
+    color: var(--text-muted);
+}
+
+.capacity-bar {
+    width: 100%;
+
+    height: 7px;
+
+    background: #292929;
+
+    border-radius: 999px;
+
+    overflow: hidden;
+}
+
+.capacity-fill {
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--gold-dark),
+            var(--gold)
+        );
+
+    border-radius: inherit;
+
+    width: 0;
+
+    transition: width .25s ease;
+}
+
+.class-card-actions,
+.class-actions {
+    display: flex;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+
+    border-top: 1px solid var(--border);
+
+    padding-top: 12px;
+}
+
+.class-empty {
+    border: 1px dashed #3a3a3a;
+
+    border-radius: 10px;
+
+    padding: 38px 20px;
+
+    text-align: center;
+
+    color: var(--text-muted);
+
+    grid-column: 1 / -1;
+
+    background: #0b0b0b;
+}
+
+.class-empty strong {
+    display: block;
+
+    color: var(--gold);
+
+    margin-bottom: 5px;
+
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.class-level-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    background: var(--gold);
+
+    color: #000;
+
+    border-radius: 5px;
+
+    padding: 4px 8px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    margin-top: 6px;
+}
+
+
+/* =========================================================
+   CLASS ROSTER
+========================================================= */
+
+.roster-header-card {
+    background:
+        linear-gradient(
+            145deg,
+            #181818,
+            #101010
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: 11px;
+
+    padding: 16px;
+
+    margin-bottom: 18px;
+}
+
+.roster-header-main {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+.roster-header-main h4 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 19px;
+
+    margin-bottom: 4px;
+
+    color: var(--gold);
+}
+
+.roster-header-main p {
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+.roster-stat-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 8px;
+
+    margin-top: 14px;
+}
+
+.roster-stat {
+    background: #090909;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    padding: 10px;
+}
+
+.roster-stat span {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 3px;
+}
+
+.roster-stat strong {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 17px;
+
+    color: var(--gold);
+}
+
+.roster-toolbar {
+    display: flex;
+
+    gap: 9px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 15px;
+}
+
+.roster-toolbar .form-control {
+    flex: 1;
+
+    min-width: 220px;
+}
+
+.roster-empty {
+    text-align: center;
+
+    padding: 30px 15px;
+
+    color: var(--text-muted);
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.message {
+    margin-top: 12px;
+
+    padding: 11px 13px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    display: none;
+
+    border: 1px solid transparent;
+}
+
+.message.success {
+    display: block;
+
+    background: var(--green-bg);
+
+    color: var(--green);
+
+    border-color: rgba(53, 201, 120, .25);
+}
+
+.message.error {
+    display: block;
+
+    background: var(--red-bg);
+
+    color: var(--red);
+
+    border-color: rgba(239, 83, 80, .25);
+}
+
+.message.info {
+    display: block;
+
+    background: var(--blue-bg);
+
+    color: #79a8ff;
+
+    border-color: rgba(92, 143, 245, .25);
+}
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, .84);
+
+    backdrop-filter: blur(7px);
+
+    -webkit-backdrop-filter: blur(7px);
+
+    z-index: 5000;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.modal[hidden] {
+    display: none !important;
+}
+
+.modal-content {
+    width: min(680px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #0d0d0d
+        );
+
+    border: 1px solid var(--border-light);
+
+    border-radius: var(--radius-lg);
+
+    padding: 25px;
+
+    box-shadow:
+        0 30px 100px rgba(0, 0, 0, .65),
+        0 0 0 1px rgba(212, 175, 55, .03);
+
+    animation: modalIn .18s ease;
+}
+
+.modal-content.large {
+    width: min(950px, 100%);
+}
+
+@keyframes modalIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(8px)
+            scale(.99);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+.modal-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header h2,
+.modal-header h3 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 21px;
+
+    color: var(--text);
+}
+
+.modal-close {
+    width: 36px;
+    height: 36px;
+
+    border: 1px solid var(--border-light);
+
+    border-radius: 8px;
+
+    background: #111;
+
+    color: var(--text-muted);
+
+    font-size: 20px;
+
+    line-height: 1;
+
+    transition:
+        background .18s ease,
+        color .18s ease,
+        border-color .18s ease,
+        transform .18s ease;
+}
+
+.modal-close:hover {
+    background: var(--gold);
+
+    color: #000;
+
+    border-color: var(--gold);
+
+    transform: rotate(3deg);
+}
+
+.student-info-box {
+    background:
+        linear-gradient(
+            145deg,
+            #181818,
+            #101010
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    padding: 15px;
+
+    margin-bottom: 18px;
+
+    line-height: 1.7;
+
+    font-size: 13px;
+
+    color: var(--text-soft);
+}
+
+.class-details {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+}
+
+.detail-item {
+    background: #0b0b0b;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    padding: 11px;
+}
+
+.detail-item span {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 4px;
+}
+
+.detail-item strong,
+.detail-item p {
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    color: var(--text-soft);
+}
+
+.detail-item.full {
+    grid-column: 1 / -1;
+}
+
+
+/* =========================================================
+   MOBILE TABLE HELPER
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .admin-container {
+        width: min(100% - 30px, 1450px);
+    }
+
+    .stats-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .course-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .teacher-grid,
+    .class-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .exercise-list {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET / MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .admin-navbar {
+        min-height: 68px;
+
+        padding: 10px 15px;
+    }
+
+    .admin-brand {
+        gap: 9px;
+    }
+
+    .admin-brand img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .admin-brand-text h1 {
+        font-size: 13px;
+    }
+
+    .admin-brand-text span {
+        font-size: 9px;
+    }
+
+    .logout-btn {
+        padding: 8px 12px;
+
+        min-height: 36px;
+
+        font-size: 11px;
+    }
+
+    .admin-container {
+        width: min(100% - 22px, 1450px);
+
+        padding-top: 23px;
+    }
+
+    .page-heading {
+        margin-bottom: 22px;
+    }
+
+    .page-heading h2 {
+        font-size: 26px;
+    }
+
+    .page-heading p {
+        font-size: 13px;
+
+        line-height: 1.5;
+    }
+
+    .admin-section {
+        padding: 17px;
+
+        border-radius: 13px;
+
+        margin-bottom: 18px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    .section-description {
+        font-size: 12px;
+    }
+
+    .stats-grid,
+    .course-grid,
+    .teacher-grid,
+    .class-grid,
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 18px;
+    }
+
+    .stat-value {
+        font-size: 28px;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    .search-row {
+        flex-direction: column;
+    }
+
+    .search-row .form-control {
+        max-width: none;
+    }
+
+    .class-toolbar {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .class-toolbar .form-control,
+    .class-toolbar select {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+    .section-header {
+        align-items: flex-start;
+    }
+
+    .section-header > .btn {
+        width: 100%;
+    }
+
+    .modal {
+        padding: 10px;
+    }
+
+    .modal-content {
+        padding: 18px;
+
+        max-height: 94vh;
+
+        border-radius: 12px;
+    }
+
+    .class-details {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-item.full {
+        grid-column: auto;
+    }
+
+    .teacher-actions,
+    .class-card-actions,
+    .class-actions,
+    .module-actions,
+    .lesson-actions {
+        width: 100%;
+    }
+
+    .teacher-actions .btn,
+    .class-card-actions .btn,
+    .class-actions .btn,
+    .module-actions .btn,
+    .lesson-actions .btn {
+        flex: 1;
+    }
+
+    .roster-stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .roster-toolbar {
+        flex-direction: column;
+    }
+
+    .roster-toolbar .form-control {
+        min-width: 0;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+
+    .generated-code {
+        font-size: 17px;
+
+        overflow-x: auto;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .admin-brand-text {
+        display: none;
+    }
+
+    .admin-navbar {
+        justify-content: space-between;
+    }
+
+    .page-heading h2 {
+        font-size: 23px;
+    }
+
+    .admin-section {
+        padding: 14px;
+    }
+
+    .btn {
+        padding: 9px 12px;
+
+        font-size: 12px;
+    }
+
+    .class-card-info,
+    .class-meta-grid,
+    .teacher-stats {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   FOCUS ACCESSIBILITY
+========================================================= */
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid rgba(212, 175, 55, .30);
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   EXTRA BUTTON COVERAGE
+   Covers buttons generated dynamically by JS
+========================================================= */
+
+.edit-module-btn,
+.edit-lesson-btn,
+.edit-exercise-btn,
+.edit-teacher-btn,
+.edit-class-btn,
+.view-class-btn,
+.assign-class-btn,
+.toggle-teacher-btn,
+.toggle-class-btn,
+.remove-class-student-btn,
+.add-lesson-btn,
+.add-exercise-btn {
+
+    background: #181818;
+
+    color: var(--gold);
+
+    border: 1px solid var(--gold-border);
+
+    border-radius: 7px;
+
+    padding: 7px 10px;
+
+    min-height: 31px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        color .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease;
+}
+
+.edit-module-btn:hover,
+.edit-lesson-btn:hover,
+.edit-exercise-btn:hover,
+.edit-teacher-btn:hover,
+.edit-class-btn:hover,
+.view-class-btn:hover,
+.assign-class-btn:hover,
+.toggle-teacher-btn:hover,
+.toggle-class-btn:hover,
+.remove-class-student-btn:hover,
+.add-lesson-btn:hover,
+.add-exercise-btn:hover {
+
+    transform: translateY(-1px);
+
+    background: var(--gold);
+
+    color: #000;
+
+    border-color: var(--gold);
+
+    box-shadow:
+        0 5px 16px rgba(212, 175, 55, .14);
+}
+
+
+/* DELETE DYNAMIC BUTTONS */
+
+.delete-module-btn,
+.delete-lesson-btn,
+.delete-exercise-btn,
+.delete-teacher-btn,
+.delete-class-btn,
+.remove-class-student-btn {
+
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        color .18s ease,
+        border-color .18s ease;
+}
+
+.delete-module-btn:hover,
+.delete-lesson-btn:hover,
+.delete-exercise-btn:hover,
+.delete-teacher-btn:hover,
+.delete-class-btn:hover {
+
+    background: var(--red);
+
+    color: #fff;
+
+    border-color: var(--red);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   EMPTY STATES
+========================================================= */
+
+.empty-state,
+.no-results,
+.loading-state {
+    color: var(--text-muted);
+
+    background: #0b0b0b;
+
+    border: 1px dashed #333;
+
+    border-radius: 10px;
+
+    padding: 28px;
+
+    text-align: center;
+}
+
+.empty-state strong,
+.no-results strong,
+.loading-state strong {
+    color: var(--gold);
+}
+
+
+/* =========================================================
+   HR
+========================================================= */
+
+hr {
+    border: 0;
+
+    border-top: 1px solid var(--border);
+
+    margin: 20px 0;
+}
+
+
+/* =========================================================
+   SMALL TEXT ELEMENTS
+========================================================= */
+
+small {
+    color: var(--text-muted);
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print {
+
+    .admin-navbar {
+        position: static;
+
+        background: #fff;
+
+        color: #000;
+
+        border-bottom: 1px solid #ccc;
+    }
+
+    .admin-container {
+        width: 100%;
+
+        padding: 20px;
+    }
+
+    .admin-section,
+    .stat-card,
+    .course-card,
+    .teacher-card,
+    .class-card {
+        background: #fff;
+
+        color: #000;
+
+        box-shadow: none;
+
+        border-color: #ccc;
+    }
+
+    .modal {
+        display: none !important;
+    }
+
+}
+/* =========================================================
+   FINAL DYNAMIC BUTTON SYSTEM
+   Fixes buttons generated by admin-dashboard.js
+========================================================= */
+
+/* ---------- GENERAL DYNAMIC BUTTON BASE ---------- */
+
+.edit-module-btn,
+.delete-module-btn,
+.add-lesson-btn,
+.edit-lesson-btn,
+.delete-lesson-btn,
+.copy-code-btn,
+.edit-student-btn,
+.delete-student-btn,
+.add-exercise-btn,
+.edit-exercise-btn,
+.delete-exercise-btn,
+.add-mc-option-btn,
+.edit-teacher-btn,
+.assign-class-btn,
+.toggle-teacher-btn,
+.delete-teacher-btn,
+.remove-assignment-btn,
+.edit-class-btn,
+.view-class-btn,
+.toggle-class-btn,
+.delete-class-btn,
+.remove-class-student-btn {
+
+    appearance: none;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    min-height: 32px;
+
+    padding: 7px 11px;
+
+    border-radius: 7px;
+
+    font-family: "DM Sans", Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        color .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease;
+}
+
+.edit-module-btn:hover,
+.delete-module-btn:hover,
+.add-lesson-btn:hover,
+.edit-lesson-btn:hover,
+.delete-lesson-btn:hover,
+.copy-code-btn:hover,
+.edit-student-btn:hover,
+.delete-student-btn:hover,
+.add-exercise-btn:hover,
+.edit-exercise-btn:hover,
+.delete-exercise-btn:hover,
+.add-mc-option-btn:hover,
+.edit-teacher-btn:hover,
+.assign-class-btn:hover,
+.toggle-teacher-btn:hover,
+.delete-teacher-btn:hover,
+.remove-assignment-btn:hover,
+.edit-class-btn:hover,
+.view-class-btn:hover,
+.toggle-class-btn:hover,
+.delete-class-btn:hover,
+.remove-class-student-btn:hover {
+
+    transform: translateY(-2px);
+}
+
+.edit-module-btn:active,
+.delete-module-btn:active,
+.add-lesson-btn:active,
+.edit-lesson-btn:active,
+.delete-lesson-btn:active,
+.copy-code-btn:active,
+.edit-student-btn:active,
+.delete-student-btn:active,
+.add-exercise-btn:active,
+.edit-exercise-btn:active,
+.delete-exercise-btn:active,
+.add-mc-option-btn:active,
+.edit-teacher-btn:active,
+.assign-class-btn:active,
+.toggle-teacher-btn:active,
+.delete-teacher-btn:active,
+.remove-assignment-btn:active,
+.edit-class-btn:active,
+.view-class-btn:active,
+.toggle-class-btn:active,
+.delete-class-btn:active,
+.remove-class-student-btn:active {
+
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   GOLD / EDIT / NORMAL ACTIONS
+========================================================= */
+
+.edit-module-btn,
+.add-lesson-btn,
+.edit-lesson-btn,
+.add-exercise-btn,
+.edit-exercise-btn,
+.add-mc-option-btn,
+.edit-teacher-btn,
+.assign-class-btn,
+.edit-class-btn {
+
+    background: var(--gold-soft);
+
+    color: var(--gold);
+
+    border: 1px solid var(--gold-border);
+
+}
+
+.edit-module-btn:hover,
+.add-lesson-btn:hover,
+.edit-lesson-btn:hover,
+.add-exercise-btn:hover,
+.edit-exercise-btn:hover,
+.add-mc-option-btn:hover,
+.edit-teacher-btn:hover,
+.assign-class-btn:hover,
+.edit-class-btn:hover {
+
+    background: var(--gold);
+
+    color: #000;
+
+    border-color: var(--gold);
+
+    box-shadow:
+        0 6px 18px rgba(212, 175, 55, .18);
+}
+
+
+/* =========================================================
+   STUDENT EDIT
+========================================================= */
+
+.edit-student-btn {
+
+    background: var(--gold-soft);
+
+    color: var(--gold);
+
+    border: 1px solid var(--gold-border);
+
+}
+
+.edit-student-btn:hover {
+
+    background: var(--gold);
+
+    color: #000;
+
+    border-color: var(--gold);
+
+    box-shadow:
+        0 6px 18px rgba(212, 175, 55, .18);
+}
+
+
+/* =========================================================
+   VIEW CLASS
+========================================================= */
+
+.view-class-btn {
+
+    background: var(--blue-bg);
+
+    color: #79a8ff;
+
+    border: 1px solid rgba(92, 143, 245, .30);
+
+}
+
+.view-class-btn:hover {
+
+    background: var(--blue);
+
+    color: #fff;
+
+    border-color: var(--blue);
+
+    box-shadow:
+        0 6px 18px rgba(92, 143, 245, .16);
+}
+
+
+/* =========================================================
+   COPY ACCESS CODE
+========================================================= */
+
+.copy-code-btn {
+
+    background: #181818;
+
+    color: var(--gold);
+
+    border: 1px solid var(--gold-border);
+
+    min-width: 62px;
+
+}
+
+.copy-code-btn:hover {
+
+    background: var(--gold);
+
+    color: #000;
+
+    border-color: var(--gold);
+
+    box-shadow:
+        0 6px 18px rgba(212, 175, 55, .18);
+}
+
+
+/* =========================================================
+   DELETE / DANGER BUTTONS
+========================================================= */
+
+.delete-module-btn,
+.delete-lesson-btn,
+.delete-exercise-btn,
+.delete-student-btn,
+.delete-teacher-btn,
+.delete-class-btn,
+.remove-class-student-btn,
+.remove-assignment-btn {
+
+    background: var(--red-bg);
+
+    color: var(--red);
+
+    border: 1px solid rgba(239, 83, 80, .32);
+
+}
+
+.delete-module-btn:hover,
+.delete-lesson-btn:hover,
+.delete-exercise-btn:hover,
+.delete-student-btn:hover,
+.delete-teacher-btn:hover,
+.delete-class-btn:hover,
+.remove-class-student-btn:hover,
+.remove-assignment-btn:hover {
+
+    background: var(--red);
+
+    color: #fff;
+
+    border-color: var(--red);
+
+    box-shadow:
+        0 6px 18px rgba(239, 83, 80, .18);
+}
+
+
+/* =========================================================
+   TOGGLE STATUS
+========================================================= */
+
+.toggle-teacher-btn,
+.toggle-class-btn {
+
+    background: var(--green-bg);
+
+    color: var(--green);
+
+    border: 1px solid rgba(53, 201, 120, .28);
+
+}
+
+.toggle-teacher-btn:hover,
+.toggle-class-btn:hover {
+
+    background: var(--green);
+
+    color: #000;
+
+    border-color: var(--green);
+
+    box-shadow:
+        0 6px 18px rgba(53, 201, 120, .16);
+}
+
+
+/* =========================================================
+   LMS COURSE SELECT BUTTON
+========================================================= */
+
+.select-course-btn {
+
+    appearance: none;
+
+    width: 100%;
+
+    margin-top: 14px;
+
+    padding: 10px 13px;
+
+    min-height: 38px;
+
+    border-radius: 7px;
+
+    border: 1px solid var(--gold-border);
+
+    background: var(--gold-soft);
+
+    color: var(--gold);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        color .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease;
+}
+
+.select-course-btn:hover {
+
+    transform: translateY(-2px);
+
+    background: var(--gold);
+
+    color: #000;
+
+    border-color: var(--gold);
+
+    box-shadow:
+        0 7px 20px rgba(212, 175, 55, .18);
+}
+
+
+/* =========================================================
+   ADD MODULE
+========================================================= */
+
+#addModuleBtn,
+#emptyAddModuleBtn {
+
+    background: var(--gold);
+
+    color: #000;
+
+    border: 1px solid var(--gold);
+
+}
+
+#addModuleBtn:hover,
+#emptyAddModuleBtn:hover {
+
+    background: var(--gold-light);
+
+    border-color: var(--gold-light);
+
+    box-shadow:
+        0 8px 24px rgba(212, 175, 55, .20);
+}
+
+
+/* =========================================================
+   EXERCISE BUTTONS
+========================================================= */
+
+#addExerciseBtn,
+#addMcOptionBtn {
+
+    background: var(--gold);
+
+    color: #000;
+
+    border: 1px solid var(--gold);
+
+}
+
+#addExerciseBtn:hover,
+#addMcOptionBtn:hover {
+
+    background: var(--gold-light);
+
+    border-color: var(--gold-light);
+
+    box-shadow:
+        0 7px 20px rgba(212, 175, 55, .18);
+}
+
+
+/* =========================================================
+   CLASS DELETE — EXPLICIT FIX
+========================================================= */
+
+.delete-class-btn {
+
+    background: var(--red-bg) !important;
+
+    color: var(--red) !important;
+
+    border: 1px solid rgba(239, 83, 80, .32) !important;
+}
+
+.delete-class-btn:hover {
+
+    background: var(--red) !important;
+
+    color: #fff !important;
+
+    border-color: var(--red) !important;
+
+    box-shadow:
+        0 6px 18px rgba(239, 83, 80, .18);
+}
+
+
+/* =========================================================
+   TEACHER DELETE — EXPLICIT FIX
+========================================================= */
+
+.delete-teacher-btn {
+
+    background: var(--red-bg) !important;
+
+    color: var(--red) !important;
+
+    border: 1px solid rgba(239, 83, 80, .32) !important;
+}
+
+.delete-teacher-btn:hover {
+
+    background: var(--red) !important;
+
+    color: #fff !important;
+
+    border-color: var(--red) !important;
+
+    box-shadow:
+        0 6px 18px rgba(239, 83, 80, .18);
+}
+
+
+/* =========================================================
+   ACCESS CODE STATUS
+========================================================= */
+
+.access-code-used,
+.status-used {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px 9px;
+
+    border-radius: 999px;
+
+    background: var(--red-bg);
+
+    color: var(--red);
+
+    border: 1px solid rgba(239, 83, 80, .25);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+}
+
+.access-code-unused,
+.status-unused {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px 9px;
+
+    border-radius: 999px;
+
+    background: var(--green-bg);
+
+    color: var(--green);
+
+    border: 1px solid rgba(53, 201, 120, .25);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+}
+
+.access-code-used::before,
+.status-used::before {
+
+    content: "";
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: currentColor;
+
+    margin-right: 6px;
+
+}
+
+.access-code-unused::before,
+.status-unused::before {
+
+    content: "";
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: currentColor;
+
+    margin-right: 6px;
+
+}
+
+
+/* =========================================================
+   TABLE ACTION GROUP
+========================================================= */
+
+td .edit-student-btn,
+td .delete-student-btn,
+td .copy-code-btn,
+td .delete-class-btn,
+td .remove-class-student-btn {
+
+    margin: 2px;
+}
+
+.teacher-actions button,
+.class-card-actions button,
+.class-actions button,
+.module-actions button,
+.lesson-actions button,
+.exercise-card-actions button {
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   MOBILE BUTTONS
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .teacher-actions button,
+    .class-card-actions button,
+    .class-actions button,
+    .module-actions button,
+    .lesson-actions button,
+    .exercise-card-actions button {
+
+        min-height: 36px;
+
+        padding: 8px 11px;
+
+    }
+
+    .table-action-group {
+
+        justify-content: flex-start;
+
+        flex-wrap: wrap;
+
+    }
+
+    td .edit-student-btn,
+    td .delete-student-btn,
+    td .copy-code-btn {
+
+        margin: 2px 1px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="admin-navbar">
+
+```
+<div class="admin-brand">
+
+    <img
+        src="../assets/logo/logo.jpg"
+        alt="LINGUA DEUTSCH CONNECT Logo"
+    >
+
+    <div class="admin-brand-text">
+
+        <h1>
+            LINGUA DEUTSCH CONNECT
+        </h1>
+
+        <span>
+            Administration Panel
+        </span>
+
+    </div>
+
+</div>
+
+
+<button
+    type="button"
+    class="logout-btn"
+    id="logoutBtn"
+>
+    Logout
+</button>
+```
+
+</nav>
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="admin-container">
+
+```
+<div class="page-heading">
+
+    <h2>
+        Admin Dashboard
+    </h2>
+
+    <p>
+        Manage students, teachers, courses, classes, lessons,
+        exercises and access codes.
+    </p>
+
+</div>
+
+
+
+<!-- =====================================================
+     STATISTICS
+===================================================== -->
+
+<section class="stats-grid">
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Total Students
+        </div>
+
+        <div
+            class="stat-value"
+            id="studentCount"
+        >
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Access Codes
+        </div>
+
+        <div
+            class="stat-value"
+            id="accessCodeCount"
+        >
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Unused Codes
+        </div>
+
+        <div
+            class="stat-value"
+            id="unusedCodeCount"
+        >
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Paid Students
+        </div>
+
+        <div
+            class="stat-value"
+            id="paidStudentCount"
+        >
+            0
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TEACHER MANAGEMENT
+===================================================== -->
+
+<section
+    class="admin-section"
+    id="teacherManagement"
+>
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-title">
+                Teacher Management
+            </div>
+
+            <div class="section-description">
+                Create teacher accounts, manage their status
+                and assign them to classes.
+            </div>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="btn btn-primary"
+            id="addTeacherBtn"
+        >
+            + Create Teacher
+        </button>
+
+    </div>
+
+
+    <div
+        id="teacherMessage"
+        class="message"
+        role="alert"
+        aria-live="polite"
+    ></div>
+
+
+    <div
+        id="teacherGrid"
+        class="teacher-grid"
+    >
+
+        <div class="teacher-empty">
+
+            <strong>
+                Loading teachers...
+            </strong>
+
+            Please wait.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CLASS MANAGEMENT
+===================================================== -->
+
+<section
+    class="admin-section"
+    id="classManagement"
+>
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-title">
+                Class Management
+            </div>
+
+            <div class="section-description">
+                Create classes, assign teachers, enroll students
+                and manage class schedules.
+            </div>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="btn btn-primary"
+            id="addClassBtn"
+        >
+            + Create Class
+        </button>
+
+    </div>
+
+
+    <div
+        id="classMessage"
+        class="message"
+        role="alert"
+        aria-live="polite"
+    ></div>
+
+
+    <div class="class-toolbar">
+
+        <input
+            type="search"
+            id="classSearch"
+            class="form-control"
+            placeholder="Search class, teacher, course or level..."
+            autocomplete="off"
+        >
+
+
+        <select
+            id="classStatusFilter"
+            class="form-control"
+        >
+
+            <option value="">
+                All Statuses
+            </option>
+
+            <option value="active">
+                Active
+            </option>
+
+            <option value="inactive">
+                Inactive
+            </option>
+
+        </select>
+
+
+        <select
+            id="classLevelFilter"
+            class="form-control"
+        >
+
+            <option value="">
+                All Levels
+            </option>
+
+            <option value="A1">
+                A1
+            </option>
+
+            <option value="A2">
+                A2
+            </option>
+
+            <option value="B1">
+                B1
+            </option>
+
+            <option value="B2">
+                B2
+            </option>
+
+            <option value="C1">
+                C1
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div
+        id="classGrid"
+        class="class-grid"
+    >
+
+        <div class="class-empty">
+
+            <strong>
+                Loading classes...
+            </strong>
+
+            Please wait.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LMS COURSE MANAGEMENT
+===================================================== -->
+
+<section class="admin-section">
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-title">
+                LMS Course Management
+            </div>
+
+            <div class="section-description">
+                Select a course to manage modules, lessons and exercises.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="courseGrid"
+        class="course-grid"
+    >
+
+        <div class="teacher-empty">
+
+            <strong>
+                Loading courses...
+            </strong>
+
+            Please wait.
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="lmsBuilder"
+        class="hidden"
+    >
+
+        <div class="builder-header">
+
+            <div>
+
+                <h3 id="selectedCourseTitle">
+                    Course
+                </h3>
+
+                <div
+                    class="builder-description"
+                    id="selectedCourseDescription"
+                ></div>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="btn btn-primary"
+                id="addModuleBtn"
+            >
+                + Add Module
+            </button>
+
+        </div>
+
+
+        <div
+            id="moduleList"
+            class="module-list"
+        ></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ACCESS CODE GENERATION
+===================================================== -->
+
+<section class="admin-section">
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-title">
+                Access Code Generation
+            </div>
+
+            <div class="section-description">
+                Generate student access codes for course registration.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <form id="accessCodeForm">
+
+        <div class="form-grid">
+
+
+            <div class="form-group">
+
+                <label for="course">
+                    Course
+                </label>
+
+                <select
+                    id="course"
+                    name="course"
+                    class="form-control"
+                    required
+                >
+
+                    <option value="">
+                        Select course
+                    </option>
+
+                    <option value="A1">
+                        A1
+                    </option>
+
+                    <option value="A2">
+                        A2
+                    </option>
+
+                    <option value="B1">
+                        B1
+                    </option>
+
+                    <option value="B2">
+                        B2
+                    </option>
+
+                    <option value="C1">
+                        C1
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="level">
+                    Level
+                </label>
+
+                <select
+                    id="level"
+                    name="level"
+                    class="form-control"
+                    required
+                >
+
+                    <option value="">
+                        Select level
+                    </option>
+
+                    <option value="A1">
+                        A1
+                    </option>
+
+                    <option value="A2">
+                        A2
+                    </option>
+
+                    <option value="B1">
+                        B1
+                    </option>
+
+                    <option value="B2">
+                        B2
+                    </option>
+
+                    <option value="C1">
+                        C1
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="expiresAt">
+                    Expiration Date
+                </label>
+
+                <input
+                    type="datetime-local"
+                    id="expiresAt"
+                    name="expiresAt"
+                    class="form-control"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+                id="generateCodeBtn"
+            >
+                Generate Access Code
+            </button>
+
+        </div>
+
+
+        <div
+            id="codeMessage"
+            class="message"
+            role="alert"
+            aria-live="polite"
+        ></div>
+
+    </form>
+
+</section>
+
+
+
+<!-- =====================================================
+     ACCESS CODE LIST
+===================================================== -->
+
+<section class="admin-section">
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-title">
+                Access Codes
+            </div>
+
+            <div class="section-description">
+                View generated student access codes.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Code</th>
+                    <th>Course</th>
+                    <th>Level</th>
+                    <th>Status</th>
+                    <th>Expires</th>
+                    <th>Created</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="accessCodesTable">
+
+                <tr>
+
+                    <td colspan="7">
+                        Loading access codes...
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STUDENT MANAGEMENT
+===================================================== -->
+
+<section class="admin-section">
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="section-title">
+                Student Management
+            </div>
+
+            <div class="section-description">
+                View and manage registered students.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="search-row">
+
+        <input
+            type="search"
+            id="studentSearch"
+            class="form-control"
+            placeholder="Search student by name, email, phone, course or level..."
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Course</th>
+                    <th>Level</th>
+                    <th>Payment</th>
+                    <th>Account</th>
+                    <th>Manage</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="studentsTable">
+
+                <tr>
+
+                    <td colspan="8">
+                        Loading students...
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+```
+
+</main>
+
+<!-- =========================================================
+     STUDENT MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="studentModal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="studentModalTitle"
+>
+
+```
+<div class="modal-content">
+
+    <div class="modal-header">
+
+        <h3 id="studentModalTitle">
+            Manage Student
+        </h3>
+
+        <button
+            type="button"
+            class="modal-close"
+            id="closeStudentModal"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        id="studentInfo"
+        class="student-info-box"
+    ></div>
+
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label for="editCourse">
+                Course
+            </label>
+
+            <select
+                id="editCourse"
+                name="course"
+                class="form-control"
+            >
+
+                <option value="A1">A1</option>
+                <option value="A2">A2</option>
+                <option value="B1">B1</option>
+                <option value="B2">B2</option>
+                <option value="C1">C1</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="editLevel">
+                Level
+            </label>
+
+            <select
+                id="editLevel"
+                name="level"
+                class="form-control"
+            >
+
+                <option value="A1">A1</option>
+                <option value="A2">A2</option>
+                <option value="B1">B1</option>
+                <option value="B2">B2</option>
+                <option value="C1">C1</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="editAccountStatus">
+                Account Status
+            </label>
+
+            <select
+                id="editAccountStatus"
+                name="accountStatus"
+                class="form-control"
+            >
+
+                <option value="active">
+                    Active
+                </option>
+
+                <option value="inactive">
+                    Inactive
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="editPaymentStatus">
+                Payment Status
+            </label>
+
+            <select
+                id="editPaymentStatus"
+                name="paymentStatus"
+                class="form-control"
+            >
+
+                <option value="paid">
+                    Paid
+                </option>
+
+                <option value="pending">
+                    Pending
+                </option>
+
+                <option value="partial">
+                    Partial
+                </option>
+
+                <option value="overdue">
+                    Overdue
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="studentEditMessage"
+        class="message"
+        role="alert"
+        aria-live="polite"
+    ></div>
+
+
+    <div class="form-actions">
+
+        <button
+            type="button"
+            class="btn btn-danger"
+            id="deleteStudentBtn"
+        >
+            Delete Student
+        </button>
+
+
+        <button
+            type="button"
+            class="btn btn-primary"
+            id="saveStudentBtn"
+        >
+            Save Changes
+        </button>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- =========================================================
+     MODULE MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="moduleModal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="moduleModalTitle"
+>
+
+```
+<div class="modal-content">
+
+    <div class="modal-header">
+
+        <h3 id="moduleModalTitle">
+            Add Module
+        </h3>
+
+        <button
+            type="button"
+            class="modal-close"
+            id="closeModuleModal"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <form id="moduleForm">
+
+        <div class="form-grid">
+
+            <div class="form-group full">
+
+                <label for="moduleTitle">
+                    Module Title
+                </label>
+
+                <input
+                    type="text"
+                    id="moduleTitle"
+                    name="title"
+                    class="form-control"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label for="moduleDescription">
+                    Description
+                </label>
+
+                <textarea
+                    id="moduleDescription"
+                    name="description"
+                    class="form-control"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="moduleOrder">
+                    Module Order
+                </label>
+
+                <input
+                    type="number"
+                    id="moduleOrder"
+                    name="moduleOrder"
+                    class="form-control"
+                    min="1"
+                    value="1"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="moduleStatus">
+                    Status
+                </label>
+
+                <select
+                    id="moduleStatus"
+                    name="status"
+                    class="form-control"
+                >
+
+                    <option value="active">
+                        Active
+                    </option>
+
+                    <option value="inactive">
+                        Inactive
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="moduleMessage"
+            class="message"
+            role="alert"
+            aria-live="polite"
+        ></div>
+
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                id="cancelModuleBtn"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+                id="saveModuleBtn"
+            >
+                Save Module
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<!-- =========================================================
+     LESSON MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="lessonModal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="lessonModalTitle"
+>
+
+```
+<div class="modal-content">
+
+    <div class="modal-header">
+
+        <h3 id="lessonModalTitle">
+            Add Lesson
+        </h3>
+
+        <button
+            type="button"
+            class="modal-close"
+            id="closeLessonModal"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <form id="lessonForm">
+
+        <div class="form-grid">
+
+            <div class="form-group full">
+
+                <label for="lessonTitle">
+                    Lesson Title
+                </label>
+
+                <input
+                    type="text"
+                    id="lessonTitle"
+                    name="title"
+                    class="form-control"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label for="lessonDescription">
+                    Description
+                </label>
+
+                <textarea
+                    id="lessonDescription"
+                    name="description"
+                    class="form-control"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label for="lessonContent">
+                    Lesson Content
+                </label>
+
+                <textarea
+                    id="lessonContent"
+                    name="content"
+                    class="form-control"
+                    style="min-height:180px;"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="lessonOrder">
+                    Lesson Order
+                </label>
+
+                <input
+                    type="number"
+                    id="lessonOrder"
+                    name="lessonOrder"
+                    class="form-control"
+                    min="1"
+                    value="1"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="lessonDuration">
+                    Duration (minutes)
+                </label>
+
+                <input
+                    type="number"
+                    id="lessonDuration"
+                    name="duration"
+                    class="form-control"
+                    min="0"
+                    value="0"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="lessonXp">
+                    XP Reward
+                </label>
+
+                <input
+                    type="number"
+                    id="lessonXp"
+                    name="xpReward"
+                    class="form-control"
+                    min="0"
+                    value="50"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="lessonStatus">
+                    Status
+                </label>
+
+                <select
+                    id="lessonStatus"
+                    name="status"
+                    class="form-control"
+                >
+
+                    <option value="published">
+                        Published
+                    </option>
+
+                    <option value="draft">
+                        Draft
+                    </option>
+
+                    <option value="inactive">
+                        Inactive
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="lessonMessage"
+            class="message"
+            role="alert"
+            aria-live="polite"
+        ></div>
+
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                id="cancelLessonBtn"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+                id="saveLessonBtn"
+            >
+                Save Lesson
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<!-- =========================================================
+     CLASS CREATE / EDIT MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="classModal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="classModalTitle"
+>
+
+```
+<div class="modal-content">
+
+    <div class="modal-header">
+
+        <h3 id="classModalTitle">
+            Create Class
+        </h3>
+
+        <button
+            type="button"
+            class="modal-close"
+            id="closeClassModal"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <form id="classForm">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label for="classCourse">
+                    Course
+                </label>
+
+                <select
+                    id="classCourse"
+                    name="courseId"
+                    class="form-control"
+                    required
+                >
+
+                    <option value="">
+                        Select course
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="classLevel">
+                    Level
+                </label>
+
+                <select
+                    id="classLevel"
+                    name="level"
+                    class="form-control"
+                    required
+                >
+
+                    <option value="">
+                        Select level
+                    </option>
+
+                    <option value="A1">A1</option>
+                    <option value="A2">A2</option>
+                    <option value="B1">B1</option>
+                    <option value="B2">B2</option>
+                    <option value="C1">C1</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label for="className">
+                    Class Name
+                </label>
+
+                <input
+                    type="text"
+                    id="className"
+                    name="name"
+                    class="form-control"
+                    placeholder="A1.1 Morning"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label for="classDescription">
+                    Description
+                </label>
+
+                <textarea
+                    id="classDescription"
+                    name="description"
+                    class="form-control"
+                    placeholder="Optional class description..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="classRoom">
+                    Room
+                </label>
+
+                <input
+                    type="text"
+                    id="classRoom"
+                    name="room"
+                    class="form-control"
+                    placeholder="Room 1 / Online"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="classSchedule">
+                    Schedule
+                </label>
+
+                <input
+                    type="text"
+                    id="classSchedule"
+                    name="schedule"
+                    class="form-control"
+                    placeholder="Mon–Fri, 08:00–10:00"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="classStartDate">
+                    Start Date
+                </label>
+
+                <input
+                    type="date"
+                    id="classStartDate"
+                    name="startDate"
+                    class="form-control"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="classEndDate">
+                    End Date
+                </label>
+
+                <input
+                    type="date"
+                    id="classEndDate"
+                    name="endDate"
+                    class="form-control"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="classMaxStudents">
+                    Maximum Students
+                </label>
+
+                <input
+                    type="number"
+                    id="classMaxStudents"
+                    name="maxStudents"
+                    class="form-control"
+                    min="1"
+                    max="1000"
+                    value="20"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="classStatus">
+                    Status
+                </label>
+
+                <select
+                    id="classStatus"
+                    name="status"
+                    class="form-control"
+                    required
+                >
+
+                    <option value="active">
+                        Active
+                    </option>
+
+                    <option value="inactive">
+                        Inactive
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="classFormMessage"
+            class="message"
+            role="alert"
+            aria-live="polite"
+        ></div>
+
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                id="cancelClassBtn"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+                id="saveClassBtn"
+            >
+                Create Class
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<!-- =========================================================
+     CLASS DETAILS / STUDENT ROSTER MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="classDetailsModal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="classDetailsModalTitle"
+>
+
+```
+<div class="modal-content large">
+
+    <div class="modal-header">
+
+        <h3 id="classDetailsModalTitle">
+            Class Details
+        </h3>
+
+        <button
+            type="button"
+            class="modal-close"
+            id="closeClassDetailsModal"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        id="classRosterHeader"
+        class="roster-header-card"
+    >
+
+        <div class="roster-header-main">
+
+            <div>
+
+                <h4 id="rosterClassName">
+                    Class
+                </h4>
+
+                <p id="rosterClassMeta">
+                    Loading class information...
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="btn btn-primary"
+                id="addStudentToClassBtn"
+            >
+                + Enroll Student
+            </button>
+
+        </div>
+
+
+        <div class="roster-stat-grid">
+
+            <div class="roster-stat">
+
+                <span>
+                    Students
+                </span>
+
+                <strong id="rosterStudentCount">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="roster-stat">
+
+                <span>
+                    Capacity
+                </span>
+
+                <strong id="rosterCapacity">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="roster-stat">
+
+                <span>
+                    Teacher
+                </span>
+
+                <strong id="rosterTeacher">
+                    Not assigned
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="classRosterMessage"
+        class="message"
+        role="alert"
+        aria-live="polite"
+    ></div>
+
+
+    <div class="roster-toolbar">
+
+        <input
+            type="search"
+            id="classStudentSearch"
+            class="form-control"
+            placeholder="Search students in this class..."
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Student
+                    </th>
+
+                    <th>
+                        Email
+                    </th>
+
+                    <th>
+                        Level
+                    </th>
+
+                    <th>
+                        Attendance
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="classStudentsTable">
+
+                <tr>
+
+                    <td
+                        colspan="6"
+                        class="roster-empty"
+                    >
+                        Loading students...
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- =========================================================
+     ENROLL STUDENT MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="enrollStudentModal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="enrollStudentModalTitle"
+>
+
+```
+<div class="modal-content">
+
+    <div class="modal-header">
+
+        <h3 id="enrollStudentModalTitle">
+            Enroll Student
+        </h3>
+
+        <button
+            type="button"
+            class="modal-close"
+            id="closeEnrollStudentModal"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        id="enrollStudentInfo"
+        class="student-info-box"
+    >
+        Select a student to enroll in this class.
+    </div>
+
+
+    <form id="enrollStudentForm">
+
+        <div class="form-group">
+
+            <label for="enrollStudentSelect">
+                Student
+            </label>
+
+            <select
+                id="enrollStudentSelect"
+                name="studentId"
+                class="form-control"
+                required
+            >
+
+                <option value="">
+                    Loading students...
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div
+            id="enrollStudentMessage"
+            class="message"
+            role="alert"
+            aria-live="polite"
+        ></div>
+
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                id="cancelEnrollStudentBtn"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+                id="saveEnrollmentBtn"
+            >
+                Enroll Student
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<!-- =========================================================
+     TEACHER CREATE / EDIT MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="teacherModal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="teacherModalTitle"
+>
+
+```
+<div class="modal-content">
+
+    <div class="modal-header">
+
+        <h3 id="teacherModalTitle">
+            Create Teacher
+        </h3>
+
+        <button
+            type="button"
+            class="modal-close"
+            id="closeTeacherModal"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <form id="teacherForm">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label for="teacherFirstName">
+                    First Name
+                </label>
+
+                <input
+                    type="text"
+                    id="teacherFirstName"
+                    name="firstName"
+                    class="form-control"
+                    placeholder="Jean"
+                    autocomplete="given-name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="teacherLastName">
+                    Last Name
+                </label>
+
+                <input
+                    type="text"
+                    id="teacherLastName"
+                    name="lastName"
+                    class="form-control"
+                    placeholder="Uwase"
+                    autocomplete="family-name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label for="teacherEmail">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="teacherEmail"
+                    name="email"
+                    class="form-control"
+                    placeholder="teacher@example.com"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="teacherPhone">
+                    Phone
+                </label>
+
+                <input
+                    type="tel"
+                    id="teacherPhone"
+                    name="phone"
+                    class="form-control"
+                    placeholder="+250..."
+                    autocomplete="tel"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="teacherPassword">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="teacherPassword"
+                    name="password"
+                    class="form-control"
+                    placeholder="Teacher password"
+                    autocomplete="new-password"
+                >
+
+                <small
+                    id="teacherPasswordHint"
+                    style="color:#777;font-size:11px;"
+                >
+                    Required when creating a teacher.
+                </small>
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label for="teacherSpecialization">
+                    Specialization
+                </label>
+
+                <input
+                    type="text"
+                    id="teacherSpecialization"
+                    name="specialization"
+                    class="form-control"
+                    placeholder="German A1–B2 / Exam Preparation"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="teacherStatus">
+                    Status
+                </label>
+
+                <select
+                    id="teacherStatus"
+                    name="status"
+                    class="form-control"
+                >
+
+                    <option value="active">
+                        Active
+                    </option>
+
+                    <option value="inactive">
+                        Inactive
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="teacherFormMessage"
+            class="message"
+            role="alert"
+            aria-live="polite"
+        ></div>
+
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                id="cancelTeacherBtn"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+                id="saveTeacherBtn"
+            >
+                Create Teacher
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<!-- =========================================================
+     ASSIGN TEACHER TO CLASS MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="assignTeacherModal"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="assignTeacherModalTitle"
+>
+
+```
+<div class="modal-content">
+
+    <div class="modal-header">
+
+        <h3 id="assignTeacherModalTitle">
+            Assign Teacher to Class
+        </h3>
+
+        <button
+            type="button"
+            class="modal-close"
+            id="closeAssignTeacherModal"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        id="assignTeacherInfo"
+        class="student-info-box"
+    >
+        Select a class for this teacher.
+    </div>
+
+
+    <form id="assignTeacherForm">
+
+        <div class="form-group">
+
+            <label for="assignClassSelect">
+                Class
+            </label>
+
+            <select
+                id="assignClassSelect"
+                name="classId"
+                class="form-control"
+                required
+            >
+
+                <option value="">
+                    Loading classes...
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div
+            id="assignTeacherMessage"
+            class="message"
+            role="alert"
+            aria-live="polite"
+        ></div>
+
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                id="cancelAssignTeacherBtn"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+                id="saveTeacherAssignmentBtn"
+            >
+                Assign Class
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script src="../js/admin-dashboard.js"></script>
+
+</body>
+
+</html>

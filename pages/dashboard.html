@@ -1,0 +1,4676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="LINGUA DEUTSCH CONNECT Student Learning Dashboard"
+    >
+
+    <meta
+        name="theme-color"
+        content="#101010"
+    >
+
+    <title>Student Dashboard | LINGUA DEUTSCH CONNECT</title>
+
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         AUTH CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/auth.css"
+    >
+
+
+    <!-- =====================================================
+         DASHBOARD STYLES
+    ====================================================== -->
+
+    <style>
+
+        /* =====================================================
+           VARIABLES
+        ====================================================== */
+
+        :root {
+
+            --black: #101010;
+            --black-deep: #080b14;
+
+            --gold: #d4a900;
+            --gold-light: #ffce00;
+
+            --red: #c8102e;
+            --red-light: #fff0f2;
+
+            --blue: #1255d8;
+            --blue-light: #eef3ff;
+
+            --green: #167333;
+            --green-light: #eaf7ed;
+
+            --orange: #b66b00;
+            --orange-light: #fff5df;
+
+            --white: #ffffff;
+            --light: #f7f8fa;
+            --lighter: #fbfbfc;
+
+            --text: #101010;
+            --text-muted: #666666;
+            --text-light: #888888;
+
+            --border: rgba(16,16,16,.08);
+
+            --shadow:
+                0 15px 40px rgba(16,16,16,.05);
+
+            --shadow-hover:
+                0 18px 45px rgba(16,16,16,.09);
+
+            --radius: 22px;
+
+        }
+
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        *,
+        *::before,
+        *::after {
+
+            box-sizing:
+                border-box;
+
+        }
+
+
+        html {
+
+            scroll-behavior:
+                smooth;
+
+            width:
+                100%;
+
+            overflow-x:
+                hidden;
+
+        }
+
+
+        body {
+
+            margin:
+                0;
+
+            min-height:
+                100vh;
+
+            width:
+                100%;
+
+            overflow-x:
+                hidden;
+
+            background:
+                var(--light);
+
+            color:
+                var(--text);
+
+            font-family:
+                "DM Sans",
+                Arial,
+                sans-serif;
+
+        }
+
+
+        button,
+        input,
+        select,
+        textarea {
+
+            font-family:
+                inherit;
+
+        }
+
+
+        button,
+        a {
+
+            -webkit-tap-highlight-color:
+                transparent;
+
+        }
+
+
+        button:disabled {
+
+            cursor:
+                not-allowed;
+
+        }
+
+
+        a {
+
+            color:
+                inherit;
+
+        }
+
+
+        /* =====================================================
+           TOPBAR
+        ====================================================== */
+
+        .dashboard-topbar {
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            z-index:
+                1000;
+
+            background:
+                rgba(255,255,255,.96);
+
+            backdrop-filter:
+                blur(14px);
+
+            -webkit-backdrop-filter:
+                blur(14px);
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .dashboard-topbar-inner {
+
+            width:
+                min(1250px, calc(100% - 40px));
+
+            min-height:
+                76px;
+
+            margin:
+                0 auto;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+        }
+
+
+        .dashboard-logo {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            flex-shrink:
+                0;
+
+            text-decoration:
+                none;
+
+        }
+
+
+        .dashboard-logo img {
+
+            width:
+                145px;
+
+            height:
+                auto;
+
+            display:
+                block;
+
+        }
+
+
+        .topbar-right {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+        }
+
+
+        .notification-btn {
+
+            position:
+                relative;
+
+            width:
+                42px;
+
+            height:
+                42px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                50%;
+
+            background:
+                var(--white);
+
+            color:
+                var(--black);
+
+            font-size:
+                18px;
+
+            cursor:
+                pointer;
+
+            transition:
+                .2s ease;
+
+        }
+
+
+        .notification-btn:hover {
+
+            border-color:
+                var(--gold);
+
+            background:
+                #fffaf0;
+
+            transform:
+                translateY(-1px);
+
+        }
+
+
+        .notification-badge {
+
+            position:
+                absolute;
+
+            top:
+                -3px;
+
+            right:
+                -3px;
+
+            min-width:
+                18px;
+
+            height:
+                18px;
+
+            padding:
+                0 4px;
+
+            display:
+                none;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                999px;
+
+            background:
+                var(--red);
+
+            color:
+                var(--white);
+
+            border:
+                2px solid var(--white);
+
+            font-size:
+                9px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .notification-badge.visible {
+
+            display:
+                inline-flex;
+
+        }
+
+
+        .topbar-level {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            min-height:
+                40px;
+
+            padding:
+                0 15px;
+
+            border-radius:
+                999px;
+
+            background:
+                var(--blue-light);
+
+            color:
+                var(--blue);
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .logout-btn {
+
+            min-height:
+                42px;
+
+            padding:
+                0 18px;
+
+            border:
+                1px solid var(--black);
+
+            border-radius:
+                999px;
+
+            background:
+                var(--black);
+
+            color:
+                var(--white);
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            transition:
+                .25s ease;
+
+        }
+
+
+        .logout-btn:hover {
+
+            background:
+                var(--gold-light);
+
+            border-color:
+                var(--gold-light);
+
+            color:
+                var(--black);
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .dashboard-page {
+
+            padding:
+                45px 20px 70px;
+
+        }
+
+
+        .dashboard-container {
+
+            width:
+                min(1250px, 100%);
+
+            margin:
+                0 auto;
+
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        .dashboard-header {
+
+            margin-bottom:
+                30px;
+
+        }
+
+
+        .dashboard-label {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            margin-bottom:
+                10px;
+
+            color:
+                var(--blue);
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1.5px;
+
+        }
+
+
+        .dashboard-header h1 {
+
+            margin:
+                0 0 8px;
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                clamp(32px, 5vw, 52px);
+
+            line-height:
+                1.05;
+
+        }
+
+
+        .dashboard-header p {
+
+            margin:
+                0;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                16px;
+
+            line-height:
+                1.6;
+
+        }
+
+
+        /* =====================================================
+           STATISTICS
+        ====================================================== */
+
+        .stats-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap:
+                18px;
+
+            margin-bottom:
+                22px;
+
+        }
+
+
+        .stat-card {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            padding:
+                23px;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius);
+
+            box-shadow:
+                var(--shadow);
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+
+        }
+
+
+        .stat-card:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                var(--shadow-hover);
+
+        }
+
+
+        .stat-card::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                80px;
+
+            height:
+                80px;
+
+            right:
+                -35px;
+
+            bottom:
+                -35px;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(212,169,0,.08);
+
+        }
+
+
+        .stat-icon {
+
+            width:
+                42px;
+
+            height:
+                42px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            margin-bottom:
+                16px;
+
+            border-radius:
+                13px;
+
+            background:
+                var(--blue-light);
+
+            color:
+                var(--blue);
+
+            font-size:
+                20px;
+
+        }
+
+
+        .stat-label {
+
+            margin-bottom:
+                5px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .stat-value {
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                28px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .stat-small {
+
+            margin-top:
+                5px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                12px;
+
+        }
+
+
+        /* =====================================================
+           MAIN GRID
+        ====================================================== */
+
+        .main-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                minmax(0, 2fr)
+                minmax(300px, 1fr);
+
+            gap:
+                22px;
+
+            align-items:
+                start;
+
+        }
+
+
+        .dashboard-card {
+
+            min-width:
+                0;
+
+            padding:
+                25px;
+
+            background:
+                var(--white);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                24px;
+
+            box-shadow:
+                var(--shadow);
+
+        }
+
+
+        .dashboard-card.full {
+
+            grid-column:
+                1 / -1;
+
+        }
+
+
+        .card-heading {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                20px;
+
+        }
+
+
+        .card-heading h2 {
+
+            margin:
+                0;
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                21px;
+
+        }
+
+
+        .card-heading p {
+
+            margin:
+                5px 0 0;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                13px;
+
+            line-height:
+                1.5;
+
+        }
+
+
+        .view-link {
+
+            flex-shrink:
+                0;
+
+            color:
+                var(--blue);
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+            text-decoration:
+                none;
+
+        }
+
+
+        .view-link:hover {
+
+            text-decoration:
+                underline;
+
+        }
+
+
+        /* =====================================================
+           COURSE
+        ====================================================== */
+
+        .course-banner {
+
+            margin-bottom:
+                22px;
+
+            padding:
+                22px;
+
+            border-radius:
+                20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #101010,
+                    #18264b
+                );
+
+            color:
+                var(--white);
+
+        }
+
+
+        .course-banner-top {
+
+            display:
+                flex;
+
+            align-items:
+                flex-start;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+        }
+
+
+        .course-banner h3 {
+
+            margin:
+                0 0 6px;
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                25px;
+
+        }
+
+
+        .course-banner p {
+
+            max-width:
+                650px;
+
+            margin:
+                0;
+
+            color:
+                rgba(255,255,255,.7);
+
+            font-size:
+                14px;
+
+            line-height:
+                1.6;
+
+        }
+
+
+        .course-level-badge {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            min-width:
+                58px;
+
+            min-height:
+                42px;
+
+            padding:
+                0 13px;
+
+            border-radius:
+                12px;
+
+            background:
+                var(--gold-light);
+
+            color:
+                var(--black);
+
+            font-weight:
+                900;
+
+        }
+
+
+        .progress-area {
+
+            margin-top:
+                22px;
+
+        }
+
+
+        .progress-top {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                8px;
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .progress-track {
+
+            width:
+                100%;
+
+            height:
+                10px;
+
+            overflow:
+                hidden;
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(255,255,255,.16);
+
+        }
+
+
+        .progress-fill {
+
+            width:
+                0%;
+
+            height:
+                100%;
+
+            border-radius:
+                inherit;
+
+            background:
+                var(--gold-light);
+
+            transition:
+                width .5s ease;
+
+        }
+
+
+        /* =====================================================
+           MODULES
+        ====================================================== */
+
+        .module-list {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                13px;
+
+        }
+
+
+        .module-item {
+
+            overflow:
+                hidden;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                18px;
+
+            background:
+                #fafafa;
+
+        }
+
+
+        .module-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            padding:
+                17px 18px;
+
+        }
+
+
+        .module-left {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            min-width:
+                0;
+
+        }
+
+
+        .module-number {
+
+            width:
+                36px;
+
+            height:
+                36px;
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                11px;
+
+            background:
+                var(--blue-light);
+
+            color:
+                var(--blue);
+
+            font-size:
+                13px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .module-title {
+
+            font-size:
+                15px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .module-description {
+
+            margin-top:
+                4px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                12px;
+
+        }
+
+
+        .module-progress {
+
+            flex-shrink:
+                0;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .lesson-list {
+
+            border-top:
+                1px solid var(--border);
+
+            background:
+                var(--white);
+
+        }
+
+
+        .lesson-item {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            padding:
+                15px 18px;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .lesson-item:last-child {
+
+            border-bottom:
+                none;
+
+        }
+
+
+        .lesson-info {
+
+            min-width:
+                0;
+
+            flex:
+                1;
+
+        }
+
+
+        .lesson-title {
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .lesson-meta {
+
+            margin-top:
+                4px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                12px;
+
+        }
+
+
+        .lesson-progress-track {
+
+            width:
+                min(180px, 100%);
+
+            height:
+                5px;
+
+            margin-top:
+                7px;
+
+            overflow:
+                hidden;
+
+            border-radius:
+                999px;
+
+            background:
+                #e7e9ed;
+
+        }
+
+
+        .lesson-progress-fill {
+
+            width:
+                0%;
+
+            height:
+                100%;
+
+            border-radius:
+                inherit;
+
+            background:
+                var(--gold);
+
+        }
+
+
+        .lesson-actions {
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+        }
+
+
+        .lesson-status {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            min-height:
+                30px;
+
+            padding:
+                0 10px;
+
+            border-radius:
+                999px;
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .lesson-status.completed {
+
+            background:
+                var(--green-light);
+
+            color:
+                var(--green);
+
+        }
+
+
+        .lesson-status.in-progress {
+
+            background:
+                var(--orange-light);
+
+            color:
+                var(--orange);
+
+        }
+
+
+        .lesson-status.not-started {
+
+            background:
+                #eef0f4;
+
+            color:
+                #555;
+
+        }
+
+
+        .lesson-status.locked {
+
+            background:
+                #f1f1f1;
+
+            color:
+                #888;
+
+        }
+
+
+        .continue-btn {
+
+            min-height:
+                32px;
+
+            padding:
+                0 12px;
+
+            border:
+                1px solid var(--blue);
+
+            border-radius:
+                999px;
+
+            background:
+                var(--blue);
+
+            color:
+                var(--white);
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            transition:
+                .2s ease;
+
+        }
+
+
+        .continue-btn:hover:not(:disabled) {
+
+            background:
+                var(--gold-light);
+
+            border-color:
+                var(--gold-light);
+
+            color:
+                var(--black);
+
+        }
+
+
+        .continue-btn:disabled {
+
+            opacity:
+                .55;
+
+        }
+
+
+        /* =====================================================
+           ATTENDANCE
+        ====================================================== */
+
+        .attendance-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap:
+                12px;
+
+        }
+
+
+        .attendance-stat {
+
+            padding:
+                17px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                17px;
+
+            background:
+                #f7f8fa;
+
+        }
+
+
+        .attendance-stat span {
+
+            display:
+                block;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .attendance-stat strong {
+
+            display:
+                block;
+
+            margin-top:
+                5px;
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                24px;
+
+        }
+
+
+        .attendance-percent {
+
+            margin-top:
+                18px;
+
+        }
+
+
+        .attendance-percent-top {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            gap:
+                10px;
+
+            margin-bottom:
+                8px;
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .attendance-track {
+
+            width:
+                100%;
+
+            height:
+                9px;
+
+            overflow:
+                hidden;
+
+            border-radius:
+                999px;
+
+            background:
+                #e7e9ed;
+
+        }
+
+
+        .attendance-fill {
+
+            width:
+                0%;
+
+            height:
+                100%;
+
+            border-radius:
+                inherit;
+
+            background:
+                var(--blue);
+
+            transition:
+                width .5s ease;
+
+        }
+
+
+        .today-attendance {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                12px;
+
+            margin-top:
+                16px;
+
+            padding:
+                13px 14px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                14px;
+
+            background:
+                #f7f8fa;
+
+        }
+
+
+        .today-attendance span {
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .today-attendance strong {
+
+            font-size:
+                12px;
+
+            text-align:
+                right;
+
+        }
+
+
+        .attendance-checkin {
+
+            margin-top:
+                12px;
+
+        }
+
+
+        .checkin-form {
+
+            display:
+                flex;
+
+            gap:
+                8px;
+
+        }
+
+
+        .checkin-input {
+
+            flex:
+                1;
+
+            min-width:
+                0;
+
+            height:
+                40px;
+
+            padding:
+                0 12px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                10px;
+
+            outline:
+                none;
+
+            background:
+                var(--white);
+
+            font-size:
+                12px;
+
+        }
+
+
+        .checkin-input:focus {
+
+            border-color:
+                var(--blue);
+
+            box-shadow:
+                0 0 0 3px rgba(18,85,216,.08);
+
+        }
+
+
+        .checkin-btn {
+
+            height:
+                40px;
+
+            padding:
+                0 13px;
+
+            border:
+                none;
+
+            border-radius:
+                10px;
+
+            background:
+                var(--black);
+
+            color:
+                var(--white);
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .checkin-btn:hover:not(:disabled) {
+
+            background:
+                var(--gold-light);
+
+            color:
+                var(--black);
+
+        }
+
+
+        .checkin-btn:disabled {
+
+            opacity:
+                .55;
+
+        }
+
+
+        .checkin-message {
+
+            min-height:
+                16px;
+
+            margin-top:
+                8px;
+
+            font-size:
+                11px;
+
+        }
+
+
+        .checkin-message.success {
+
+            color:
+                var(--green);
+
+        }
+
+
+        .checkin-message.error {
+
+            color:
+                var(--red);
+
+        }
+
+
+        /* =====================================================
+           PROFILE
+        ====================================================== */
+
+        .profile-list {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                13px;
+
+        }
+
+
+        .profile-row {
+
+            display:
+                flex;
+
+            align-items:
+                flex-start;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            padding-bottom:
+                13px;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .profile-row:last-child {
+
+            padding-bottom:
+                0;
+
+            border-bottom:
+                none;
+
+        }
+
+
+        .profile-label {
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .profile-value {
+
+            max-width:
+                65%;
+
+            text-align:
+                right;
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+
+            word-break:
+                break-word;
+
+        }
+
+
+        .status-pill {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            min-height:
+                27px;
+
+            padding:
+                0 9px;
+
+            border-radius:
+                999px;
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .status-pill.active,
+        .status-pill.paid {
+
+            background:
+                var(--green-light);
+
+            color:
+                var(--green);
+
+        }
+
+
+        .status-pill.pending {
+
+            background:
+                var(--orange-light);
+
+            color:
+                var(--orange);
+
+        }
+
+
+        .status-pill.inactive,
+        .status-pill.unpaid {
+
+            background:
+                var(--red-light);
+
+            color:
+                var(--red);
+
+        }
+
+
+        /* =====================================================
+           QUICK ACTIONS
+        ====================================================== */
+
+        .quick-actions {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                12px;
+
+        }
+
+
+        .quick-action {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            min-width:
+                0;
+
+            padding:
+                15px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                17px;
+
+            background:
+                #fafafa;
+
+            color:
+                var(--black);
+
+            text-decoration:
+                none;
+
+            transition:
+                transform .2s ease,
+                border-color .2s ease,
+                background .2s ease;
+
+        }
+
+
+        .quick-action:hover {
+
+            transform:
+                translateY(-2px);
+
+            border-color:
+                var(--blue);
+
+            background:
+                #f3f6ff;
+
+        }
+
+
+        .quick-icon {
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                12px;
+
+            background:
+                var(--blue-light);
+
+            font-size:
+                18px;
+
+        }
+
+
+        .quick-action strong {
+
+            display:
+                block;
+
+            font-size:
+                13px;
+
+        }
+
+
+        .quick-action span {
+
+            display:
+                block;
+
+            margin-top:
+                3px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                11px;
+
+            line-height:
+                1.4;
+
+        }
+
+
+        /* =====================================================
+           ACHIEVEMENTS
+        ====================================================== */
+
+        .achievement-summary {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap:
+                10px;
+
+            margin-bottom:
+                14px;
+
+        }
+
+
+        .mini-stat {
+
+            padding:
+                14px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                16px;
+
+            background:
+                #fafafa;
+
+        }
+
+
+        .mini-stat span {
+
+            display:
+                block;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                10px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .mini-stat strong {
+
+            display:
+                block;
+
+            margin-top:
+                5px;
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                20px;
+
+        }
+
+
+        .achievement-list {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                8px;
+
+        }
+
+
+        .achievement-item {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                11px;
+
+            padding:
+                12px 14px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                14px;
+
+        }
+
+
+        .achievement-icon {
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                10px;
+
+            background:
+                var(--blue-light);
+
+        }
+
+
+        .achievement-content {
+
+            min-width:
+                0;
+
+            flex:
+                1;
+
+        }
+
+
+        .achievement-item strong {
+
+            display:
+                block;
+
+            font-size:
+                12px;
+
+        }
+
+
+        .achievement-item small {
+
+            display:
+                block;
+
+            margin-top:
+                3px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                10px;
+
+        }
+
+
+        .achievement-item.unlocked {
+
+            background:
+                #fffaf0;
+
+            border-color:
+                rgba(212,169,0,.25);
+
+        }
+
+
+        .achievement-item.locked {
+
+            opacity:
+                .6;
+
+            background:
+                #f7f7f7;
+
+        }
+
+
+        /* =====================================================
+           CLASSES
+        ====================================================== */
+
+        .class-list {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap:
+                12px;
+
+        }
+
+
+        .class-item {
+
+            padding:
+                16px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                17px;
+
+            background:
+                #fafafa;
+
+        }
+
+
+        .class-top {
+
+            display:
+                flex;
+
+            align-items:
+                flex-start;
+
+            justify-content:
+                space-between;
+
+            gap:
+                10px;
+
+        }
+
+
+        .class-name {
+
+            min-width:
+                0;
+
+            font-size:
+                14px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .class-level {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            min-height:
+                25px;
+
+            padding:
+                0 8px;
+
+            flex-shrink:
+                0;
+
+            border-radius:
+                999px;
+
+            background:
+                var(--blue-light);
+
+            color:
+                var(--blue);
+
+            font-size:
+                9px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .class-details {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                5px;
+
+            margin-top:
+                10px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                11px;
+
+        }
+
+
+        /* =====================================================
+           TESTS
+        ====================================================== */
+
+        .test-list {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                9px;
+
+        }
+
+
+        .test-item {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            padding:
+                13px 14px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                14px;
+
+            background:
+                #fafafa;
+
+        }
+
+
+        .test-info {
+
+            min-width:
+                0;
+
+            flex:
+                1;
+
+        }
+
+
+        .test-title {
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .test-meta {
+
+            margin-top:
+                4px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                10px;
+
+        }
+
+
+        .test-result {
+
+            flex-shrink:
+                0;
+
+            text-align:
+                right;
+
+        }
+
+
+        .test-score {
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                17px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .test-status {
+
+            margin-top:
+                3px;
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .test-status.passed {
+
+            color:
+                var(--green);
+
+        }
+
+
+        .test-status.failed {
+
+            color:
+                var(--red);
+
+        }
+
+
+        .test-status.pending {
+
+            color:
+                var(--orange);
+
+        }
+
+
+        /* =====================================================
+           PERFORMANCE
+        ====================================================== */
+
+        .performance-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap:
+                12px;
+
+        }
+
+
+        .performance-item {
+
+            padding:
+                16px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                17px;
+
+            background:
+                #fafafa;
+
+        }
+
+
+        .performance-item span {
+
+            display:
+                block;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                11px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .performance-item strong {
+
+            display:
+                block;
+
+            margin-top:
+                5px;
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                22px;
+
+        }
+
+
+        /* =====================================================
+           PAYMENTS
+        ====================================================== */
+
+        .payment-box {
+
+            padding:
+                18px;
+
+            border-radius:
+                18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #101010,
+                    #202020
+                );
+
+            color:
+                var(--white);
+
+        }
+
+
+        .payment-top {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+        }
+
+
+        .payment-label {
+
+            color:
+                rgba(255,255,255,.65);
+
+            font-size:
+                11px;
+
+        }
+
+
+        .payment-value {
+
+            margin-top:
+                5px;
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                24px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .payment-status {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            align-self:
+                flex-start;
+
+            min-height:
+                28px;
+
+            padding:
+                0 10px;
+
+            border-radius:
+                999px;
+
+            background:
+                var(--gold-light);
+
+            color:
+                var(--black);
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        /* =====================================================
+           LEADERBOARD
+        ====================================================== */
+
+        .leaderboard-list {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                8px;
+
+        }
+
+
+        .leaderboard-item {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            padding:
+                11px 13px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                13px;
+
+            background:
+                #fafafa;
+
+        }
+
+
+        .leaderboard-rank {
+
+            width:
+                27px;
+
+            height:
+                27px;
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                9px;
+
+            background:
+                #eef0f4;
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .leaderboard-name {
+
+            min-width:
+                0;
+
+            flex:
+                1;
+
+            overflow:
+                hidden;
+
+            text-overflow:
+                ellipsis;
+
+            white-space:
+                nowrap;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .leaderboard-xp {
+
+            flex-shrink:
+                0;
+
+            color:
+                var(--gold);
+
+            font-size:
+                11px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        /* =====================================================
+           NOTIFICATIONS
+        ====================================================== */
+
+        .notification-list {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                9px;
+
+        }
+
+
+        .notification-item {
+
+            display:
+                flex;
+
+            gap:
+                12px;
+
+            padding:
+                14px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                15px;
+
+            background:
+                #fafafa;
+
+        }
+
+
+        .notification-icon {
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                10px;
+
+            background:
+                var(--blue-light);
+
+        }
+
+
+        .notification-content {
+
+            min-width:
+                0;
+
+            flex:
+                1;
+
+        }
+
+
+        .notification-content strong {
+
+            display:
+                block;
+
+            font-size:
+                12px;
+
+        }
+
+
+        .notification-content p {
+
+            margin:
+                4px 0 0;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                11px;
+
+            line-height:
+                1.5;
+
+        }
+
+
+        .notification-time {
+
+            margin-top:
+                5px;
+
+            color:
+                var(--text-light);
+
+            font-size:
+                9px;
+
+        }
+
+
+        /* =====================================================
+           EMPTY / LOADING / ERROR
+        ====================================================== */
+
+        .loading-message,
+        .empty-message,
+        .section-error {
+
+            padding:
+                20px;
+
+            border-radius:
+                16px;
+
+            text-align:
+                center;
+
+            color:
+                var(--text-muted);
+
+            background:
+                #f7f8fa;
+
+            font-size:
+                13px;
+
+        }
+
+
+        .section-error {
+
+            color:
+                #a00000;
+
+            background:
+                #fff0f0;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .dashboard-footer {
+
+            padding:
+                28px 20px 40px;
+
+            text-align:
+                center;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                12px;
+
+        }
+
+
+        .dashboard-footer p {
+
+            margin:
+                5px 0;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1100px) {
+
+            .stats-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+
+            .quick-actions {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+
+            .achievement-summary {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+
+            .performance-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media (max-width: 850px) {
+
+            .main-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .dashboard-card.full {
+
+                grid-column:
+                    auto;
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .dashboard-topbar-inner {
+
+                width:
+                    calc(100% - 25px);
+
+                min-height:
+                    68px;
+
+            }
+
+
+            .dashboard-logo img {
+
+                width:
+                    120px;
+
+            }
+
+
+            .topbar-level {
+
+                display:
+                    none;
+
+            }
+
+
+            .notification-btn {
+
+                width:
+                    39px;
+
+                height:
+                    39px;
+
+            }
+
+
+            .logout-btn {
+
+                min-height:
+                    39px;
+
+                padding:
+                    0 14px;
+
+            }
+
+
+            .dashboard-page {
+
+                padding:
+                    30px 14px 50px;
+
+            }
+
+
+            .stats-grid {
+
+                gap:
+                    10px;
+
+            }
+
+
+            .stat-card {
+
+                padding:
+                    17px;
+
+                border-radius:
+                    18px;
+
+            }
+
+
+            .stat-icon {
+
+                width:
+                    36px;
+
+                height:
+                    36px;
+
+                font-size:
+                    17px;
+
+            }
+
+
+            .stat-value {
+
+                font-size:
+                    23px;
+
+            }
+
+
+            .dashboard-card {
+
+                padding:
+                    18px;
+
+                border-radius:
+                    20px;
+
+            }
+
+
+            .course-banner {
+
+                padding:
+                    18px;
+
+            }
+
+
+            .course-banner h3 {
+
+                font-size:
+                    21px;
+
+            }
+
+
+            .course-banner-top {
+
+                gap:
+                    12px;
+
+            }
+
+
+            .course-level-badge {
+
+                min-width:
+                    48px;
+
+                min-height:
+                    38px;
+
+            }
+
+
+            .lesson-item {
+
+                align-items:
+                    flex-start;
+
+                flex-wrap:
+                    wrap;
+
+            }
+
+
+            .lesson-actions {
+
+                width:
+                    100%;
+
+                justify-content:
+                    flex-end;
+
+            }
+
+
+            .quick-actions {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .class-list {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .performance-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+
+            .checkin-form {
+
+                flex-direction:
+                    column;
+
+            }
+
+
+            .checkin-btn {
+
+                width:
+                    100%;
+
+            }
+
+        }
+
+
+        @media (max-width: 390px) {
+
+            .dashboard-topbar-inner {
+
+                width:
+                    calc(100% - 18px);
+
+            }
+
+
+            .dashboard-logo img {
+
+                width:
+                    105px;
+
+            }
+
+
+            .logout-btn {
+
+                padding:
+                    0 11px;
+
+                font-size:
+                    11px;
+
+            }
+
+
+            .stats-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .attendance-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .performance-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .achievement-summary {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         TOPBAR
+    ====================================================== -->
+
+    <header class="dashboard-topbar">
+
+        <div class="dashboard-topbar-inner">
+
+
+            <a
+                href="../index.html"
+                class="dashboard-logo"
+                aria-label="LINGUA DEUTSCH CONNECT Home"
+            >
+
+                <img
+                    src="../assets/logo/logo.jpg"
+                    alt="LINGUA DEUTSCH CONNECT"
+                >
+
+            </a>
+
+
+            <div class="topbar-right">
+
+
+                <button
+                    type="button"
+                    class="notification-btn"
+                    id="notificationBtn"
+                    aria-label="Notifications"
+                    title="Notifications"
+                >
+
+                    🔔
+
+                    <span
+                        class="notification-badge"
+                        id="notificationBadge"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <span
+                    class="topbar-level"
+                    id="topbarLevel"
+                >
+                    German
+                </span>
+
+
+                <button
+                    type="button"
+                    class="logout-btn"
+                    id="logoutBtn"
+                >
+                    Log out
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="dashboard-page">
+
+        <div class="dashboard-container">
+
+
+            <!-- =================================================
+                 WELCOME HEADER
+            ================================================== -->
+
+            <div class="dashboard-header">
+
+                <span class="dashboard-label">
+                    STUDENT DASHBOARD
+                </span>
+
+
+                <h1>
+
+                    Welcome,
+
+                    <span id="studentName">
+                        Student
+                    </span>
+
+                    👋
+
+                </h1>
+
+
+                <p>
+                    Your personal German learning space at
+                    LINGUA DEUTSCH CONNECT.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MAIN STATISTICS
+            ================================================== -->
+
+            <section
+                class="stats-grid"
+                aria-label="Learning statistics"
+            >
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ⭐
+                    </div>
+
+                    <div class="stat-label">
+                        Total XP
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="totalXp"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-small">
+                        Keep learning and earn more XP.
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🔥
+                    </div>
+
+                    <div class="stat-label">
+                        Current Streak
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="currentStreak"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-small">
+                        Consecutive learning days.
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📊
+                    </div>
+
+                    <div class="stat-label">
+                        Course Progress
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="courseProgress"
+                    >
+                        0%
+                    </div>
+
+                    <div class="stat-small">
+                        Lessons completed.
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📅
+                    </div>
+
+                    <div class="stat-label">
+                        Attendance
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="attendancePercentage"
+                    >
+                        0%
+                    </div>
+
+                    <div class="stat-small">
+                        Keep your attendance strong.
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MAIN CONTENT GRID
+            ================================================== -->
+
+            <div class="main-grid">
+
+
+                <!-- =================================================
+                     COURSE
+                ================================================== -->
+
+                <section class="dashboard-card">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                📚 My Course
+                            </h2>
+
+                            <p>
+                                Continue your German learning journey.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="course-banner">
+
+                        <div class="course-banner-top">
+
+                            <div>
+
+                                <h3 id="courseTitle">
+                                    Loading course...
+                                </h3>
+
+                                <p id="courseDescription">
+                                    Your course information will appear here.
+                                </p>
+
+                            </div>
+
+
+                            <div
+                                class="course-level-badge"
+                                id="courseLevel"
+                            >
+                                —
+                            </div>
+
+                        </div>
+
+
+                        <div class="progress-area">
+
+                            <div class="progress-top">
+
+                                <span>
+                                    Course Progress
+                                </span>
+
+                                <span id="courseProgressText">
+                                    0%
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                class="progress-track"
+                                id="courseProgressTrack"
+                                role="progressbar"
+                                aria-label="Course progress"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                aria-valuenow="0"
+                            >
+
+                                <div
+                                    class="progress-fill"
+                                    id="courseProgressBar"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="module-list"
+                        id="moduleList"
+                    >
+
+                        <div class="loading-message">
+                            Loading your lessons...
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     RIGHT COLUMN
+                ================================================== -->
+
+                <div>
+
+
+                    <!-- ATTENDANCE -->
+
+                    <section class="dashboard-card">
+
+                        <div class="card-heading">
+
+                            <div>
+
+                                <h2>
+                                    📅 Attendance
+                                </h2>
+
+                                <p>
+                                    Your attendance overview.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="attendance-grid">
+
+
+                            <div class="attendance-stat">
+
+                                <span>
+                                    Present
+                                </span>
+
+                                <strong id="presentCount">
+                                    0
+                                </strong>
+
+                            </div>
+
+
+                            <div class="attendance-stat">
+
+                                <span>
+                                    Late
+                                </span>
+
+                                <strong id="lateCount">
+                                    0
+                                </strong>
+
+                            </div>
+
+
+                            <div class="attendance-stat">
+
+                                <span>
+                                    Absent
+                                </span>
+
+                                <strong id="absentCount">
+                                    0
+                                </strong>
+
+                            </div>
+
+
+                            <div class="attendance-stat">
+
+                                <span>
+                                    Excused
+                                </span>
+
+                                <strong id="excusedCount">
+                                    0
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="attendance-percent">
+
+                            <div class="attendance-percent-top">
+
+                                <span>
+                                    Attendance Rate
+                                </span>
+
+                                <span id="attendancePercentText">
+                                    0%
+                                </span>
+
+                            </div>
+
+
+                            <div class="attendance-track">
+
+                                <div
+                                    class="attendance-fill"
+                                    id="attendanceBar"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="today-attendance">
+
+                            <span>
+                                Today's attendance
+                            </span>
+
+                            <strong id="todayAttendance">
+                                Checking...
+                            </strong>
+
+                        </div>
+
+
+                        <div class="attendance-checkin">
+
+                            <form
+                                class="checkin-form"
+                                id="attendanceCheckinForm"
+                            >
+
+                                <input
+                                    type="text"
+                                    id="attendanceCode"
+                                    class="checkin-input"
+                                    placeholder="Enter attendance code"
+                                    autocomplete="off"
+                                    maxlength="30"
+                                >
+
+                                <button
+                                    type="submit"
+                                    class="checkin-btn"
+                                    id="attendanceCheckinBtn"
+                                >
+                                    Check in
+                                </button>
+
+                            </form>
+
+
+                            <div
+                                class="checkin-message"
+                                id="checkinMessage"
+                                aria-live="polite"
+                            ></div>
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- PROFILE -->
+
+                    <section
+                        class="dashboard-card"
+                        style="margin-top:22px;"
+                    >
+
+                        <div class="card-heading">
+
+                            <div>
+
+                                <h2>
+                                    👤 My Information
+                                </h2>
+
+                                <p>
+                                    Your account details.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="profile-list">
+
+
+                            <div class="profile-row">
+
+                                <span class="profile-label">
+                                    Full Name
+                                </span>
+
+                                <span
+                                    class="profile-value"
+                                    id="studentFullName"
+                                >
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="profile-row">
+
+                                <span class="profile-label">
+                                    Email
+                                </span>
+
+                                <span
+                                    class="profile-value"
+                                    id="studentEmail"
+                                >
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="profile-row">
+
+                                <span class="profile-label">
+                                    Phone
+                                </span>
+
+                                <span
+                                    class="profile-value"
+                                    id="studentPhone"
+                                >
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="profile-row">
+
+                                <span class="profile-label">
+                                    Account
+                                </span>
+
+                                <span
+                                    class="profile-value"
+                                    id="accountStatus"
+                                >
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="profile-row">
+
+                                <span class="profile-label">
+                                    Payment
+                                </span>
+
+                                <span
+                                    class="profile-value"
+                                    id="paymentStatus"
+                                >
+                                    —
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+                    </section>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     LEARNING TOOLS
+                ================================================== -->
+
+                <section class="dashboard-card">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                🚀 Learning Tools
+                            </h2>
+
+                            <p>
+                                More ways to improve your German.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+
+                        <a
+                            href="games.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-icon">
+                                🎮
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Games
+                                </strong>
+
+                                <span>
+                                    Learn German and earn XP.
+                                </span>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <a
+                            href="vocabulary.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-icon">
+                                📖
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Vocabulary
+                                </strong>
+
+                                <span>
+                                    Build your German vocabulary.
+                                </span>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <a
+                            href="grammar.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-icon">
+                                ✍️
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Grammar
+                                </strong>
+
+                                <span>
+                                    Practice German grammar.
+                                </span>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <a
+                            href="listening.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-icon">
+                                🎧
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Listening
+                                </strong>
+
+                                <span>
+                                    Improve your Hörverstehen.
+                                </span>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <a
+                            href="speaking.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-icon">
+                                🗣️
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Speaking
+                                </strong>
+
+                                <span>
+                                    Practice speaking German.
+                                </span>
+
+                            </div>
+
+                        </a>
+
+
+
+                        <a
+                            href="leaderboard.html"
+                            class="quick-action"
+                        >
+
+                            <div class="quick-icon">
+                                🏆
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Weekly Ranking
+                                </strong>
+
+                                <span>
+                                    See your XP ranking.
+                                </span>
+
+                            </div>
+
+                        </a>
+
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     ACHIEVEMENTS
+                ================================================== -->
+
+                <section class="dashboard-card">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                🏅 Achievements
+                            </h2>
+
+                            <p>
+                                Keep learning and unlock rewards.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="achievement-summary">
+
+
+                        <div class="mini-stat">
+
+                            <span>
+                                Achievements
+                            </span>
+
+                            <strong id="achievementCount">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="mini-stat">
+
+                            <span>
+                                Longest Streak
+                            </span>
+
+                            <strong id="longestStreak">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="mini-stat">
+
+                            <span>
+                                Weekly XP
+                            </span>
+
+                            <strong id="weeklyXp">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="mini-stat">
+
+                            <span>
+                                Learning Status
+                            </span>
+
+                            <strong id="todayLearningStatus">
+                                Active
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div
+                        class="achievement-list"
+                        id="achievementList"
+                    >
+
+                        <div class="empty-message">
+                            Loading achievements...
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     MY CLASSES
+                ================================================== -->
+
+                <section class="dashboard-card">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                🏫 My Classes
+                            </h2>
+
+                            <p>
+                                Your current class enrollment.
+                            </p>
+
+                        </div>
+
+                        <a
+                            href="classes.html"
+                            class="view-link"
+                        >
+                            View all
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        class="class-list"
+                        id="classList"
+                    >
+
+                        <div class="loading-message">
+                            Loading classes...
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     TESTS
+                ================================================== -->
+
+                <section class="dashboard-card">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                📝 Tests & Results
+                            </h2>
+
+                            <p>
+                                Your latest assessments.
+                            </p>
+
+                        </div>
+
+                        <a
+                            href="tests.html"
+                            class="view-link"
+                        >
+                            View all
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        class="test-list"
+                        id="testList"
+                    >
+
+                        <div class="loading-message">
+                            Loading tests...
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     PERFORMANCE
+                ================================================== -->
+
+                <section class="dashboard-card full">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                📈 My Performance
+                            </h2>
+
+                            <p>
+                                Track your progress and assessment results.
+                            </p>
+
+                        </div>
+
+                        <a
+                            href="performance.html"
+                            class="view-link"
+                        >
+                            Details
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        class="performance-grid"
+                        id="performanceGrid"
+                    >
+
+                        <div class="performance-item">
+
+                            <span>
+                                Average Score
+                            </span>
+
+                            <strong id="averageScore">
+                                0%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="performance-item">
+
+                            <span>
+                                Tests Completed
+                            </span>
+
+                            <strong id="testsCompleted">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="performance-item">
+
+                            <span>
+                                Passed
+                            </span>
+
+                            <strong id="testsPassed">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="performance-item">
+
+                            <span>
+                                Highest Score
+                            </span>
+
+                            <strong id="highestScore">
+                                0%
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     PAYMENT
+                ================================================== -->
+
+                <section class="dashboard-card">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                💳 Payment
+                            </h2>
+
+                            <p>
+                                Your course payment information.
+                            </p>
+
+                        </div>
+
+                        <a
+                            href="payments.html"
+                            class="view-link"
+                        >
+                            Details
+                        </a>
+
+                    </div>
+
+
+                    <div class="payment-box">
+
+                        <div class="payment-top">
+
+                            <div>
+
+                                <div class="payment-label">
+                                    Payment Status
+                                </div>
+
+                                <div
+                                    class="payment-value"
+                                    id="dashboardPaymentAmount"
+                                >
+                                    —
+                                </div>
+
+                            </div>
+
+
+                            <span
+                                class="payment-status"
+                                id="dashboardPaymentStatus"
+                            >
+                                Checking
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     WEEKLY LEADERBOARD
+                ================================================== -->
+
+                <section class="dashboard-card">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                🏆 Weekly Ranking
+                            </h2>
+
+                            <p>
+                                Students competing at your level.
+                            </p>
+
+                        </div>
+
+                        <a
+                            href="leaderboard.html"
+                            class="view-link"
+                        >
+                            Full ranking
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        class="leaderboard-list"
+                        id="leaderboardList"
+                    >
+
+                        <div class="loading-message">
+                            Loading ranking...
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     NOTIFICATIONS
+                ================================================== -->
+
+                <section class="dashboard-card full">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                🔔 Notifications
+                            </h2>
+
+                            <p>
+                                Important updates from LINGUA DEUTSCH CONNECT.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="notification-list"
+                        id="notificationList"
+                    >
+
+                        <div class="empty-message">
+                            Loading notifications...
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="dashboard-footer">
+
+        <p>
+            © 2026 LINGUA DEUTSCH CONNECT.
+            All rights reserved.
+        </p>
+
+        <p>
+            German language learning in Kigali, Rwanda.
+        </p>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="../js/dashboard.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LDC Attendance</title>
+
+    <link rel="stylesheet" href="../css/auth.css">
+
+    <style>
+        /* =========================================================
+           ATTENDANCE PAGE
+        ========================================================= */
+
+        :root {
+            --gold: #d4af37;
+            --gold-light: #e4c65a;
+            --black: #000000;
+            --dark: #0b0b0b;
+            --dark-2: #111111;
+            --dark-3: #171717;
+            --border: rgba(212, 175, 55, 0.22);
+            --white: #ffffff;
+            --muted: #a7a7a7;
+            --green: #36c76f;
+            --yellow: #e8b949;
+            --red: #e05252;
+            --blue: #4b8cff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--black);
+            color: var(--white);
+            font-family: "DM Sans", Arial, sans-serif;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================================================
+           TOPBAR
+        ========================================================= */
+
+        .attendance-topbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            min-height: 72px;
+            padding: 0 5%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: var(--gold);
+            color: var(--black);
+
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 900;
+            letter-spacing: 0.4px;
+        }
+
+        .brand img {
+            width: 42px;
+            height: 42px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: var(--white);
+        }
+
+        .brand span {
+            font-size: 1rem;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topbar-btn {
+            border: 1px solid rgba(0, 0, 0, 0.18);
+            background: rgba(0, 0, 0, 0.08);
+            color: var(--black);
+
+            padding: 9px 15px;
+            border-radius: 8px;
+
+            font-weight: 800;
+            transition: 0.2s ease;
+        }
+
+        .topbar-btn:hover {
+            background: var(--black);
+            color: var(--gold);
+        }
+
+        .logout-btn:hover {
+            background: #181818;
+            color: #ffffff;
+        }
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .attendance-container {
+            width: min(1180px, 92%);
+            margin: 0 auto;
+        }
+
+        .attendance-hero {
+            padding: 58px 0 35px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 12px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.06);
+
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .attendance-hero h1 {
+            margin-top: 18px;
+            max-width: 760px;
+
+            font-family: "Space Grotesk", Arial, sans-serif;
+            font-size: clamp(2.3rem, 5vw, 4.5rem);
+            line-height: 0.98;
+            letter-spacing: -2px;
+        }
+
+        .attendance-hero h1 span {
+            color: var(--gold);
+        }
+
+        .attendance-hero p {
+            max-width: 680px;
+            margin-top: 18px;
+
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           MESSAGE
+        ========================================================= */
+
+        .page-message {
+            display: none;
+
+            margin: 0 0 25px;
+            padding: 14px 16px;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            background: var(--dark-2);
+            color: var(--white);
+
+            font-weight: 700;
+        }
+
+        .page-message.show {
+            display: block;
+        }
+
+        .page-message.success {
+            border-color: rgba(54, 199, 111, 0.45);
+            color: var(--green);
+        }
+
+        .page-message.error {
+            border-color: rgba(224, 82, 82, 0.45);
+            color: var(--red);
+        }
+
+        .page-message.info {
+            border-color: rgba(75, 140, 255, 0.45);
+            color: var(--blue);
+        }
+
+        /* =========================================================
+           STUDENT ATTENDANCE CARD
+        ========================================================= */
+
+        .attendance-card {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            padding: 28px;
+            margin-bottom: 25px;
+
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.22);
+        }
+
+        .card-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .card-heading h2 {
+            font-family: "Space Grotesk", Arial, sans-serif;
+            font-size: 1.55rem;
+        }
+
+        .card-heading p {
+            margin-top: 6px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .live-badge {
+            white-space: nowrap;
+
+            padding: 7px 11px;
+            border-radius: 999px;
+
+            background: rgba(54, 199, 111, 0.1);
+            border: 1px solid rgba(54, 199, 111, 0.25);
+
+            color: var(--green);
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        /* =========================================================
+           STUDENT CODE FORM
+        ========================================================= */
+
+        .attendance-code-box {
+            padding: 24px;
+
+            background: var(--dark-2);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 14px;
+        }
+
+        .code-label {
+            display: block;
+            margin-bottom: 9px;
+
+            color: var(--white);
+            font-weight: 800;
+        }
+
+        .code-help {
+            margin-bottom: 17px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .code-form {
+            display: flex;
+            gap: 12px;
+        }
+
+        .code-input {
+            flex: 1;
+            min-width: 0;
+
+            height: 52px;
+            padding: 0 16px;
+
+            background: var(--black);
+            color: var(--white);
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+
+            outline: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+
+        .code-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.08);
+        }
+
+        .primary-btn {
+            min-height: 52px;
+            padding: 0 20px;
+
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+
+            background: var(--gold);
+            color: var(--black);
+
+            font-weight: 900;
+            transition: 0.2s ease;
+        }
+
+        .primary-btn:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+
+        .primary-btn:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* =========================================================
+           TODAY STATUS
+        ========================================================= */
+
+        .today-status {
+            margin-top: 20px;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .status-stat {
+            padding: 18px;
+
+            background: var(--dark-2);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 12px;
+        }
+
+        .status-stat small {
+            display: block;
+            color: var(--muted);
+            font-size: 0.78rem;
+            margin-bottom: 7px;
+        }
+
+        .status-stat strong {
+            font-size: 1.25rem;
+        }
+
+        /* =========================================================
+           TEACHER PANEL
+        ========================================================= */
+
+        .teacher-panel {
+            display: none;
+        }
+
+        .teacher-panel.visible {
+            display: block;
+        }
+
+        .class-selector {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: end;
+        }
+
+        .field-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--muted);
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .field-group select,
+        .field-group input {
+            width: 100%;
+            height: 48px;
+
+            padding: 0 13px;
+
+            background: var(--black);
+            color: var(--white);
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 9px;
+
+            outline: none;
+        }
+
+        .field-group select:focus,
+        .field-group input:focus {
+            border-color: var(--gold);
+        }
+
+        .generate-btn {
+            height: 48px;
+            padding: 0 18px;
+
+            border: 1px solid var(--gold);
+            border-radius: 9px;
+
+            background: var(--gold);
+            color: var(--black);
+
+            font-weight: 900;
+        }
+
+        .generated-code {
+            display: none;
+
+            margin-top: 22px;
+            padding: 24px;
+
+            text-align: center;
+
+            background: var(--black);
+            border: 1px dashed rgba(212, 175, 55, 0.55);
+            border-radius: 14px;
+        }
+
+        .generated-code.visible {
+            display: block;
+        }
+
+        .generated-code small {
+            color: var(--muted);
+        }
+
+        .generated-code strong {
+            display: block;
+            margin: 8px 0;
+
+            color: var(--gold);
+
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            letter-spacing: 8px;
+        }
+
+        .generated-code p {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* =========================================================
+           ATTENDANCE TABLE
+        ========================================================= */
+
+        .attendance-table-wrapper {
+            margin-top: 25px;
+            overflow-x: auto;
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 13px;
+        }
+
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        .attendance-table th,
+        .attendance-table td {
+            padding: 15px 16px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .attendance-table th {
+            background: var(--dark-2);
+            color: var(--muted);
+
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+        }
+
+        .attendance-table td {
+            background: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .attendance-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+
+            padding: 6px 9px;
+            border-radius: 999px;
+
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        .status-present {
+            background: rgba(54, 199, 111, 0.1);
+            color: var(--green);
+        }
+
+        .status-late {
+            background: rgba(232, 185, 73, 0.1);
+            color: var(--yellow);
+        }
+
+        .status-absent {
+            background: rgba(224, 82, 82, 0.1);
+            color: var(--red);
+        }
+
+        .status-excused {
+            background: rgba(75, 140, 255, 0.1);
+            color: var(--blue);
+        }
+
+        .status-pending {
+            background: rgba(255, 255, 255, 0.07);
+            color: var(--muted);
+        }
+
+        /* =========================================================
+           HISTORY
+        ========================================================= */
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .history-card {
+            padding: 19px;
+
+            background: var(--dark-2);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 12px;
+        }
+
+        .history-card .history-date {
+            color: var(--gold);
+            font-weight: 900;
+        }
+
+        .history-card h3 {
+            margin-top: 8px;
+            font-size: 1rem;
+        }
+
+        .history-card p {
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
+
+        /* =========================================================
+           EMPTY STATE
+        ========================================================= */
+
+        .empty-state {
+            padding: 35px 20px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .empty-state strong {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--white);
+        }
+
+        /* =========================================================
+           LOADING
+        ========================================================= */
+
+        .loading {
+            padding: 25px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .spinner {
+            width: 25px;
+            height: 25px;
+
+            margin: 0 auto 10px;
+
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--gold);
+
+            border-radius: 50%;
+
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .attendance-footer {
+            padding: 35px 0 45px;
+            text-align: center;
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 850px) {
+
+            .today-status {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .history-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .class-selector {
+                grid-template-columns: 1fr;
+            }
+
+            .generate-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 620px) {
+
+            .attendance-topbar {
+                padding: 0 4%;
+            }
+
+            .brand span {
+                display: none;
+            }
+
+            .topbar-btn {
+                padding: 8px 11px;
+                font-size: 0.78rem;
+            }
+
+            .attendance-hero {
+                padding-top: 40px;
+            }
+
+            .attendance-card {
+                padding: 20px;
+            }
+
+            .card-heading {
+                flex-direction: column;
+            }
+
+            .code-form {
+                flex-direction: column;
+            }
+
+            .primary-btn {
+                width: 100%;
+            }
+
+            .today-status {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .history-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .generated-code strong {
+                font-size: 2rem;
+                letter-spacing: 4px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         TOPBAR
+    ========================================================= -->
+
+    <header class="attendance-topbar">
+
+        <a href="dashboard.html" class="brand">
+            <img
+                src="../assets/logo/logo.jpg"
+                alt="Lingua Deutsch Connect logo"
+            >
+            <span>LINGUA DEUTSCH CONNECT</span>
+        </a>
+
+        <nav class="topbar-actions">
+            <a href="dashboard.html" class="topbar-btn">
+                Dashboard
+            </a>
+
+            <a href="classes.html" class="topbar-btn">
+                Classes
+            </a>
+
+            <button
+                type="button"
+                id="logoutBtn"
+                class="topbar-btn logout-btn"
+            >
+                Logout
+            </button>
+        </nav>
+
+    </header>
+
+
+    <!-- =========================================================
+         MAIN
+    ========================================================= -->
+
+    <main class="attendance-container">
+
+        <!-- HERO -->
+
+        <section class="attendance-hero">
+
+            <span class="hero-label">
+                ● LDC Attendance
+            </span>
+
+            <h1>
+                Your attendance.
+                <span>Your progress.</span>
+            </h1>
+
+            <p>
+                Mark your attendance securely using the code generated
+                by your teacher. Your attendance is saved directly to
+                your LDC student account.
+            </p>
+
+        </section>
+
+
+        <!-- GLOBAL MESSAGE -->
+
+        <div
+            id="attendanceMessage"
+            class="page-message"
+            role="alert"
+            aria-live="polite"
+        ></div>
+
+
+        <!-- =====================================================
+             STUDENT ATTENDANCE
+        ====================================================== -->
+
+        <section class="attendance-card">
+
+            <div class="card-heading">
+
+                <div>
+                    <h2>Today's Attendance</h2>
+
+                    <p>
+                        Enter the attendance code provided by your teacher.
+                    </p>
+                </div>
+
+                <span class="live-badge">
+                    ● Attendance Open
+                </span>
+
+            </div>
+
+
+            <div class="attendance-code-box">
+
+                <label
+                    for="attendanceCode"
+                    class="code-label"
+                >
+                    Attendance Code
+                </label>
+
+                <p class="code-help">
+                    Ask your teacher for today's code.
+                    The code is unique to your class and attendance session.
+                </p>
+
+                <form
+                    id="attendanceCheckinForm"
+                    class="code-form"
+                >
+
+                    <input
+                        type="text"
+                        id="attendanceCode"
+                        name="attendanceCode"
+                        class="code-input"
+                        placeholder="ENTER CODE"
+                        autocomplete="off"
+                        maxlength="20"
+                        required
+                    >
+
+                    <button
+                        type="submit"
+                        id="attendanceCheckinBtn"
+                        class="primary-btn"
+                    >
+                        ✓ Mark Attendance
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- TODAY STATS -->
+
+            <div class="today-status">
+
+                <div class="status-stat">
+                    <small>Today's Status</small>
+                    <strong id="todayAttendanceStatus">
+                        —
+                    </strong>
+                </div>
+
+                <div class="status-stat">
+                    <small>Check-in Time</small>
+                    <strong id="todayAttendanceTime">
+                        —
+                    </strong>
+                </div>
+
+                <div class="status-stat">
+                    <small>Attendance Rate</small>
+                    <strong id="attendancePercentage">
+                        0%
+                    </strong>
+                </div>
+
+                <div class="status-stat">
+                    <small>Current Streak</small>
+                    <strong id="attendanceStreak">
+                        0 days
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             TEACHER PANEL
+        ====================================================== -->
+
+        <section
+            id="teacherAttendancePanel"
+            class="attendance-card teacher-panel"
+        >
+
+            <div class="card-heading">
+
+                <div>
+                    <h2>Teacher Attendance Control</h2>
+
+                    <p>
+                        Generate today's attendance code and monitor
+                        your class attendance in real time.
+                    </p>
+                </div>
+
+                <span class="live-badge">
+                    Teacher Mode
+                </span>
+
+            </div>
+
+
+            <!-- CLASS SELECTOR -->
+
+            <div class="class-selector">
+
+                <div class="field-group">
+
+                    <label for="teacherClassSelect">
+                        Select Class
+                    </label>
+
+                    <select id="teacherClassSelect">
+                        <option value="">
+                            Select a class...
+                        </option>
+                    </select>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="generateAttendanceCodeBtn"
+                    class="generate-btn"
+                >
+                    + Generate Code
+                </button>
+
+            </div>
+
+
+            <!-- GENERATED CODE -->
+
+            <div
+                id="generatedCodeBox"
+                class="generated-code"
+            >
+
+                <small>
+                    TODAY'S ATTENDANCE CODE
+                </small>
+
+                <strong id="generatedAttendanceCode">
+                    ------
+                </strong>
+
+                <p id="generatedCodeExpiry">
+                    Code will appear here.
+                </p>
+
+            </div>
+
+
+            <!-- TEACHER TABLE -->
+
+            <div class="attendance-table-wrapper">
+
+                <table class="attendance-table">
+
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Class</th>
+                            <th>Status</th>
+                            <th>Check-in Time</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="teacherAttendanceTable">
+
+                        <tr>
+                            <td colspan="4">
+
+                                <div class="empty-state">
+
+                                    <strong>
+                                        Select a class
+                                    </strong>
+
+                                    Select a class above to view
+                                    today's attendance.
+
+                                </div>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ATTENDANCE HISTORY
+        ====================================================== -->
+
+        <section class="attendance-card">
+
+            <div class="card-heading">
+
+                <div>
+                    <h2>Attendance History</h2>
+
+                    <p>
+                        Review your previous attendance records.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div
+                id="attendanceHistory"
+                class="history-grid"
+            >
+
+                <div class="loading">
+                    <div class="spinner"></div>
+                    Loading attendance history...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
+
+    <footer class="attendance-footer">
+
+        © <span id="currentYear"></span>
+        Lingua Deutsch Connect.
+        Learn German. Speak German. Live German.
+
+    </footer>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
+
+    <script>
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
+    </script>
+
+    <script src="../js/attendance.js"></script>
+
+</body>
+</html>

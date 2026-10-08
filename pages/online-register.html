@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Create your LINGUA DEUTSCH CONNECT online learning account."
+    >
+
+    <title>Create Account | LINGUA DEUTSCH CONNECT</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f1d675;
+            --black: #050505;
+            --dark: #0d0d0d;
+            --card: #111111;
+            --border: rgba(212, 175, 55, 0.22);
+            --text: #ffffff;
+            --muted: #a5a5a5;
+            --danger: #ff5c5c;
+            --success: #42d392;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(212, 175, 55, 0.10),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom left,
+                    rgba(212, 175, 55, 0.06),
+                    transparent 30%
+                ),
+                var(--black);
+            color: var(--text);
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 16px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 1050px;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.55);
+        }
+
+        /* =====================================================
+           BRAND SIDE
+        ===================================================== */
+
+        .brand-panel {
+            position: relative;
+            min-height: 700px;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background:
+                linear-gradient(
+                    145deg,
+                    #151515,
+                    #070707
+                );
+            overflow: hidden;
+        }
+
+        .brand-panel::before {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            top: -120px;
+            right: -120px;
+        }
+
+        .brand-panel::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 1px solid rgba(212, 175, 55, 0.12);
+            bottom: -90px;
+            left: -90px;
+        }
+
+        .brand-content,
+        .brand-footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-mark {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            background: var(--gold);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            font-weight: 900;
+            margin-bottom: 28px;
+            box-shadow:
+                0 12px 35px rgba(212, 175, 55, 0.18);
+        }
+
+        .brand-name {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .brand-name span {
+            color: var(--gold);
+        }
+
+        .brand-title {
+            font-size: 42px;
+            line-height: 1.08;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .brand-title span {
+            color: var(--gold);
+        }
+
+        .brand-description {
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 410px;
+            font-size: 15px;
+        }
+
+        .features {
+            margin-top: 35px;
+            display: grid;
+            gap: 15px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #dddddd;
+            font-size: 14px;
+        }
+
+        .feature-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.10);
+            border: 1px solid rgba(212, 175, 55, 0.22);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .brand-footer {
+            color: #777;
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           FORM SIDE
+        ===================================================== */
+
+        .form-panel {
+            padding: 50px;
+            background: #0b0b0b;
+        }
+
+        .form-header {
+            margin-bottom: 30px;
+        }
+
+        .form-header h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .form {
+            display: grid;
+            gap: 17px;
+        }
+
+        .name-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .field label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #dddddd;
+        }
+
+        .field input {
+            width: 100%;
+            height: 50px;
+            padding: 0 15px;
+            border-radius: 11px;
+            border: 1px solid #292929;
+            outline: none;
+            background: #151515;
+            color: #fff;
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .field input::placeholder {
+            color: #666;
+        }
+
+        .field input:focus {
+            border-color: var(--gold);
+            box-shadow:
+                0 0 0 3px rgba(212, 175, 55, 0.08);
+        }
+
+        /* =====================================================
+           ACCESS CODE
+        ===================================================== */
+
+        .access-code-wrapper {
+            position: relative;
+        }
+
+        .access-code-wrapper input {
+            padding-right: 85px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        .access-code-hint {
+            color: #777;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .access-code-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .required-text {
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           PASSWORD
+        ===================================================== */
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 75px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 0;
+            background: transparent;
+            color: var(--gold);
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 7px;
+        }
+
+        .password-strength {
+            height: 4px;
+            width: 100%;
+            border-radius: 10px;
+            background: #242424;
+            overflow: hidden;
+            margin-top: 2px;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0;
+            transition: 0.25s ease;
+            background: var(--gold);
+        }
+
+        /* =====================================================
+           TERMS
+        ===================================================== */
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #888;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-top: 2px;
+        }
+
+        .terms input {
+            margin-top: 3px;
+            accent-color: var(--gold);
+        }
+
+        .terms a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        /* =====================================================
+           BUTTON
+        ===================================================== */
+
+        .submit-btn {
+            height: 52px;
+            border: 0;
+            border-radius: 11px;
+            background: var(--gold);
+            color: #050505;
+            font-size: 14px;
+            font-weight: 900;
+            cursor: pointer;
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+            margin-top: 5px;
+        }
+
+        .submit-btn:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+            box-shadow:
+                0 12px 30px rgba(212, 175, 55, 0.14);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        .message {
+            display: none;
+            padding: 13px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.error {
+            color: #ffb1b1;
+            background: rgba(255, 92, 92, 0.08);
+            border: 1px solid rgba(255, 92, 92, 0.20);
+        }
+
+        .message.success {
+            color: #9ff0c8;
+            background: rgba(66, 211, 146, 0.08);
+            border: 1px solid rgba(66, 211, 146, 0.20);
+        }
+
+        /* =====================================================
+           LOGIN / BACK
+        ===================================================== */
+
+        .login-link {
+            text-align: center;
+            margin-top: 22px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .login-link a {
+            color: var(--gold);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #777;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .back-link:hover {
+            color: var(--gold);
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .page {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+
+            .brand-panel {
+                min-height: auto;
+                padding: 35px;
+            }
+
+            .brand-footer {
+                margin-top: 35px;
+            }
+
+            .brand-title {
+                font-size: 34px;
+            }
+
+            .form-panel {
+                padding: 35px;
+            }
+
+        }
+
+        @media (max-width: 520px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .page {
+                border-radius: 18px;
+            }
+
+            .brand-panel,
+            .form-panel {
+                padding: 25px;
+            }
+
+            .brand-title {
+                font-size: 29px;
+            }
+
+            .brand-description {
+                font-size: 14px;
+            }
+
+            .name-row {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <main class="page">
+
+        <!-- =================================================
+             BRAND PANEL
+        ================================================== -->
+
+        <section class="brand-panel">
+
+            <div class="brand-content">
+
+                <div class="logo-mark">
+                    L
+                </div>
+
+                <div class="brand-name">
+                    LINGUA DEUTSCH <span>CONNECT</span>
+                </div>
+
+                <h2 class="brand-title">
+                    Learn German.<br>
+                    <span>Build your future.</span>
+                </h2>
+
+                <p class="brand-description">
+                    Create your online learning account and start
+                    learning German from wherever you are.
+                </p>
+
+                <div class="features">
+
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+                        <span>Learn at your own pace</span>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+                        <span>Access lessons and learning materials</span>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+                        <span>Track your learning progress</span>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+                        <span>Learn from anywhere</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="brand-footer">
+                Lerne Deutsch. Sprich Deutsch. Lebe Deutsch.
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FORM PANEL
+        ================================================== -->
+
+        <section class="form-panel">
+
+            <a
+                href="online-login.html"
+                class="back-link"
+            >
+                ← Back to login
+            </a>
+
+
+            <div class="form-header">
+
+                <h1>
+                    Create your account
+                </h1>
+
+                <p>
+                    Join LINGUA DEUTSCH CONNECT Online Learning.
+                </p>
+
+            </div>
+
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+
+            <form
+                id="registerForm"
+                class="form"
+                novalidate
+            >
+
+                <!-- =================================================
+                     NAME
+                ================================================== -->
+
+                <div class="name-row">
+
+                    <div class="field">
+
+                        <label for="firstName">
+                            First name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="firstName"
+                            name="firstName"
+                            placeholder="e.g. Jean"
+                            autocomplete="given-name"
+                            maxlength="100"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="lastName">
+                            Last name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="lastName"
+                            name="lastName"
+                            placeholder="e.g. Uwimana"
+                            autocomplete="family-name"
+                            maxlength="100"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     EMAIL
+                ================================================== -->
+
+                <div class="field">
+
+                    <label for="email">
+                        Email address *
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        maxlength="255"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     PHONE
+                ================================================== -->
+
+                <div class="field">
+
+                    <label for="phone">
+                        Phone number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="+250 7XX XXX XXX"
+                        autocomplete="tel"
+                        maxlength="30"
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     ACCESS CODE
+                ================================================== -->
+
+                <div class="field">
+
+                    <div class="access-code-label">
+
+                        <label for="accessCode">
+                            Online Access Code *
+                        </label>
+
+                        <span class="required-text">
+                            REQUIRED
+                        </span>
+
+                    </div>
+
+                    <div class="access-code-wrapper">
+
+                        <input
+                            type="text"
+                            id="accessCode"
+                            name="accessCode"
+                            placeholder="e.g. LDC-A7K92X"
+                            autocomplete="off"
+                            autocapitalize="characters"
+                            spellcheck="false"
+                            maxlength="100"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="access-code-hint">
+                        Enter the access code provided by LINGUA DEUTSCH CONNECT.
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     PASSWORD
+                ================================================== -->
+
+                <div class="field">
+
+                    <label for="password">
+                        Password *
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="At least 8 characters"
+                            autocomplete="new-password"
+                            maxlength="128"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            id="togglePassword"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                    <div class="password-strength">
+
+                        <div
+                            class="password-strength-bar"
+                            id="passwordStrength"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     CONFIRM PASSWORD
+                ================================================== -->
+
+                <div class="field">
+
+                    <label for="confirmPassword">
+                        Confirm password *
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Repeat your password"
+                            autocomplete="new-password"
+                            maxlength="128"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            id="toggleConfirmPassword"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     TERMS
+                ================================================== -->
+
+                <label class="terms">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        required
+                    >
+
+                    <span>
+                        I understand that the information I provide
+                        will be used to create my LDC Online Learning
+                        account.
+                    </span>
+
+                </label>
+
+
+                <!-- =================================================
+                     SUBMIT
+                ================================================== -->
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                    id="submitBtn"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <div class="login-link">
+
+                Already have an account?
+
+                <a href="online-login.html">
+                    Log in
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        "use strict";
+
+
+        /* =====================================================
+           CONFIGURATION
+        ===================================================== */
+
+        const API_URL =
+            "http://localhost:5000/api";
+
+
+        const LOGIN_PAGE =
+            "online-login.html";
+
+
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
+
+        const registerForm =
+            document.getElementById(
+                "registerForm"
+            );
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+        const submitBtn =
+            document.getElementById(
+                "submitBtn"
+            );
+
+        const firstName =
+            document.getElementById(
+                "firstName"
+            );
+
+        const lastName =
+            document.getElementById(
+                "lastName"
+            );
+
+        const email =
+            document.getElementById(
+                "email"
+            );
+
+        const phone =
+            document.getElementById(
+                "phone"
+            );
+
+        const accessCode =
+            document.getElementById(
+                "accessCode"
+            );
+
+        const password =
+            document.getElementById(
+                "password"
+            );
+
+        const confirmPassword =
+            document.getElementById(
+                "confirmPassword"
+            );
+
+        const terms =
+            document.getElementById(
+                "terms"
+            );
+
+        const passwordStrength =
+            document.getElementById(
+                "passwordStrength"
+            );
+
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        function showMessage(
+            text,
+            type = "error"
+        ) {
+
+            message.textContent =
+                text;
+
+            message.className =
+                `message show ${type}`;
+
+        }
+
+
+        function clearMessage() {
+
+            message.textContent =
+                "";
+
+            message.className =
+                "message";
+
+        }
+
+
+        /* =====================================================
+           PASSWORD VISIBILITY
+        ===================================================== */
+
+        function setupPasswordToggle(
+            buttonId,
+            inputId
+        ) {
+
+            const button =
+                document.getElementById(
+                    buttonId
+                );
+
+            const input =
+                document.getElementById(
+                    inputId
+                );
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const isPassword =
+                        input.type ===
+                        "password";
+
+
+                    input.type =
+                        isPassword
+                            ? "text"
+                            : "password";
+
+
+                    button.textContent =
+                        isPassword
+                            ? "Hide"
+                            : "Show";
+
+                }
+            );
+
+        }
+
+
+        setupPasswordToggle(
+            "togglePassword",
+            "password"
+        );
+
+
+        setupPasswordToggle(
+            "toggleConfirmPassword",
+            "confirmPassword"
+        );
+
+
+        /* =====================================================
+           PASSWORD STRENGTH
+        ===================================================== */
+
+        password.addEventListener(
+            "input",
+            () => {
+
+                const value =
+                    password.value;
+
+                let strength =
+                    0;
+
+
+                if (
+                    value.length >= 8
+                ) {
+
+                    strength++;
+
+                }
+
+
+                if (
+                    /[A-Z]/.test(value)
+                ) {
+
+                    strength++;
+
+                }
+
+
+                if (
+                    /[0-9]/.test(value)
+                ) {
+
+                    strength++;
+
+                }
+
+
+                if (
+                    /[^A-Za-z0-9]/.test(value)
+                ) {
+
+                    strength++;
+
+                }
+
+
+                const widths = [
+                    "0%",
+                    "25%",
+                    "50%",
+                    "75%",
+                    "100%"
+                ];
+
+
+                passwordStrength.style.width =
+                    widths[strength];
+
+            }
+        );
+
+
+        /* =====================================================
+           EMAIL VALIDATION
+        ===================================================== */
+
+        function validEmail(
+            value
+        ) {
+
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                .test(value);
+
+        }
+
+
+        /* =====================================================
+           ACCESS CODE NORMALIZATION
+        ===================================================== */
+
+        function normalizeAccessCode(
+            value
+        ) {
+
+            return value
+                .trim()
+                .replace(/\s+/g, "")
+                .toUpperCase();
+
+        }
+
+
+        /* =====================================================
+           FORMAT ACCESS CODE WHILE TYPING
+        ===================================================== */
+
+        accessCode.addEventListener(
+            "input",
+            () => {
+
+                const cursorPosition =
+                    accessCode.selectionStart;
+
+                const originalValue =
+                    accessCode.value;
+
+                const normalizedValue =
+                    normalizeAccessCode(
+                        originalValue
+                    );
+
+                accessCode.value =
+                    normalizedValue;
+
+                /*
+                 * Keep the cursor at the end.
+                 * This is mainly useful when the
+                 * student pastes a code.
+                 */
+
+                try {
+
+                    accessCode.setSelectionRange(
+                        normalizedValue.length,
+                        normalizedValue.length
+                    );
+
+                } catch {
+
+                    // Ignore cursor errors.
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           SUBMIT
+        ===================================================== */
+
+        registerForm.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
+
+                clearMessage();
+
+
+                const normalizedAccessCode =
+                    normalizeAccessCode(
+                        accessCode.value
+                    );
+
+
+                const data = {
+
+                    firstName:
+                        firstName.value.trim(),
+
+                    lastName:
+                        lastName.value.trim(),
+
+                    email:
+                        email.value.trim()
+                            .toLowerCase(),
+
+                    phone:
+                        phone.value.trim(),
+
+                    password:
+                        password.value,
+
+                    accessCode:
+                        normalizedAccessCode
+
+                };
+
+
+                /* =============================================
+                   FRONTEND VALIDATION
+                ============================================= */
+
+                if (
+                    data.firstName.length < 2
+                ) {
+
+                    showMessage(
+                        "Please enter your first name."
+                    );
+
+                    firstName.focus();
+
+                    return;
+
+                }
+
+
+                if (
+                    !validEmail(
+                        data.email
+                    )
+                ) {
+
+                    showMessage(
+                        "Please enter a valid email address."
+                    );
+
+                    email.focus();
+
+                    return;
+
+                }
+
+
+                if (
+                    !data.accessCode
+                ) {
+
+                    showMessage(
+                        "Please enter your online access code."
+                    );
+
+                    accessCode.focus();
+
+                    return;
+
+                }
+
+
+                if (
+                    data.password.length < 8
+                ) {
+
+                    showMessage(
+                        "Password must contain at least 8 characters."
+                    );
+
+                    password.focus();
+
+                    return;
+
+                }
+
+
+                if (
+                    data.password !==
+                    confirmPassword.value
+                ) {
+
+                    showMessage(
+                        "The passwords do not match."
+                    );
+
+                    confirmPassword.focus();
+
+                    return;
+
+                }
+
+
+                if (
+                    !terms.checked
+                ) {
+
+                    showMessage(
+                        "Please confirm the information notice before creating your account."
+                    );
+
+                    return;
+
+                }
+
+
+                /* =============================================
+                   LOADING STATE
+                ============================================= */
+
+                submitBtn.disabled =
+                    true;
+
+                submitBtn.textContent =
+                    "Creating account...";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `${API_URL}/online/auth/register`,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify(
+                                        data
+                                    )
+                            }
+                        );
+
+
+                    let result;
+
+
+                    try {
+
+                        result =
+                            await response.json();
+
+                    } catch {
+
+                        result = {
+
+                            success: false,
+
+                            message:
+                                "The server returned an invalid response."
+
+                        };
+
+                    }
+
+
+                    if (
+                        !response.ok
+                    ) {
+
+                        throw new Error(
+                            result.message ||
+                            "Registration failed."
+                        );
+
+                    }
+
+
+                    showMessage(
+                        result.message ||
+                        "Your account was created successfully.",
+                        "success"
+                    );
+
+
+                    submitBtn.textContent =
+                        "Account Created ✓";
+
+
+                    /*
+                     * Give the student a moment
+                     * to see the success message.
+                     */
+
+                    setTimeout(
+                        () => {
+
+                            window.location.href =
+                                LOGIN_PAGE;
+
+                        },
+                        1200
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Online registration error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        error.message ||
+                        "Something went wrong while creating your account."
+                    );
+
+
+                    submitBtn.disabled =
+                        false;
+
+                    submitBtn.textContent =
+                        "Create Account";
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

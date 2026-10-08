@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Create your student account at LINGUA DEUTSCH CONNECT and start your German learning journey."
+    >
+
+    <meta
+        name="theme-color"
+        content="#d4af37"
+    >
+
+    <title>Create Student Account | LINGUA DEUTSCH CONNECT</title>
+
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         AUTH STYLES
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/auth.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <header class="auth-navbar">
+
+        <div class="auth-navbar-inner">
+
+            <a
+                href="../index.html"
+                class="auth-logo"
+                aria-label="Go to LINGUA DEUTSCH CONNECT home page"
+            >
+
+                <img
+                    src="../assets/logo/logo.jpg"
+                    alt="LINGUA DEUTSCH CONNECT logo"
+                >
+
+            </a>
+
+
+            <a
+                href="login.html"
+                class="back-home"
+            >
+                ← Student Login
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="auth-page register-page">
+
+        <section
+            class="auth-card register-card"
+            aria-labelledby="registerTitle"
+        >
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="auth-header">
+
+                <div
+                    class="auth-icon"
+                    aria-hidden="true"
+                >
+                    🎓
+                </div>
+
+
+                <span class="auth-label">
+                    STUDENT REGISTRATION
+                </span>
+
+
+                <h1 id="registerTitle">
+                    Create your account.
+                </h1>
+
+
+                <p>
+                    Join LINGUA DEUTSCH CONNECT and start
+                    your German learning journey.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ACCESS CODE INFORMATION
+            ================================================== -->
+
+            <div
+                class="code-box"
+                role="note"
+            >
+
+                <div
+                    class="code-box-icon"
+                    aria-hidden="true"
+                >
+                    🔑
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Student Access Code
+                    </strong>
+
+
+                    <p>
+                        Your access code is provided by
+                        LINGUA DEUTSCH CONNECT after your
+                        course payment has been confirmed.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REGISTRATION FORM
+            ================================================== -->
+
+            <form
+                id="registerForm"
+                class="auth-form"
+                novalidate
+            >
+
+
+                <!-- =============================================
+                     ACCESS CODE
+                ============================================== -->
+
+                <div class="form-group">
+
+                    <label for="accessCode">
+                        Access code
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="accessCode"
+                        name="accessCode"
+                        placeholder="Example: LDC-A1-7K92X"
+                        autocomplete="off"
+                        autocapitalize="characters"
+                        spellcheck="false"
+                        maxlength="50"
+                        required
+                    >
+
+
+                    <small>
+                        Enter the unique code exactly as you received it.
+                    </small>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     FULL NAME
+                ============================================== -->
+
+                <div class="form-group">
+
+                    <label for="fullName">
+                        Full name
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        minlength="2"
+                        maxlength="120"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- =============================================
+                     EMAIL
+                ============================================== -->
+
+                <div class="form-group">
+
+                    <label for="registerEmail">
+                        Email address
+                    </label>
+
+
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        inputmode="email"
+                        maxlength="160"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- =============================================
+                     PHONE
+                ============================================== -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone number
+                    </label>
+
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Example: 0788 517 961"
+                        autocomplete="tel"
+                        inputmode="tel"
+                        maxlength="30"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- =============================================
+                     PASSWORD
+                ============================================== -->
+
+                <div class="form-group">
+
+                    <label for="registerPassword">
+                        Password
+                    </label>
+
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="registerPassword"
+                            name="password"
+                            placeholder="Create a secure password"
+                            autocomplete="new-password"
+                            minlength="8"
+                            maxlength="128"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="toggleRegisterPassword"
+                            aria-label="Show password"
+                            aria-controls="registerPassword"
+                            aria-pressed="false"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+
+                    <small>
+                        Use at least 8 characters.
+                    </small>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     CONFIRM PASSWORD
+                ============================================== -->
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm password
+                    </label>
+
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Repeat your password"
+                            autocomplete="new-password"
+                            minlength="8"
+                            maxlength="128"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="toggleConfirmPassword"
+                            aria-label="Show password"
+                            aria-controls="confirmPassword"
+                            aria-pressed="false"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     TERMS
+                ============================================== -->
+
+                <label
+                    class="terms-row"
+                    for="terms"
+                >
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        name="terms"
+                        required
+                    >
+
+
+                    <span>
+                        I agree to the LINGUA DEUTSCH CONNECT
+                        student terms and conditions.
+                    </span>
+
+                </label>
+
+
+
+                <!-- =============================================
+                     FORM MESSAGE
+                ============================================== -->
+
+                <div
+                    class="form-message"
+                    id="registerMessage"
+                    role="alert"
+                    aria-live="polite"
+                    hidden
+                ></div>
+
+
+
+                <!-- =============================================
+                     CREATE ACCOUNT
+                ============================================== -->
+
+                <button
+                    type="submit"
+                    class="auth-primary-btn"
+                    id="registerBtn"
+                >
+
+                    <span>
+                        Create Student Account
+                    </span>
+
+                    <span aria-hidden="true">
+                        →
+                    </span>
+
+                </button>
+
+            </form>
+
+
+
+            <!-- =================================================
+                 LOGIN PROMPT
+            ================================================== -->
+
+            <div class="register-prompt">
+
+                <p>
+                    Already have an account?
+                </p>
+
+
+                <a
+                    href="login.html"
+                    class="auth-secondary-btn"
+                >
+
+                    Log in
+
+                    <span aria-hidden="true">
+                        →
+                    </span>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ACCESS CODE HELP
+            ================================================== -->
+
+            <div class="access-notice">
+
+                <span
+                    class="notice-icon"
+                    aria-hidden="true"
+                >
+                    💳
+                </span>
+
+
+                <div>
+
+                    <strong>
+                        Don't have an access code?
+                    </strong>
+
+
+                    <p>
+                        Access codes are issued after course
+                        payment has been confirmed. If you
+                        have already paid, contact LDC for
+                        assistance.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="auth-footer">
+
+        <p>
+            © 2026 LINGUA DEUTSCH CONNECT.
+            All rights reserved.
+        </p>
+
+
+        <p>
+            German language learning in Kigali, Rwanda.
+        </p>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="../js/auth.js"></script>
+
+</body>
+
+</html>

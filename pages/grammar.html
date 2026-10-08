@@ -1,0 +1,2212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LDC | German Grammar</title>
+
+    <meta
+        name="description"
+        content="Learn German grammar from A1 to B2 with Lingua Deutsch Connect."
+    >
+
+    <!-- MAIN AUTH / GLOBAL STYLES -->
+    <link
+        rel="stylesheet"
+        href="../css/auth.css"
+    >
+
+    <!-- GRAMMAR PAGE STYLES -->
+    <style>
+
+        /* =====================================================
+           GRAMMAR PAGE
+        ===================================================== */
+
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f1d77a;
+            --gold-dark: #a88720;
+
+            --black: #000000;
+            --black-soft: #080808;
+            --black-card: #111111;
+            --black-light: #171717;
+
+            --white: #ffffff;
+            --text: #eeeeee;
+            --muted: #a7a7a7;
+
+            --border: rgba(212, 175, 55, 0.28);
+            --border-light: rgba(255, 255, 255, 0.08);
+
+            --success: #42d392;
+            --danger: #ff6464;
+
+            --shadow:
+                0 18px 45px rgba(0, 0, 0, 0.45);
+
+            --radius: 18px;
+        }
+
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--black);
+            color: var(--text);
+            font-family:
+                "DM Sans",
+                Arial,
+                Helvetica,
+                sans-serif;
+            overflow-x: hidden;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           ACCESSIBILITY
+        ===================================================== */
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+
+        /* =====================================================
+           TOPBAR
+        ===================================================== */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            min-height: 76px;
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 12px 5%;
+
+            background: var(--gold);
+            color: var(--black);
+
+            border-bottom:
+                1px solid rgba(0, 0, 0, 0.15);
+
+            box-shadow:
+                0 5px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .topbar-left,
+        .topbar-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--black);
+        }
+
+        .brand-name {
+            font-size: 0.9rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+        }
+
+        .topbar-right {
+            gap: 10px;
+        }
+
+        .topbar-link,
+        .logout-btn {
+            border: 0;
+            background: transparent;
+            color: var(--black);
+
+            padding: 10px 14px;
+
+            border-radius: 10px;
+
+            font-size: 0.88rem;
+            font-weight: 800;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .topbar-link:hover,
+        .logout-btn:hover {
+            background: rgba(0, 0, 0, 0.12);
+            transform: translateY(-1px);
+        }
+
+        .logout-btn {
+            border:
+                1px solid rgba(0, 0, 0, 0.25);
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .grammar-page {
+            width: min(1200px, 92%);
+            margin: 0 auto;
+            padding: 45px 0 70px;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .grammar-hero {
+            position: relative;
+            overflow: hidden;
+
+            min-height: 330px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 55px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 28px;
+
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(212, 175, 55, 0.18),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #111111,
+                    #050505
+                );
+
+            box-shadow: var(--shadow);
+        }
+
+        .grammar-hero::before {
+            content: "";
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            right: -100px;
+            bottom: -150px;
+
+            border-radius: 50%;
+
+            border:
+                35px solid rgba(212, 175, 55, 0.08);
+        }
+
+        .grammar-hero-content {
+            position: relative;
+            z-index: 1;
+
+            max-width: 760px;
+        }
+
+        .section-label {
+            display: inline-block;
+
+            margin-bottom: 12px;
+
+            color: var(--gold);
+
+            font-size: 0.76rem;
+            font-weight: 900;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .grammar-hero h1 {
+            margin: 0 0 18px;
+
+            color: var(--white);
+
+            font-size:
+                clamp(2.2rem, 5vw, 4.5rem);
+
+            line-height: 1.02;
+            font-weight: 900;
+        }
+
+        .grammar-hero p {
+            max-width: 650px;
+
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 1.08rem;
+            line-height: 1.7;
+        }
+
+        .grammar-hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+
+            margin-top: 28px;
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .primary-btn,
+        .secondary-btn {
+            min-height: 48px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 20px;
+
+            border-radius: 12px;
+
+            font-weight: 900;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .primary-btn {
+            border: 1px solid var(--gold);
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 10px 25px rgba(212, 175, 55, 0.22);
+        }
+
+        .secondary-btn {
+            border:
+                1px solid var(--border);
+
+            background:
+                rgba(212, 175, 55, 0.06);
+
+            color: var(--gold);
+        }
+
+        .secondary-btn:hover {
+            background:
+                rgba(212, 175, 55, 0.13);
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .grammar-stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 16px;
+
+            margin: 25px 0;
+        }
+
+        .grammar-stat-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            padding: 22px;
+
+            border:
+                1px solid var(--border-light);
+
+            border-radius: var(--radius);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #151515,
+                    #0a0a0a
+                );
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .grammar-stat-icon {
+            width: 48px;
+            height: 48px;
+
+            display: grid;
+            place-items: center;
+
+            flex-shrink: 0;
+
+            border-radius: 14px;
+
+            background:
+                rgba(212, 175, 55, 0.12);
+
+            font-size: 1.35rem;
+        }
+
+        .grammar-stat-label {
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: var(--muted);
+
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .grammar-stat-value {
+            color: var(--gold);
+
+            font-size: 1.65rem;
+            font-weight: 900;
+        }
+
+
+        /* =====================================================
+           CONTROLS
+        ===================================================== */
+
+        .grammar-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            margin: 35px 0 28px;
+        }
+
+        .grammar-search {
+            flex: 1;
+        }
+
+        .grammar-search input {
+            width: 100%;
+
+            min-height: 52px;
+
+            padding: 0 18px;
+
+            border:
+                1px solid var(--border-light);
+
+            border-radius: 13px;
+
+            outline: none;
+
+            background: #101010;
+            color: var(--white);
+
+            transition:
+                border 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .grammar-search input::placeholder {
+            color: #777777;
+        }
+
+        .grammar-search input:focus {
+            border-color: var(--gold);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(212, 175, 55, 0.08);
+        }
+
+        .grammar-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .grammar-filter {
+            min-height: 42px;
+
+            padding: 0 15px;
+
+            border:
+                1px solid var(--border-light);
+
+            border-radius: 10px;
+
+            background: #111111;
+            color: var(--muted);
+
+            font-weight: 800;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                border 0.2s ease;
+        }
+
+        .grammar-filter:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .grammar-filter.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--black);
+        }
+
+
+        /* =====================================================
+           SECTION HEADING
+        ===================================================== */
+
+        .grammar-section,
+        .quick-grammar-section {
+            margin-top: 45px;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px;
+
+            margin-bottom: 22px;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+
+            color: var(--white);
+
+            font-size:
+                clamp(1.7rem, 3vw, 2.4rem);
+
+            font-weight: 900;
+        }
+
+        .topic-count {
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           GRAMMAR GRID
+        ===================================================== */
+
+        .grammar-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+        .grammar-card {
+            position: relative;
+
+            min-height: 235px;
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 24px;
+
+            border:
+                1px solid var(--border-light);
+
+            border-radius: var(--radius);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #151515,
+                    #090909
+                );
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.28);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.22s ease,
+                border 0.22s ease,
+                box-shadow 0.22s ease;
+        }
+
+        .grammar-card:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(212, 175, 55, 0.65);
+
+            box-shadow:
+                0 18px 38px rgba(0, 0, 0, 0.42);
+        }
+
+        .grammar-card-level,
+        .grammar-level,
+        .level-badge {
+            align-self: flex-start;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 48px;
+
+            padding: 6px 10px;
+
+            border-radius: 8px;
+
+            background:
+                rgba(212, 175, 55, 0.13);
+
+            color: var(--gold);
+
+            font-size: 0.72rem;
+            font-weight: 900;
+        }
+
+        .grammar-card h3 {
+            margin: 20px 0 10px;
+
+            color: var(--white);
+
+            font-size: 1.25rem;
+            font-weight: 900;
+        }
+
+        .grammar-card p {
+            margin: 0;
+
+            color: var(--muted);
+
+            line-height: 1.65;
+            font-size: 0.92rem;
+        }
+
+        .grammar-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-top: auto;
+            padding-top: 20px;
+        }
+
+        .grammar-card-footer span {
+            color: #777777;
+            font-size: 0.78rem;
+        }
+
+        .grammar-card-footer strong {
+            color: var(--gold);
+            font-size: 0.8rem;
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state {
+            padding: 55px 25px;
+
+            border:
+                1px dashed var(--border);
+
+            border-radius: var(--radius);
+
+            text-align: center;
+
+            background:
+                rgba(212, 175, 55, 0.025);
+        }
+
+        .empty-icon {
+            margin-bottom: 12px;
+            font-size: 2.5rem;
+        }
+
+        .empty-state h3 {
+            margin: 0 0 8px;
+
+            color: var(--white);
+        }
+
+        .empty-state p {
+            margin: 0 0 20px;
+
+            color: var(--muted);
+        }
+
+
+        /* =====================================================
+           QUICK GRAMMAR
+        ===================================================== */
+
+        .level-learning-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 15px;
+        }
+
+        .level-learning-card {
+            min-height: 175px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+
+            padding: 24px;
+
+            border:
+                1px solid var(--border-light);
+
+            border-radius: var(--radius);
+
+            background: #101010;
+            color: var(--white);
+
+            text-align: left;
+
+            transition:
+                transform 0.2s ease,
+                border 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .level-learning-card:hover {
+            transform: translateY(-4px);
+
+            border-color: var(--gold);
+
+            background:
+                rgba(212, 175, 55, 0.06);
+        }
+
+        .quick-level {
+            margin-bottom: 13px;
+
+            color: var(--gold);
+
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+        }
+
+        .level-learning-card strong {
+            margin-bottom: 8px;
+
+            font-size: 1.1rem;
+        }
+
+        .level-learning-card > span:last-child {
+            color: var(--muted);
+
+            font-size: 0.84rem;
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           DAILY CHALLENGE
+        ===================================================== */
+
+        .grammar-challenge {
+            position: relative;
+            overflow: hidden;
+
+            margin-top: 50px;
+
+            padding: 40px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #161616,
+                    #080808
+                );
+
+            box-shadow: var(--shadow);
+        }
+
+        .grammar-challenge::after {
+            content: "DE";
+
+            position: absolute;
+
+            right: 30px;
+            bottom: -35px;
+
+            color:
+                rgba(212, 175, 55, 0.035);
+
+            font-size: 10rem;
+            font-weight: 900;
+
+            pointer-events: none;
+        }
+
+        .challenge-content {
+            position: relative;
+            z-index: 1;
+
+            max-width: 700px;
+        }
+
+        .grammar-challenge h2 {
+            margin: 0 0 10px;
+
+            color: var(--white);
+
+            font-size:
+                clamp(1.7rem, 3vw, 2.5rem);
+        }
+
+        .grammar-challenge p {
+            margin: 0;
+
+            color: var(--muted);
+
+            line-height: 1.7;
+        }
+
+        .challenge-progress {
+            margin: 25px 0;
+        }
+
+        .challenge-progress-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 9px;
+
+            color: var(--muted);
+
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .challenge-progress-top strong {
+            color: var(--gold);
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 9px;
+
+            overflow: hidden;
+
+            border-radius: 999px;
+
+            background: #262626;
+        }
+
+        .progress-bar {
+            height: 100%;
+
+            border-radius: inherit;
+
+            background: var(--gold);
+
+            transition: width 0.3s ease;
+        }
+
+
+        /* =====================================================
+           LEARNING NAVIGATION
+        ===================================================== */
+
+        .learning-navigation {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 15px;
+
+            margin-top: 45px;
+        }
+
+        .learning-nav-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            padding: 20px;
+
+            border:
+                1px solid var(--border-light);
+
+            border-radius: var(--radius);
+
+            background: #101010;
+
+            transition:
+                transform 0.2s ease,
+                border 0.2s ease;
+        }
+
+        .learning-nav-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--gold);
+        }
+
+        .learning-nav-card > span {
+            width: 45px;
+            height: 45px;
+
+            display: grid;
+            place-items: center;
+
+            flex-shrink: 0;
+
+            border-radius: 12px;
+
+            background:
+                rgba(212, 175, 55, 0.1);
+
+            font-size: 1.2rem;
+        }
+
+        .learning-nav-card strong {
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: var(--white);
+        }
+
+        .learning-nav-card small {
+            color: var(--muted);
+            font-size: 0.78rem;
+        }
+
+
+        /* =====================================================
+           GRAMMAR MODAL
+        ===================================================== */
+
+        .grammar-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .grammar-modal.open,
+        .grammar-modal.active {
+            display: flex;
+        }
+
+        .grammar-modal-overlay {
+            position: absolute;
+            inset: 0;
+
+            background:
+                rgba(0, 0, 0, 0.82);
+
+            backdrop-filter: blur(5px);
+        }
+
+        .grammar-modal-content {
+            position: relative;
+            z-index: 1;
+
+            width: min(760px, 100%);
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            padding: 35px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #171717,
+                    #080808
+                );
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.65);
+        }
+
+        .modal-close {
+            position: absolute;
+
+            top: 15px;
+            right: 15px;
+
+            width: 40px;
+            height: 40px;
+
+            display: grid;
+            place-items: center;
+
+            border: 0;
+            border-radius: 50%;
+
+            background: #242424;
+            color: var(--white);
+
+            font-size: 1.4rem;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .modal-level-badge {
+            display: inline-flex;
+
+            margin-bottom: 14px;
+
+            padding: 7px 12px;
+
+            border-radius: 8px;
+
+            background:
+                rgba(212, 175, 55, 0.12);
+
+            color: var(--gold);
+
+            font-size: 0.75rem;
+            font-weight: 900;
+        }
+
+        .grammar-modal-content h2 {
+            margin: 0 50px 10px 0;
+
+            color: var(--white);
+
+            font-size:
+                clamp(1.7rem, 4vw, 2.5rem);
+        }
+
+        .modal-description {
+            margin: 0 0 25px;
+
+            color: var(--muted);
+
+            line-height: 1.7;
+        }
+
+        .grammar-explanation,
+        .grammar-examples,
+        .grammar-practice {
+            margin-top: 18px;
+
+            padding: 20px;
+
+            border:
+                1px solid var(--border-light);
+
+            border-radius: 15px;
+
+            background: #101010;
+        }
+
+        .explanation-title,
+        .examples-title {
+            margin-bottom: 10px;
+
+            color: var(--gold);
+
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            font-size: 0.76rem;
+        }
+
+        .grammar-explanation p {
+            margin: 0;
+
+            color: var(--text);
+
+            line-height: 1.7;
+        }
+
+        .grammar-examples {
+            color: var(--text);
+        }
+
+        .grammar-examples > div:last-child {
+            display: grid;
+            gap: 9px;
+        }
+
+        .grammar-example,
+        .example-item {
+            padding: 11px 13px;
+
+            border-left:
+                3px solid var(--gold);
+
+            background: #181818;
+
+            border-radius: 5px;
+
+            color: var(--text);
+
+            line-height: 1.55;
+        }
+
+        .practice-label {
+            display: inline-block;
+
+            margin-bottom: 8px;
+
+            color: var(--gold);
+
+            font-size: 0.75rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .practice-question p {
+            margin: 0;
+
+            color: var(--white);
+
+            font-weight: 800;
+            line-height: 1.6;
+        }
+
+        .grammar-answers {
+            display: grid;
+            gap: 9px;
+
+            margin-top: 18px;
+        }
+
+        .grammar-answer,
+        .answer-btn {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border:
+                1px solid var(--border-light);
+
+            border-radius: 10px;
+
+            background: #181818;
+            color: var(--text);
+
+            text-align: left;
+
+            transition:
+                border 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .grammar-answer:hover,
+        .answer-btn:hover {
+            border-color: var(--gold);
+
+            background:
+                rgba(212, 175, 55, 0.08);
+        }
+
+        .grammar-answer.correct,
+        .answer-btn.correct {
+            border-color: var(--success);
+            background:
+                rgba(66, 211, 146, 0.1);
+        }
+
+        .grammar-answer.wrong,
+        .answer-btn.wrong {
+            border-color: var(--danger);
+            background:
+                rgba(255, 100, 100, 0.1);
+        }
+
+        .grammar-feedback {
+            margin-top: 15px;
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            background: #181818;
+
+            line-height: 1.55;
+        }
+
+        .modal-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            margin-top: 22px;
+        }
+
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        .grammar-message {
+            position: fixed;
+
+            left: 50%;
+            bottom: 25px;
+
+            z-index: 3000;
+
+            max-width: min(500px, 90%);
+
+            padding: 14px 20px;
+
+            border:
+                1px solid var(--gold);
+
+            border-radius: 12px;
+
+            background: #141414;
+            color: var(--white);
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.5);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform:
+                translate(-50%, 20px);
+
+            transition:
+                opacity 0.25s ease,
+                transform 0.25s ease,
+                visibility 0.25s ease;
+        }
+
+        .grammar-message.show {
+            opacity: 1;
+            visibility: visible;
+
+            transform:
+                translate(-50%, 0);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .grammar-stats {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .grammar-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .level-learning-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+
+        @media (max-width: 760px) {
+
+            .topbar {
+                padding: 10px 4%;
+            }
+
+            .brand-name {
+                display: none;
+            }
+
+            .topbar-right {
+                gap: 3px;
+            }
+
+            .topbar-link,
+            .logout-btn {
+                padding: 8px 9px;
+                font-size: 0.75rem;
+            }
+
+            .grammar-page {
+                width: 94%;
+                padding-top: 25px;
+            }
+
+            .grammar-hero {
+                min-height: auto;
+                padding: 35px 25px;
+                border-radius: 22px;
+            }
+
+            .grammar-hero h1 {
+                font-size: 2.35rem;
+            }
+
+            .grammar-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .grammar-filters {
+                width: 100%;
+            }
+
+            .grammar-filter {
+                flex: 1;
+            }
+
+            .learning-navigation {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 560px) {
+
+            .grammar-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .grammar-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .level-learning-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grammar-challenge {
+                padding: 28px 22px;
+            }
+
+            .grammar-modal {
+                padding: 10px;
+            }
+
+            .grammar-modal-content {
+                padding: 25px 18px;
+                border-radius: 18px;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .modal-actions .primary-btn,
+            .modal-actions .secondary-btn {
+                width: 100%;
+            }
+
+            .grammar-hero-actions {
+                flex-direction: column;
+            }
+
+            .grammar-hero-actions .primary-btn,
+            .grammar-hero-actions .secondary-btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         TOPBAR
+    ====================================================== -->
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <a
+                href="dashboard.html"
+                class="brand"
+            >
+
+                <img
+                    src="../assets/logo/logo.jpg"
+                    alt="Lingua Deutsch Connect"
+                    class="brand-logo"
+                >
+
+                <span class="brand-name">
+                    LINGUA DEUTSCH CONNECT
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <a
+                href="dashboard.html"
+                class="topbar-link"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="games.html"
+                class="topbar-link"
+            >
+                Games
+            </a>
+
+            <a
+                href="vocabulary.html"
+                class="topbar-link"
+            >
+                Vocabulary
+            </a>
+
+            <button
+                type="button"
+                id="logoutBtn"
+                class="logout-btn"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="grammar-page">
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="grammar-hero">
+
+            <div class="grammar-hero-content">
+
+                <span class="section-label">
+                    LDC LEARNING CENTER
+                </span>
+
+                <h1>
+                    Master German Grammar.
+                </h1>
+
+                <p>
+                    Learn German grammar step by step,
+                    from A1 basics to B2 structures.
+                </p>
+
+                <div class="grammar-hero-actions">
+
+                    <button
+                        type="button"
+                        id="randomGrammarBtn"
+                        class="primary-btn"
+                    >
+                        🎲 Random Topic
+                    </button>
+
+                    <a
+                        href="vocabulary.html"
+                        class="secondary-btn"
+                    >
+                        Build Vocabulary
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROGRESS / STATS
+        ================================================== -->
+
+        <section class="grammar-stats">
+
+            <div class="grammar-stat-card">
+
+                <span class="grammar-stat-icon">
+                    📚
+                </span>
+
+                <div>
+
+                    <span class="grammar-stat-label">
+                        Topics Studied
+                    </span>
+
+                    <strong
+                        id="topicsStudied"
+                        class="grammar-stat-value"
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="grammar-stat-card">
+
+                <span class="grammar-stat-icon">
+                    🧠
+                </span>
+
+                <div>
+
+                    <span class="grammar-stat-label">
+                        Exercises Completed
+                    </span>
+
+                    <strong
+                        id="grammarExercises"
+                        class="grammar-stat-value"
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="grammar-stat-card">
+
+                <span class="grammar-stat-icon">
+                    🔥
+                </span>
+
+                <div>
+
+                    <span class="grammar-stat-label">
+                        Grammar Streak
+                    </span>
+
+                    <strong
+                        id="grammarStreak"
+                        class="grammar-stat-value"
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="grammar-stat-card">
+
+                <span class="grammar-stat-icon">
+                    ⭐
+                </span>
+
+                <div>
+
+                    <span class="grammar-stat-label">
+                        Grammar XP
+                    </span>
+
+                    <strong
+                        id="grammarXp"
+                        class="grammar-stat-value"
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SEARCH + FILTERS
+        ================================================== -->
+
+        <section class="grammar-controls">
+
+            <div class="grammar-search">
+
+                <label
+                    for="grammarSearch"
+                    class="sr-only"
+                >
+                    Search grammar
+                </label>
+
+                <input
+                    type="search"
+                    id="grammarSearch"
+                    placeholder="Search grammar... e.g. Dativ, Passiv, Konjunktiv II"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="grammar-filters">
+
+                <button
+                    type="button"
+                    class="grammar-filter active"
+                    data-level="all"
+                >
+                    All
+                </button>
+
+                <button
+                    type="button"
+                    class="grammar-filter"
+                    data-level="A1"
+                >
+                    A1
+                </button>
+
+                <button
+                    type="button"
+                    class="grammar-filter"
+                    data-level="A2"
+                >
+                    A2
+                </button>
+
+                <button
+                    type="button"
+                    class="grammar-filter"
+                    data-level="B1"
+                >
+                    B1
+                </button>
+
+                <button
+                    type="button"
+                    class="grammar-filter"
+                    data-level="B2"
+                >
+                    B2
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             GRAMMAR TOPICS
+        ================================================== -->
+
+        <section class="grammar-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        GRAMMAR LIBRARY
+                    </span>
+
+                    <h2>
+                        Choose a topic
+                    </h2>
+
+                </div>
+
+                <span
+                    id="grammarTopicCount"
+                    class="topic-count"
+                >
+                    0 topics
+                </span>
+
+            </div>
+
+
+            <div
+                id="grammarGrid"
+                class="grammar-grid"
+            >
+                <!-- Topics inserted by grammar.js -->
+            </div>
+
+
+            <div
+                id="grammarEmptyState"
+                class="empty-state"
+                style="display: none;"
+            >
+
+                <div class="empty-icon">
+                    🔎
+                </div>
+
+                <h3>
+                    No grammar topics found
+                </h3>
+
+                <p>
+                    Try another search or choose a different level.
+                </p>
+
+                <button
+                    type="button"
+                    id="clearGrammarSearch"
+                    class="secondary-btn"
+                >
+                    Clear Filters
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             QUICK GRAMMAR
+        ================================================== -->
+
+        <section class="quick-grammar-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        QUICK PRACTICE
+                    </span>
+
+                    <h2>
+                        Grammar by level
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="level-learning-grid">
+
+                <button
+                    type="button"
+                    class="level-learning-card"
+                    data-quick-level="A1"
+                >
+
+                    <span class="quick-level">
+                        A1
+                    </span>
+
+                    <strong>
+                        German Basics
+                    </strong>
+
+                    <span>
+                        Articles, verbs, sentence structure
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="level-learning-card"
+                    data-quick-level="A2"
+                >
+
+                    <span class="quick-level">
+                        A2
+                    </span>
+
+                    <strong>
+                        Build Your Grammar
+                    </strong>
+
+                    <span>
+                        Cases, conjunctions, reflexive verbs
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="level-learning-card"
+                    data-quick-level="B1"
+                >
+
+                    <span class="quick-level">
+                        B1
+                    </span>
+
+                    <strong>
+                        Communicate Better
+                    </strong>
+
+                    <span>
+                        Complex sentences and useful structures
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="level-learning-card"
+                    data-quick-level="B2"
+                >
+
+                    <span class="quick-level">
+                        B2
+                    </span>
+
+                    <strong>
+                        Advanced German
+                    </strong>
+
+                    <span>
+                        Passiv, Konjunktiv II, advanced structures
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             DAILY CHALLENGE
+        ================================================== -->
+
+        <section class="grammar-challenge">
+
+            <div class="challenge-content">
+
+                <span class="section-label">
+                    DAILY GRAMMAR CHALLENGE
+                </span>
+
+                <h2>
+                    One grammar topic a day.
+                </h2>
+
+                <p>
+                    Practice consistently and turn German
+                    grammar into a habit.
+                </p>
+
+                <div class="challenge-progress">
+
+                    <div class="challenge-progress-top">
+
+                        <span>
+                            Today's progress
+                        </span>
+
+                        <strong id="grammarDailyText">
+                            0 / 1
+                        </strong>
+
+                    </div>
+
+                    <div class="progress-track">
+
+                        <div
+                            id="grammarDailyBar"
+                            class="progress-bar"
+                            style="width: 0%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="dailyGrammarBtn"
+                    class="primary-btn"
+                >
+                    Start Today's Challenge
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FOOTER NAVIGATION
+        ================================================== -->
+
+        <section class="learning-navigation">
+
+            <a
+                href="dashboard.html"
+                class="learning-nav-card"
+            >
+
+                <span>
+                    🏠
+                </span>
+
+                <div>
+
+                    <strong>
+                        Dashboard
+                    </strong>
+
+                    <small>
+                        Back to your learning center
+                    </small>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="vocabulary.html"
+                class="learning-nav-card"
+            >
+
+                <span>
+                    📖
+                </span>
+
+                <div>
+
+                    <strong>
+                        Vocabulary
+                    </strong>
+
+                    <small>
+                        Learn new German words
+                    </small>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="games.html"
+                class="learning-nav-card"
+            >
+
+                <span>
+                    🎮
+                </span>
+
+                <div>
+
+                    <strong>
+                        Games
+                    </strong>
+
+                    <small>
+                        Practice while having fun
+                    </small>
+
+                </div>
+
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         GRAMMAR MODAL
+    ====================================================== -->
+
+    <div
+        id="grammarModal"
+        class="grammar-modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="grammar-modal-overlay"
+            id="grammarModalOverlay"
+        ></div>
+
+
+        <div
+            class="grammar-modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="grammarModalTitle"
+        >
+
+            <button
+                type="button"
+                id="closeGrammarModal"
+                class="modal-close"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+
+            <div class="modal-level-badge">
+
+                <span id="modalGrammarLevel">
+                    A1
+                </span>
+
+            </div>
+
+
+            <h2 id="grammarModalTitle">
+                Grammar Topic
+            </h2>
+
+
+            <p
+                id="grammarModalDescription"
+                class="modal-description"
+            >
+                Learn this German grammar topic.
+            </p>
+
+
+            <div class="grammar-explanation">
+
+                <div class="explanation-title">
+                    Rule
+                </div>
+
+                <p id="grammarModalRule">
+                    Grammar rule.
+                </p>
+
+            </div>
+
+
+            <div class="grammar-examples">
+
+                <div class="examples-title">
+                    Examples
+                </div>
+
+                <div id="grammarModalExamples">
+                    <!-- Examples inserted by grammar.js -->
+                </div>
+
+            </div>
+
+
+            <div class="grammar-practice">
+
+                <div class="practice-question">
+
+                    <span class="practice-label">
+                        Quick Check
+                    </span>
+
+                    <p id="grammarQuestion">
+                        Practice question.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="grammarAnswers"
+                    class="grammar-answers"
+                >
+                    <!-- Answers inserted by grammar.js -->
+                </div>
+
+            </div>
+
+
+            <div
+                id="grammarFeedback"
+                class="grammar-feedback"
+                style="display: none;"
+            ></div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    id="nextGrammarQuestion"
+                    class="primary-btn"
+                >
+                    Next Question
+                </button>
+
+                <button
+                    type="button"
+                    id="markGrammarComplete"
+                    class="secondary-btn"
+                >
+                    ✓ Mark Topic Complete
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MESSAGE
+    ====================================================== -->
+
+    <div
+        id="grammarMessage"
+        class="grammar-message"
+        aria-live="polite"
+    ></div>
+
+
+    <!-- =====================================================
+         SCRIPT
+    ====================================================== -->
+
+    <script src="../js/grammar.js"></script>
+
+</body>
+
+</html>

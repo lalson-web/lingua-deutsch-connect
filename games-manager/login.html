@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Games Manager | LINGUA DEUTSCH CONNECT</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/games-manager.css"
+    >
+</head>
+
+<body>
+
+    <main class="gm-login-page">
+
+        <section class="gm-login-card">
+
+            <div class="gm-brand">
+
+                <div class="gm-logo">
+                    🎮
+                </div>
+
+                <div>
+                    <h1>
+                        LINGUA DEUTSCH CONNECT
+                    </h1>
+
+                    <p>
+                        Games Manager
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="gm-login-header">
+
+                <span class="gm-badge">
+                    PRIVATE MANAGEMENT
+                </span>
+
+                <h2>
+                    Welcome back
+                </h2>
+
+                <p>
+                    Sign in to manage German learning games,
+                    questions, XP and game statistics.
+                </p>
+
+            </div>
+
+
+            <form id="gameManagerLoginForm">
+
+                <div class="gm-field">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="gm-field">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="gm-password-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="gm-password-toggle"
+                            aria-label="Show password"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="loginMessage"
+                    class="gm-message"
+                    hidden
+                ></div>
+
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                    class="gm-login-button"
+                >
+                    <span id="loginButtonText">
+                        Sign In
+                    </span>
+                </button>
+
+            </form>
+
+
+            <div class="gm-login-footer">
+
+                <span>
+                    🔒 Private Games Management Area
+                </span>
+
+                <span>
+                    © 2026 Lingua Deutsch Connect
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="./js/login.js"></script>
+
+</body>
+
+</html>

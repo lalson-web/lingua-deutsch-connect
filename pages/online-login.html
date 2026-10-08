@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Log in to your LINGUA DEUTSCH CONNECT online learning account."
+    >
+
+    <title>Online Learning Login | LINGUA DEUTSCH CONNECT</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f1d675;
+
+            --black: #050505;
+            --dark: #0d0d0d;
+            --card: #111111;
+
+            --border: rgba(212, 175, 55, 0.22);
+
+            --text: #ffffff;
+            --muted: #a5a5a5;
+
+            --danger: #ff5c5c;
+            --success: #42d392;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+
+                radial-gradient(
+                    circle at top right,
+                    rgba(212, 175, 55, 0.10),
+                    transparent 35%
+                ),
+
+                radial-gradient(
+                    circle at bottom left,
+                    rgba(212, 175, 55, 0.06),
+                    transparent 30%
+                ),
+
+                var(--black);
+
+            color: var(--text);
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px 16px;
+
+        }
+
+
+        /* =====================================================
+           MAIN CONTAINER
+        ===================================================== */
+
+        .page {
+
+            width: 100%;
+
+            max-width: 1050px;
+
+            display: grid;
+
+            grid-template-columns:
+                1.05fr
+                0.95fr;
+
+            background: var(--card);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 24px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 30px 80px
+                rgba(0, 0, 0, 0.55);
+
+        }
+
+
+        /* =====================================================
+           BRAND PANEL
+        ===================================================== */
+
+        .brand-panel {
+
+            position: relative;
+
+            min-height: 650px;
+
+            padding: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    #151515,
+                    #070707
+                );
+
+            overflow: hidden;
+
+        }
+
+
+        .brand-panel::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+
+            height: 350px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.18);
+
+            top: -140px;
+
+            right: -140px;
+
+        }
+
+
+        .brand-panel::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 240px;
+
+            height: 240px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.12);
+
+            bottom: -100px;
+
+            left: -100px;
+
+        }
+
+
+        .brand-content,
+        .brand-footer {
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
+        .logo-mark {
+
+            width: 62px;
+
+            height: 62px;
+
+            border-radius: 17px;
+
+            background: var(--gold);
+
+            color: #000;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 27px;
+
+            font-weight: 900;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 12px 35px
+                rgba(212, 175, 55, 0.18);
+
+        }
+
+
+        .brand-name {
+
+            font-size: 25px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .brand-name span {
+
+            color: var(--gold);
+
+        }
+
+
+        .brand-title {
+
+            font-size: 44px;
+
+            line-height: 1.08;
+
+            font-weight: 900;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .brand-title span {
+
+            color: var(--gold);
+
+        }
+
+
+        .brand-description {
+
+            color: var(--muted);
+
+            line-height: 1.7;
+
+            max-width: 430px;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =====================================================
+           FEATURES
+        ===================================================== */
+
+        .features {
+
+            margin-top: 38px;
+
+            display: grid;
+
+            gap: 16px;
+
+        }
+
+
+        .feature {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            color: #dddddd;
+
+            font-size: 14px;
+
+        }
+
+
+        .feature-icon {
+
+            width: 31px;
+
+            height: 31px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background:
+                rgba(212, 175, 55, 0.10);
+
+            border:
+                1px solid
+                rgba(212, 175, 55, 0.22);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: var(--gold);
+
+            font-weight: bold;
+
+        }
+
+
+        .brand-footer {
+
+            color: #777;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =====================================================
+           FORM PANEL
+        ===================================================== */
+
+        .form-panel {
+
+            padding: 55px 50px;
+
+            background: #0b0b0b;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+        }
+
+
+        .back-link {
+
+            display: inline-block;
+
+            margin-bottom: 35px;
+
+            color: #777;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            transition: 0.2s ease;
+
+        }
+
+
+        .back-link:hover {
+
+            color: var(--gold);
+
+        }
+
+
+        .form-header {
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .form-header h1 {
+
+            font-size: 31px;
+
+            margin-bottom: 9px;
+
+        }
+
+
+        .form-header p {
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        .message {
+
+            display: none;
+
+            padding: 13px 14px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .message.show {
+
+            display: block;
+
+        }
+
+
+        .message.error {
+
+            color: #ffb1b1;
+
+            background:
+                rgba(255, 92, 92, 0.08);
+
+            border:
+                1px solid
+                rgba(255, 92, 92, 0.20);
+
+        }
+
+
+        .message.success {
+
+            color: #9ff0c8;
+
+            background:
+                rgba(66, 211, 146, 0.08);
+
+            border:
+                1px solid
+                rgba(66, 211, 146, 0.20);
+
+        }
+
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .form {
+
+            display: grid;
+
+            gap: 19px;
+
+        }
+
+
+        .field {
+
+            display: grid;
+
+            gap: 8px;
+
+        }
+
+
+        .field label {
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #dddddd;
+
+        }
+
+
+        .field input {
+
+            width: 100%;
+
+            height: 52px;
+
+            padding: 0 15px;
+
+            border-radius: 11px;
+
+            border:
+                1px solid
+                #292929;
+
+            outline: none;
+
+            background: #151515;
+
+            color: #fff;
+
+            font-size: 14px;
+
+            transition: 0.2s ease;
+
+        }
+
+
+        .field input::placeholder {
+
+            color: #666;
+
+        }
+
+
+        .field input:focus {
+
+            border-color:
+                var(--gold);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(212, 175, 55, 0.08);
+
+        }
+
+
+        /* =====================================================
+           PASSWORD
+        ===================================================== */
+
+        .password-wrapper {
+
+            position: relative;
+
+        }
+
+
+        .password-wrapper input {
+
+            padding-right: 75px;
+
+        }
+
+
+        .toggle-password {
+
+            position: absolute;
+
+            right: 10px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            border: 0;
+
+            background: transparent;
+
+            color: var(--gold);
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            padding: 7px;
+
+        }
+
+
+        .toggle-password:hover {
+
+            color:
+                var(--gold-light);
+
+        }
+
+
+        /* =====================================================
+           LOGIN OPTIONS
+        ===================================================== */
+
+        .login-options {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-top: -3px;
+
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #777;
+
+            font-size: 12px;
+
+            cursor: pointer;
+
+        }
+
+
+        .remember input {
+
+            accent-color:
+                var(--gold);
+
+            cursor: pointer;
+
+        }
+
+
+        .forgot-link {
+
+            color: var(--gold);
+
+            font-size: 12px;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+        }
+
+
+        .forgot-link:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =====================================================
+           SUBMIT BUTTON
+        ===================================================== */
+
+        .submit-btn {
+
+            width: 100%;
+
+            height: 53px;
+
+            border: 0;
+
+            border-radius: 11px;
+
+            background: var(--gold);
+
+            color: #050505;
+
+            font-size: 14px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition:
+
+                transform 0.2s ease,
+
+                background 0.2s ease,
+
+                box-shadow 0.2s ease;
+
+            margin-top: 3px;
+
+        }
+
+
+        .submit-btn:hover {
+
+            background:
+                var(--gold-light);
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(212, 175, 55, 0.14);
+
+        }
+
+
+        .submit-btn:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+        }
+
+
+        /* =====================================================
+           REGISTER LINK
+        ===================================================== */
+
+        .register-link {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #777;
+
+            font-size: 13px;
+
+        }
+
+
+        .register-link a {
+
+            color: var(--gold);
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+        }
+
+
+        .register-link a:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =====================================================
+           SECURITY NOTE
+        ===================================================== */
+
+        .security-note {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            margin-top: 25px;
+
+            color: #555;
+
+            font-size: 11px;
+
+        }
+
+
+        .security-icon {
+
+            color: var(--gold);
+
+            font-size: 12px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .page {
+
+                grid-template-columns: 1fr;
+
+                max-width: 600px;
+
+            }
+
+
+            .brand-panel {
+
+                min-height: auto;
+
+                padding: 40px 35px;
+
+            }
+
+
+            .brand-title {
+
+                font-size: 36px;
+
+            }
+
+
+            .brand-footer {
+
+                margin-top: 40px;
+
+            }
+
+
+            .form-panel {
+
+                padding: 40px 35px;
+
+            }
+
+        }
+
+
+        @media (max-width: 520px) {
+
+            body {
+
+                padding: 15px;
+
+            }
+
+
+            .page {
+
+                border-radius: 18px;
+
+            }
+
+
+            .brand-panel,
+            .form-panel {
+
+                padding: 28px 25px;
+
+            }
+
+
+            .brand-title {
+
+                font-size: 30px;
+
+            }
+
+
+            .brand-name {
+
+                font-size: 21px;
+
+            }
+
+
+            .brand-description {
+
+                font-size: 14px;
+
+            }
+
+
+            .login-options {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="page">
+
+
+        <!-- =================================================
+             BRAND PANEL
+        ================================================== -->
+
+        <section class="brand-panel">
+
+
+            <div class="brand-content">
+
+
+                <div class="logo-mark">
+
+                    L
+
+                </div>
+
+
+                <div class="brand-name">
+
+                    LINGUA DEUTSCH
+                    <span>CONNECT</span>
+
+                </div>
+
+
+                <h2 class="brand-title">
+
+                    Welcome<br>
+
+                    <span>back.</span>
+
+                </h2>
+
+
+                <p class="brand-description">
+
+                    Continue your German learning journey
+                    with LINGUA DEUTSCH CONNECT Online Learning.
+
+                </p>
+
+
+                <div class="features">
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+
+                            ✓
+
+                        </div>
+
+                        <span>
+                            Continue your lessons
+                        </span>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+
+                            ✓
+
+                        </div>
+
+                        <span>
+                            Access your learning materials
+                        </span>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+
+                            ✓
+
+                        </div>
+
+                        <span>
+                            Track your progress
+                        </span>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+
+                            ✓
+
+                        </div>
+
+                        <span>
+                            Learn from anywhere
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <div class="brand-footer">
+
+                Lerne Deutsch. Sprich Deutsch. Lebe Deutsch.
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             FORM PANEL
+        ================================================== -->
+
+        <section class="form-panel">
+
+
+            <a
+                href="../index.html"
+                class="back-link"
+            >
+
+                ← Back to LDC
+
+            </a>
+
+
+            <div class="form-header">
+
+
+                <h1>
+
+                    Welcome back
+
+                </h1>
+
+
+                <p>
+
+                    Log in to your LDC Online Learning account.
+
+                </p>
+
+
+            </div>
+
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+
+            <form
+                id="loginForm"
+                class="form"
+                novalidate
+            >
+
+
+                <!-- =========================================
+                     EMAIL
+                ========================================== -->
+
+                <div class="field">
+
+
+                    <label for="email">
+
+                        Email address *
+
+                    </label>
+
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        maxlength="255"
+                        required
+                    >
+
+
+                </div>
+
+
+                <!-- =========================================
+                     PASSWORD
+                ========================================== -->
+
+                <div class="field">
+
+
+                    <label for="password">
+
+                        Password *
+
+                    </label>
+
+
+                    <div class="password-wrapper">
+
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            maxlength="128"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            id="togglePassword"
+                        >
+
+                            Show
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =========================================
+                     OPTIONS
+                ========================================== -->
+
+                <div class="login-options">
+
+
+                    <label class="remember">
+
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+
+
+                        <span>
+
+                            Remember me
+
+                        </span>
+
+
+                    </label>
+
+
+                    <a
+                        href="#"
+                        class="forgot-link"
+                        id="forgotPassword"
+                    >
+
+                        Forgot password?
+
+                    </a>
+
+
+                </div>
+
+
+                <!-- =========================================
+                     SUBMIT
+                ========================================== -->
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                    id="submitBtn"
+                >
+
+                    Log In
+
+                </button>
+
+
+            </form>
+
+
+            <div class="register-link">
+
+
+                Don't have an account?
+
+
+                <a
+                    href="online-register.html"
+                >
+
+                    Create one
+
+                </a>
+
+
+            </div>
+
+
+            <div class="security-note">
+
+                <span class="security-icon">
+
+                    🔒
+
+                </span>
+
+                <span>
+
+                    Your account is protected by secure authentication.
+
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <script>
+
+        "use strict";
+
+
+        /* =====================================================
+           CONFIGURATION
+        ===================================================== */
+
+        const API_URL =
+            "http://localhost:5000/api";
+
+
+        const DASHBOARD_PAGE =
+            "online-dashboard.html";
+
+
+        const TOKEN_KEY =
+            "ldc_online_student_token";
+
+
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
+
+        const loginForm =
+            document.getElementById(
+                "loginForm"
+            );
+
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        const submitBtn =
+            document.getElementById(
+                "submitBtn"
+            );
+
+
+        const email =
+            document.getElementById(
+                "email"
+            );
+
+
+        const password =
+            document.getElementById(
+                "password"
+            );
+
+
+        const rememberMe =
+            document.getElementById(
+                "rememberMe"
+            );
+
+
+        const forgotPassword =
+            document.getElementById(
+                "forgotPassword"
+            );
+
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        function showMessage(
+            text,
+            type = "error"
+        ) {
+
+            message.textContent =
+                text;
+
+            message.className =
+                `message show ${type}`;
+
+        }
+
+
+        function clearMessage() {
+
+            message.textContent =
+                "";
+
+            message.className =
+                "message";
+
+        }
+
+
+        /* =====================================================
+           EMAIL VALIDATION
+        ===================================================== */
+
+        function validEmail(
+            value
+        ) {
+
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                .test(value);
+
+        }
+
+
+        /* =====================================================
+           PASSWORD VISIBILITY
+        ===================================================== */
+
+        const togglePassword =
+            document.getElementById(
+                "togglePassword"
+            );
+
+
+        togglePassword.addEventListener(
+            "click",
+            () => {
+
+                const isPassword =
+                    password.type ===
+                    "password";
+
+
+                password.type =
+                    isPassword
+                        ? "text"
+                        : "password";
+
+
+                togglePassword.textContent =
+                    isPassword
+                        ? "Hide"
+                        : "Show";
+
+            }
+        );
+
+
+        /* =====================================================
+           FORGOT PASSWORD
+        ===================================================== */
+
+        forgotPassword.addEventListener(
+            "click",
+            (event) => {
+
+                event.preventDefault();
+
+
+                showMessage(
+                    "Please contact LINGUA DEUTSCH CONNECT to reset your password."
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           LOGIN
+        ===================================================== */
+
+        loginForm.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
+
+                clearMessage();
+
+
+                const emailValue =
+                    email.value
+                        .trim()
+                        .toLowerCase();
+
+
+                const passwordValue =
+                    password.value;
+
+
+                /* =============================================
+                   VALIDATION
+                ============================================= */
+
+                if (
+                    !validEmail(
+                        emailValue
+                    )
+                ) {
+
+                    showMessage(
+                        "Please enter a valid email address."
+                    );
+
+                    email.focus();
+
+                    return;
+
+                }
+
+
+                if (
+                    !passwordValue
+                ) {
+
+                    showMessage(
+                        "Please enter your password."
+                    );
+
+                    password.focus();
+
+                    return;
+
+                }
+
+
+                if (
+                    passwordValue.length < 8
+                ) {
+
+                    showMessage(
+                        "Password must contain at least 8 characters."
+                    );
+
+                    password.focus();
+
+                    return;
+
+                }
+
+
+                /* =============================================
+                   LOADING
+                ============================================= */
+
+                submitBtn.disabled =
+                    true;
+
+                submitBtn.textContent =
+                    "Logging in...";
+
+
+                try {
+
+
+                    const response =
+                        await fetch(
+                            `${API_URL}/online/auth/login`,
+                            {
+
+                                method: "POST",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/json"
+
+                                },
+
+                                body:
+                                    JSON.stringify(
+                                        {
+
+                                            email:
+                                                emailValue,
+
+                                            password:
+                                                passwordValue
+
+                                        }
+                                    )
+
+                            }
+                        );
+
+
+                    let result;
+
+
+                    try {
+
+                        result =
+                            await response.json();
+
+                    } catch {
+
+                        result = {
+
+                            success: false,
+
+                            message:
+                                "The server returned an invalid response."
+
+                        };
+
+                    }
+
+
+                    if (
+                        !response.ok
+                    ) {
+
+                        throw new Error(
+
+                            result.message ||
+
+                            "Login failed. Please check your email and password."
+
+                        );
+
+                    }
+
+
+                    /* =========================================
+                       TOKEN
+                    ========================================== */
+
+                    const token =
+                        result.token ||
+                        result.accessToken;
+
+
+                    if (
+                        !token
+                    ) {
+
+                        throw new Error(
+                            "Login succeeded, but no authentication token was returned."
+                        );
+
+                    }
+
+
+                    /*
+                     * Clear any previous token first.
+                     */
+
+                    localStorage.removeItem(
+                        TOKEN_KEY
+                    );
+
+
+                    /*
+                     * Save the new online student token.
+                     */
+
+                    localStorage.setItem(
+                        TOKEN_KEY,
+                        token
+                    );
+
+
+                    /* =========================================
+                       SUCCESS
+                    ========================================== */
+
+                    showMessage(
+                        result.message ||
+                        "Login successful. Welcome back!",
+                        "success"
+                    );
+
+
+                    submitBtn.textContent =
+                        "Login Successful ✓";
+
+
+                    /* =========================================
+                       REDIRECT
+                    ========================================== */
+
+                    setTimeout(
+                        () => {
+
+                            window.location.href =
+                                DASHBOARD_PAGE;
+
+                        },
+                        700
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Online login error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        error.message ||
+                        "Something went wrong while logging in."
+                    );
+
+
+                    submitBtn.disabled =
+                        false;
+
+                    submitBtn.textContent =
+                        "Log In";
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           REMEMBER ME
+        ===================================================== */
+
+        /*
+         * We intentionally keep the authentication token in
+         * localStorage because the Online Learning dashboard
+         * already uses the same storage key.
+         *
+         * The checkbox is therefore only a user preference
+         * indicator for now. It does not create a second token
+         * storage system.
+         */
+
+        rememberMe.addEventListener(
+            "change",
+            () => {
+
+                localStorage.setItem(
+                    "ldc_online_remember_me",
+                    rememberMe.checked
+                        ? "true"
+                        : "false"
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           RESTORE REMEMBER PREFERENCE
+        ===================================================== */
+
+        const savedRememberPreference =
+            localStorage.getItem(
+                "ldc_online_remember_me"
+            );
+
+
+        if (
+            savedRememberPreference ===
+            "true"
+        ) {
+
+            rememberMe.checked =
+                true;
+
+        }
+
+
+        /* =====================================================
+           PAGE INITIALIZATION
+        ===================================================== */
+
+        function initialize() {
+
+            /*
+             * If a student already has an online token,
+             * don't force them to log in again.
+             */
+
+            const existingToken =
+                localStorage.getItem(
+                    TOKEN_KEY
+                );
+
+
+            if (
+                existingToken
+            ) {
+
+                /*
+                 * We don't immediately redirect here.
+                 * This allows the student to intentionally
+                 * return to the login page if needed.
+                 */
+
+            }
+
+
+            email.focus();
+
+        }
+
+
+        initialize();
+
+    </script>
+
+</body>
+
+</html>

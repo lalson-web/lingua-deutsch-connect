@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LDC Online Admin Login</title>
+
+    <meta
+        name="description"
+        content="Lingua Deutsch Connect Online Learning Admin Login"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .logo-area {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-area h1 {
+            color: #d4af37;
+            font-size: 28px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .logo-area p {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .login-card {
+            background: #111;
+            border: 1px solid #2a2a2a;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .5);
+        }
+
+        .login-card h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 15px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            background: #080808;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: .2s;
+        }
+
+        input:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, .12);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #d4af37;
+            color: #000;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            opacity: .92;
+        }
+
+        button:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            display: none;
+            margin-bottom: 20px;
+            padding: 12px 14px;
+            border-radius: 9px;
+            font-size: 14px;
+        }
+
+        .message.error {
+            display: block;
+            background: rgba(220, 53, 69, .12);
+            border: 1px solid rgba(220, 53, 69, .3);
+            color: #ff7b86;
+        }
+
+        .message.success {
+            display: block;
+            background: rgba(40, 167, 69, .12);
+            border: 1px solid rgba(40, 167, 69, .3);
+            color: #75e58b;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 22px;
+        }
+
+        .back-link a {
+            color: #d4af37;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        .security-note {
+            text-align: center;
+            margin-top: 22px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        @media (max-width: 500px) {
+
+            .login-card {
+                padding: 25px 20px;
+            }
+
+            .logo-area h1 {
+                font-size: 23px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <main class="login-container">
+
+        <div class="logo-area">
+
+            <h1>LINGUA DEUTSCH CONNECT</h1>
+
+            <p>Online Learning Administration</p>
+
+        </div>
+
+
+        <section class="login-card">
+
+            <h2>Online Admin Login</h2>
+
+            <p class="subtitle">
+                Sign in to manage the online learning platform.
+            </p>
+
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter admin email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                >
+                    Login
+                </button>
+
+            </form>
+
+
+            <div class="back-link">
+
+                <a href="index.html">
+                    ← Back to LDC
+                </a>
+
+            </div>
+
+
+            <div class="security-note">
+
+                Authorized online administrators only.
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        "use strict";
+
+
+        /* =========================================================
+           CONFIGURATION
+        ========================================================= */
+
+        const API_URL = "http://localhost:5000/api";
+
+        const TOKEN_KEY = "ldc_online_admin_token";
+
+
+        /* =========================================================
+           ELEMENTS
+        ========================================================= */
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const emailInput =
+            document.getElementById("email");
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const loginButton =
+            document.getElementById("loginButton");
+
+        const message =
+            document.getElementById("message");
+
+
+        /* =========================================================
+           MESSAGE
+        ========================================================= */
+
+        function showMessage(text, type = "error") {
+
+            message.textContent = text;
+
+            message.className =
+                `message ${type}`;
+
+        }
+
+
+        function hideMessage() {
+
+            message.textContent = "";
+
+            message.className = "message";
+
+        }
+
+
+        /* =========================================================
+           LOGIN
+        ========================================================= */
+
+        loginForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+                hideMessage();
+
+                const email =
+                    emailInput.value.trim().toLowerCase();
+
+                const password =
+                    passwordInput.value;
+
+
+                if (!email || !password) {
+
+                    showMessage(
+                        "Please enter your email and password."
+                    );
+
+                    return;
+
+                }
+
+
+                loginButton.disabled = true;
+
+                loginButton.textContent =
+                    "Logging in...";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `${API_URL}/online-admin/login`,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    email,
+                                    password
+                                })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.message ||
+                            data.error ||
+                            "Login failed."
+                        );
+
+                    }
+
+
+                    if (!data.token) {
+
+                        throw new Error(
+                            "Login succeeded but no authentication token was returned."
+                        );
+
+                    }
+
+
+                    /*
+                     * Save the online-admin JWT.
+                     */
+
+                    localStorage.setItem(
+                        TOKEN_KEY,
+                        data.token
+                    );
+
+
+                    showMessage(
+                        "Login successful. Redirecting...",
+                        "success"
+                    );
+
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "online-admin-dashboard.html";
+
+                        },
+                        700
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Online admin login error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        error.message ||
+                        "Unable to log in. Please try again."
+                    );
+
+
+                } finally {
+
+                    loginButton.disabled = false;
+
+                    loginButton.textContent =
+                        "Login";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           CHECK EXISTING LOGIN
+        ========================================================= */
+
+        const existingToken =
+            localStorage.getItem(TOKEN_KEY);
+
+
+        if (existingToken) {
+
+            /*
+             * We don't automatically redirect here.
+             * This allows the admin to deliberately open
+             * the login page again.
+             */
+
+        }
+
+    </script>
+
+</body>
+
+</html>

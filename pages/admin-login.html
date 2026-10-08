@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        LDC Admin Login
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/auth.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="auth-navbar">
+
+    <div class="auth-navbar-inner">
+
+
+        <!-- LDC LOGO -->
+
+        <a
+            href="../index.html"
+            class="auth-logo"
+            aria-label="LINGUA DEUTSCH CONNECT Home"
+        >
+
+            <img
+                src="../assets/logo/logo.jpg"
+                alt="LINGUA DEUTSCH CONNECT"
+            >
+
+        </a>
+
+
+
+        <!-- BACK TO STUDENT LOGIN -->
+
+        <a
+            href="login.html"
+            class="back-home"
+        >
+
+            ← Back to Student Login
+
+        </a>
+
+
+    </div>
+
+</header>
+
+
+
+<main class="auth-page">
+
+    <section class="auth-card">
+
+
+        <!-- ADMIN HEADER -->
+
+        <div class="auth-header">
+
+            <div class="auth-icon">
+
+                🔐
+
+            </div>
+
+
+            <span class="auth-label">
+
+                LDC ADMIN
+
+            </span>
+
+
+            <h1>
+
+                Admin Login
+
+            </h1>
+
+
+            <p>
+
+                Manage students, courses and access codes.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- ADMIN LOGIN FORM -->
+
+        <form
+            id="adminLoginForm"
+            class="auth-form"
+        >
+
+
+            <div class="form-group">
+
+                <label for="adminEmail">
+
+                    Admin email
+
+                </label>
+
+
+                <input
+                    type="email"
+                    id="adminEmail"
+                    placeholder="Admin email"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="adminPassword">
+
+                    Password
+
+                </label>
+
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="adminPassword"
+                        placeholder="Admin password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="toggleAdminPassword"
+                        aria-label="Show password"
+                    >
+
+                        Show
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                class="form-message"
+                id="adminMessage"
+                role="alert"
+                aria-live="polite"
+                hidden
+            ></div>
+
+
+
+            <button
+                type="submit"
+                class="auth-primary-btn"
+                id="adminLoginBtn"
+            >
+
+                <span>
+
+                    Login to Admin
+
+                </span>
+
+
+                <span aria-hidden="true">
+
+                    →
+
+                </span>
+
+            </button>
+
+
+        </form>
+
+
+    </section>
+
+</main>
+
+
+
+<footer class="auth-footer">
+
+    <p>
+
+        © 2026 LINGUA DEUTSCH CONNECT.
+
+    </p>
+
+</footer>
+
+
+
+<script src="../js/admin.js"></script>
+
+
+<script>
+    /* Admin password visibility */
+
+    const toggleAdminPassword =
+        document.getElementById("toggleAdminPassword");
+
+    const adminPassword =
+        document.getElementById("adminPassword");
+
+    if (toggleAdminPassword && adminPassword) {
+
+        toggleAdminPassword.addEventListener("click", () => {
+
+            const isPassword =
+                adminPassword.type === "password";
+
+            adminPassword.type =
+                isPassword ? "text" : "password";
+
+            toggleAdminPassword.textContent =
+                isPassword ? "Hide" : "Show";
+
+            toggleAdminPassword.setAttribute(
+                "aria-label",
+                isPassword ? "Hide password" : "Show password"
+            );
+
+        });
+
+    }
+</script>
+
+
+</body>
+
+</html>

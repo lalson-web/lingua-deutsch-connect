@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Take the LINGUA DEUTSCH CONNECT German level test and discover your estimated German level from A1 to B2."
+    >
+
+    <meta
+        name="author"
+        content="LINGUA DEUTSCH CONNECT"
+    >
+
+    <meta
+        property="og:title"
+        content="German Level Test | LINGUA DEUTSCH CONNECT"
+    >
+
+    <meta
+        property="og:description"
+        content="Discover your estimated German level from A1 to B2."
+    >
+
+    <meta
+        property="og:type"
+        content="website"
+    >
+
+    <title>
+        German Level Test | LINGUA DEUTSCH CONNECT
+    </title>
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         LEVEL TEST CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/level-test.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="test-navbar">
+
+    <div class="navbar-inner">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="../index.html"
+            class="test-logo"
+            aria-label="LINGUA Deutsch Connect Home"
+        >
+
+            <img
+                src="../assets/logo/logo.jpg"
+                alt="LINGUA DEUTSCH CONNECT"
+            >
+
+        </a>
+
+
+        <!-- BACK TO HOMEPAGE -->
+
+        <a
+            href="../index.html"
+            class="back-link"
+        >
+            ← Back to LDC
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<section
+    class="test-intro"
+    id="intro"
+>
+
+    <div class="intro-content">
+
+
+        <!-- LABEL -->
+
+        <div class="intro-label">
+            LINGUA DEUTSCH CONNECT · LEVEL TEST
+        </div>
+
+
+        <!-- TITLE -->
+
+        <h1>
+
+            How good is your
+
+            <span>
+                German?
+            </span>
+
+        </h1>
+
+
+        <!-- DESCRIPTION -->
+
+        <p class="intro-description">
+
+            Discover your current German level
+            and find the course that fits you best.
+
+        </p>
+
+
+
+        <!-- TEST INFORMATION -->
+
+        <div class="test-info">
+
+
+            <div class="info-card">
+
+                <strong>
+                    20
+                </strong>
+
+                <span>
+                    Questions
+                </span>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <strong>
+                    A1–B2
+                </strong>
+
+                <span>
+                    Levels
+                </span>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <strong>
+                    10–15
+                </strong>
+
+                <span>
+                    Minutes
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- INFORMATION NOTE -->
+
+        <div class="test-note">
+
+            <span>
+                ⓘ
+            </span>
+
+            <p>
+                This test gives you an estimated level.
+                Your official level can be confirmed
+                by LINGUA DEUTSCH CONNECT.
+            </p>
+
+        </div>
+
+
+
+        <!-- START BUTTON -->
+
+        <button
+            class="primary-btn"
+            id="startTestBtn"
+            type="button"
+        >
+
+            Start Level Test
+
+            <span>
+                →
+            </span>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     QUIZ
+===================================================== -->
+
+<section
+    class="quiz-section"
+    id="quizSection"
+    hidden
+>
+
+    <div class="quiz-container">
+
+
+        <!-- QUIZ HEADER -->
+
+        <div class="quiz-top">
+
+
+            <div>
+
+                <span class="quiz-label">
+                    GERMAN LEVEL TEST
+                </span>
+
+
+                <h2 id="questionCounter">
+                    Question 1 of 20
+                </h2>
+
+            </div>
+
+
+            <!-- CURRENT LEVEL -->
+
+            <div
+                class="level-badge"
+                id="levelBadge"
+            >
+                A1
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PROGRESS
+        ================================================== -->
+
+        <div class="progress-wrapper">
+
+            <div
+                class="progress-bar"
+                role="progressbar"
+                aria-label="Test progress"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="5"
+            >
+
+                <div
+                    class="progress-fill"
+                    id="progressFill"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             QUESTION CARD
+        ================================================== -->
+
+        <div class="question-card">
+
+
+            <!-- QUESTION NUMBER -->
+
+            <div
+                class="question-number"
+                id="questionNumber"
+            >
+                01
+            </div>
+
+
+            <!-- QUESTION -->
+
+            <h3 id="questionText">
+                Question goes here
+            </h3>
+
+
+            <!-- ANSWERS -->
+
+            <div
+                class="answers"
+                id="answersContainer"
+            ></div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             QUIZ CONTROLS
+        ================================================== -->
+
+        <div class="quiz-controls">
+
+
+            <button
+                class="secondary-btn"
+                id="previousBtn"
+                type="button"
+            >
+                ← Previous
+            </button>
+
+
+            <button
+                class="primary-btn"
+                id="nextBtn"
+                type="button"
+            >
+                Next →
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RESULT
+===================================================== -->
+
+<section
+    class="result-section"
+    id="resultSection"
+    hidden
+>
+
+    <div class="result-container">
+
+
+        <!-- RESULT LABEL -->
+
+        <div class="result-label">
+            YOUR ESTIMATED RESULT
+        </div>
+
+
+        <!-- RESULT TITLE -->
+
+        <h2>
+            Your estimated German level is
+        </h2>
+
+
+        <!-- LEVEL -->
+
+        <div
+            class="result-level"
+            id="resultLevel"
+        >
+            A1
+        </div>
+
+
+        <!-- LEVEL TITLE -->
+
+        <h3 id="resultTitle">
+            German for beginners.
+        </h3>
+
+
+        <!-- DESCRIPTION -->
+
+        <p
+            class="result-description"
+            id="resultDescription"
+        >
+            Build your German foundation step by step.
+        </p>
+
+
+
+        <!-- =================================================
+             SCORE CARD
+        ================================================== -->
+
+        <div class="score-card">
+
+
+            <!-- SCORE CIRCLE -->
+
+            <div
+                class="score-circle"
+                id="scoreCircle"
+                role="progressbar"
+                aria-label="Test score"
+            >
+
+                <div class="score-inner">
+
+                    <strong id="scoreValue">
+                        0
+                    </strong>
+
+                    <span>
+                        /20
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- SCORE TEXT -->
+
+            <div class="score-text">
+
+                <span>
+                    Your score
+                </span>
+
+                <strong id="scoreMessage">
+                    Keep learning!
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             RECOMMENDATION
+        ================================================== -->
+
+        <div class="recommendation-card">
+
+            <span class="recommendation-label">
+                RECOMMENDATION
+            </span>
+
+
+            <p id="recommendationText">
+                Start with A1 and build
+                a strong German foundation.
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             RESULT ACTIONS
+        ================================================== -->
+
+        <div class="result-actions">
+
+
+            <!-- REGISTER -->
+
+            <a
+                href="../index.html#start-learning"
+                class="primary-btn"
+                id="registerLevelBtn"
+            >
+
+                Register for Your Level
+
+                <span>
+                    ↗
+                </span>
+
+            </a>
+
+
+            <!-- COURSES -->
+
+            <a
+                href="../index.html#courses"
+                class="secondary-btn"
+            >
+
+                Explore Courses
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+
+            <!-- RESTART -->
+
+            <button
+                class="secondary-btn"
+                id="restartBtn"
+                type="button"
+            >
+
+                Take Test Again
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="test-footer">
+
+    <div class="footer-content">
+
+
+        <!-- LOGO -->
+
+        <img
+            src="../assets/logo/logo.jpg"
+            alt="LINGUA DEUTSCH CONNECT"
+            class="footer-logo"
+        >
+
+
+        <!-- SLOGAN -->
+
+        <p class="footer-slogan">
+
+            Lerne Deutsch.
+
+            <span>
+                Sprich Deutsch.
+            </span>
+
+            <strong>
+                Lebe Deutsch.
+            </strong>
+
+        </p>
+
+
+        <!-- LOCATION -->
+
+        <p>
+            German language learning in Kigali, Rwanda.
+        </p>
+
+
+        <!-- CONTACT -->
+
+        <p>
+            KK 15 St, Kigali · 0788 517 961
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     LEVEL TEST JAVASCRIPT
+===================================================== -->
+
+<script src="../js/level-test.js"></script>
+
+</body>
+
+</html>

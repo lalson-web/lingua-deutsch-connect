@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teacher Dashboard | LINGUA DEUTSCH CONNECT</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/teacher.css">
+</head>
+
+<body class="teacher-dashboard-page">
+
+    <div class="teacher-layout">
+
+        <aside class="teacher-sidebar">
+
+            <div class="sidebar-brand">
+                <img
+                    src="../assets/logo/logo.jpg"
+                    alt="LINGUA DEUTSCH CONNECT"
+                >
+
+                <div>
+                    <strong>LDC</strong>
+                    <span>Teacher Portal</span>
+                </div>
+            </div>
+
+            <nav class="teacher-nav">
+
+                <button
+                    type="button"
+                    class="teacher-nav-link active"
+                    data-section="overview"
+                >
+                    <span>⌂</span>
+                    <span>Overview</span>
+                </button>
+
+                <button
+                    type="button"
+                    class="teacher-nav-link"
+                    data-section="classes"
+                >
+                    <span>▦</span>
+                    <span>My Classes</span>
+                </button>
+
+                <button
+                    type="button"
+                    class="teacher-nav-link"
+                    data-section="lessons"
+                >
+                    <span>▤</span>
+                    <span>Lessons</span>
+                </button>
+
+                <button
+                    type="button"
+                    class="teacher-nav-link"
+                    data-section="tests"
+                >
+                    <span>✓</span>
+                    <span>Tests</span>
+                </button>
+
+                <button
+                    type="button"
+                    class="teacher-nav-link"
+                    data-section="attendance"
+                >
+                    <span>◷</span>
+                    <span>Attendance</span>
+                </button>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <a href="../index.html" class="sidebar-home">
+                    ← Main Website
+                </a>
+
+                <button
+                    type="button"
+                    id="teacherLogoutBtn"
+                    class="logout-btn"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <main class="teacher-main">
+
+            <header class="teacher-header">
+
+                <div>
+                    <span class="eyebrow">TEACHER PORTAL</span>
+
+                    <h1>
+                        Welcome,
+                        <span id="teacherName">Teacher</span> 👋
+                    </h1>
+
+                    <p>
+                        Manage your classes and help your students progress.
+                    </p>
+                </div>
+
+                <div class="teacher-profile-mini">
+
+                    <div class="teacher-avatar" id="teacherAvatar">
+                        T
+                    </div>
+
+                    <div>
+                        <strong id="teacherProfileName">
+                            Teacher
+                        </strong>
+
+                        <span id="teacherProfileEmail">
+                            —
+                        </span>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <div
+                id="dashboardMessage"
+                class="dashboard-message"
+                hidden
+            ></div>
+
+
+            <!-- OVERVIEW -->
+
+            <section
+                id="section-overview"
+                class="dashboard-section active"
+            >
+
+                <div class="stats-grid">
+
+                    <article class="teacher-stat-card">
+                        <div class="stat-icon">▦</div>
+
+                        <div>
+                            <span>MY CLASSES</span>
+                            <strong id="statClasses">0</strong>
+                        </div>
+                    </article>
+
+
+                    <article class="teacher-stat-card">
+                        <div class="stat-icon">👨‍🎓</div>
+
+                        <div>
+                            <span>STUDENTS</span>
+                            <strong id="statStudents">0</strong>
+                        </div>
+                    </article>
+
+
+                    <article class="teacher-stat-card">
+                        <div class="stat-icon">📚</div>
+
+                        <div>
+                            <span>LESSONS</span>
+                            <strong id="statLessons">0</strong>
+                        </div>
+                    </article>
+
+
+                    <article class="teacher-stat-card">
+                        <div class="stat-icon">📝</div>
+
+                        <div>
+                            <span>TESTS</span>
+                            <strong id="statTests">0</strong>
+                        </div>
+                    </article>
+
+                </div>
+
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="eyebrow">TEACHING</span>
+                        <h2>My Classes</h2>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="outline-btn"
+                        data-section-target="classes"
+                    >
+                        View All
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="overviewClasses"
+                    class="classes-grid"
+                >
+                    <div class="loading-card">
+                        Loading your classes...
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- CLASSES -->
+
+            <section
+                id="section-classes"
+                class="dashboard-section"
+                hidden
+            >
+
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">TEACHING</span>
+                        <h2>My Classes</h2>
+                        <p>
+                            Classes assigned to your teacher account.
+                        </p>
+                    </div>
+                </div>
+
+                <div
+                    id="allClasses"
+                    class="classes-grid"
+                >
+                    <div class="loading-card">
+                        Loading classes...
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- LESSONS -->
+
+            <section
+                id="section-lessons"
+                class="dashboard-section"
+                hidden
+            >
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="eyebrow">CONTENT</span>
+                        <h2>Lessons</h2>
+                        <p>
+                            Your lessons across assigned classes.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div
+                    id="teacherLessons"
+                    class="data-list"
+                >
+                    <div class="empty-card">
+                        Open a class to manage its lessons.
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- TESTS -->
+
+            <section
+                id="section-tests"
+                class="dashboard-section"
+                hidden
+            >
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="eyebrow">ASSESSMENT</span>
+                        <h2>Tests</h2>
+                        <p>
+                            Create tests and manage student results.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="feature-placeholder">
+                    <div class="placeholder-icon">📝</div>
+
+                    <h3>Test Management</h3>
+
+                    <p>
+                        Open one of your classes to create weekly tests,
+                        enter marks and view class performance.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ATTENDANCE -->
+
+            <section
+                id="section-attendance"
+                class="dashboard-section"
+                hidden
+            >
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="eyebrow">STUDENT TRACKING</span>
+                        <h2>Attendance</h2>
+                        <p>
+                            Manage attendance for your assigned classes.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="feature-placeholder">
+                    <div class="placeholder-icon">◷</div>
+
+                    <h3>Attendance Management</h3>
+
+                    <p>
+                        Open a class to view attendance, mark students
+                        present or absent, and create today's attendance code.
+                    </p>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/teacher-dashboard.js"></script>
+</body>
+</html>
