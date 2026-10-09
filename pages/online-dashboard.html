@@ -3242,7 +3242,7 @@ overflow: hidden;
         ========================================================= */
 
         const API_URL =
-            "http://localhost:5000/api";
+            "/api";
 
         const TOKEN_KEY =
             "ldc_online_student_token";
@@ -5226,11 +5226,11 @@ function renderVideo(videoUrl) {
 
     }
 
-    let url = String(videoUrl).trim();
+  let url = String(videoUrl).trim();
 
-    if (!url.startsWith("http://") && !url.startsWith("https://")) {
-        url = "http://localhost:5000" + (url.startsWith("/") ? url : "/" + url);
-    }
+if (!url.startsWith("http://") && !url.startsWith("https://")) {
+    url = `${window.location.origin}${url.startsWith("/") ? url : "/" + url}`;
+}
 
     const youtube = url.match(
         /(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})/

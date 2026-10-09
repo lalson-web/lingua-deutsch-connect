@@ -4017,7 +4017,7 @@
 ========================================================= */
 
 const API_URL =
-    "http://localhost:5000/api";
+    "/api";
 
 const TOKEN_KEY =
     "ldc_online_admin_token";
@@ -6425,13 +6425,12 @@ function normalizeMediaUrl(
         stringValue.startsWith("/")
     ) {
 
-        return `http://localhost:5000${stringValue}`;
+       return `${window.location.origin}${stringValue}`;
 
     }
 
 
-    return `http://localhost:5000/${stringValue}`;
-
+   return `${window.location.origin}/${stringValue}`;
 }
 
 

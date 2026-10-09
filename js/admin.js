@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api";
+const API_URL = "/api";
 
 /* ========================================
    MESSAGE
@@ -111,7 +111,7 @@ if (adminLoginForm) {
                     );
 
                     throw new Error(
-                        "The server returned an unexpected response. Make sure the LDC backend is running on http://localhost:5000."
+                        "The server returned an unexpected response. Please try again or contact the LDC administrator."
                     );
                 }
 

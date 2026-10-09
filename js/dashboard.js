@@ -10,7 +10,7 @@
    API CONFIG
 ========================================================= */
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "/api";
 
 const TOKEN_KEY = "ldc_token";
 const STUDENT_KEY = "ldc_student";
