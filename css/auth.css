@@ -1722,3 +1722,28 @@ textarea:focus-visible {
         transition-duration: 0.01ms !important;
     }
 }
+
+.teacher-login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 20px;
+    margin-top: 15px;
+    background: #d4af37;
+    color: #000;
+    border: 1px solid #d4af37;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-sizing: border-box;
+}
+
+.teacher-login-btn:hover {
+    background: #000;
+    color: #d4af37;
+    transform: translateY(-2px);
+}

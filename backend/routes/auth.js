@@ -144,7 +144,24 @@ function safeStudent(student) {
 
 }
 
+if (code.class_id) {
+    const cls = db.prepare(
+        "SELECT id, max_students FROM classes WHERE id = ? AND status = 'active'"
+    ).get(code.class_id);
 
+    if (cls) {
+        const taken = db.prepare(
+            "SELECT COUNT(*) AS n FROM enrollments WHERE class_id = ? AND status = 'active'"
+        ).get(cls.id).n;
+
+        if (taken < Number(cls.max_students || 9999)) {
+            db.prepare(`
+                INSERT INTO enrollments (student_id, class_id, enrollment_date, status)
+                VALUES (?, ?, date('now'), 'active')
+            `).run(studentId, cls.id);
+        }
+    }
+}
 function sendServerError(res, message) {
 
     return res.status(500).json({

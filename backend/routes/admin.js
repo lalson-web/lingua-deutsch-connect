@@ -10,6 +10,14 @@ const crypto = require("crypto");
 
 const router = express.Router();
 const db = require("../database");
+function addColumnIfMissing(table, column, definition) {
+    const cols = db.prepare(`PRAGMA table_info(${table})`).all();
+    if (!cols.some(c => c.name === column)) {
+        db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
+    }
+}
+
+addColumnIfMissing("access_codes", "class_id", "INTEGER");
 
 const JWT_SECRET =
     process.env.JWT_SECRET ||
@@ -730,7 +738,7 @@ router.post(
         try {
             const {
                 code,
-                courseId,
+                courseId,classId,
                 level = null,
                 paymentStatus =
                     "pending",
@@ -738,7 +746,22 @@ router.post(
             } =
                 req.body || {};
 
-            const normalizedCourseId =
+           let normalizedCourseId =
+           const normalizedClassId = normalizeNullableId(classId);
+let finalLevel = level;
+
+if (normalizedClassId) {
+    const cls = db.prepare(
+        "SELECT id, course_id, level FROM classes WHERE id = ?"
+    ).get(normalizedClassId);
+
+    if (!cls) {
+        return res.status(404).json({ message: "Class not found." });
+    }
+
+    normalizedCourseId = cls.course_id;
+    finalLevel = cls.level || level;
+}
                 normalizeNullableId(
                     courseId
                 );
@@ -799,45 +822,21 @@ router.post(
                 });
             }
 
-            const result =
-                db.prepare(`
-                    INSERT INTO access_codes
-                    (
-                        code,
-                        course_id,
-                        course,
-                        level,
-                        payment_status,
-                        used,
-                        expires_at
-                    )
-                    VALUES (?, ?, ?, ?, ?, 0, ?)
-                `).run(
-                    generatedCode,
-                    normalizedCourseId,
-                    normalizedCourseId
-                        ? String(
-                            db.prepare(`
-                                SELECT name
-                                FROM courses
-                                WHERE id = ?
-                            `).get(
-                                normalizedCourseId
-                            )?.name || ""
-                        )
-                        : null,
-                    level,
-                    normalizeStatus(
-                        paymentStatus,
-                        [
-                            "pending",
-                            "partial",
-                            "paid"
-                        ],
-                        "pending"
-                    ),
-                    expiresAt || null
-                );
+            const result = db.prepare(`
+    INSERT INTO access_codes
+    (code, course_id, course, level, payment_status, used, expires_at, class_id)
+    VALUES (?, ?, ?, ?, ?, 0, ?, ?)
+`).run(
+    generatedCode,
+    normalizedCourseId,
+    normalizedCourseId
+        ? String(db.prepare("SELECT name FROM courses WHERE id = ?").get(normalizedCourseId)?.name || "")
+        : null,
+    finalLevel,
+    normalizeStatus(paymentStatus, ["pending", "partial", "paid"], "pending"),
+    expiresAt || null,
+    normalizedClassId
+);
 
             const accessCode =
                 db.prepare(`

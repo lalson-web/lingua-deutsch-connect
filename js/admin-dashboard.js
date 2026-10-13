@@ -2351,7 +2351,7 @@ async function generateAccessCode(
                 "accessCodeCourse"
             )?.value ??
             "",
-
+  classId: getElement("accessCodeClass")?.value || "",
         level:
             raw.level ??
             getElement(
@@ -7635,7 +7635,9 @@ function initializeStaticForms() {
         accessCodeForm.addEventListener(
             "submit",
             generateAccessCode
+            
         );
+        
     }
 
     const moduleForm =
@@ -9271,7 +9273,17 @@ async function initializeAdminDashboard() {
         populateClassCourseSelects();
 
         populateAssignClassSelect();
+  function populateAccessCodeClassSelect() {
+      const select = getElement("accessCodeClass");
+      if (!select) return;
 
+      select.innerHTML =
+          `<option value="">No class</option>` +
+          allClasses
+              .filter(c => String(c.status).toLowerCase() === "active")
+              .map(c => `<option value="${escapeHTML(c.id)}">${escapeHTML(c.name)} (${escapeHTML(c.level || "")})</option>`)
+              .join("");
+  }
         console.log(
             "LDC Admin Dashboard ready."
         );

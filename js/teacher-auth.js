@@ -1,4 +1,4 @@
-const API_URL = "/api";
+const API_URL = "https://linguadeutschconnect.cloud/api";
 
 const teacherLoginForm = document.getElementById("teacherLoginForm");
 const teacherMessage = document.getElementById("teacherMessage");

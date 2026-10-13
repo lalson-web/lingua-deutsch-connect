@@ -3,6 +3,7 @@
    TEACHER ROUTES
    FULLY UPDATED / SCHEMA ALIGNED
 ========================================================= */
+const API_URL = "https://linguadeutschconnect.cloud/api";
 console.log("teacher routes loaded: class materials v1");
 const express = require("express");
 const jwt = require("jsonwebtoken");
@@ -11,6 +12,7 @@ const crypto = require("crypto");
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
+
 
 const db = require("../database");
 
@@ -5413,7 +5415,10 @@ db.exec(`
         updated_at TEXT DEFAULT CURRENT_TIMESTAMP
     )
 `);
-
+const matCols = db.prepare("PRAGMA table_info(class_materials)").all();
+if (!matCols.some(c => c.name === "due_date")) {
+    db.exec("ALTER TABLE class_materials ADD COLUMN due_date TEXT");
+}
 
 /* ---------- LIST ---------- */
 
@@ -5495,6 +5500,10 @@ router.post(
                 INSERT INTO class_materials
                 (class_id, teacher_id, title, description, type, url, content, status)
                 VALUES (?, ?, ?, ?, ?, ?, ?, 'published')
+                
+type === "link" ? url : null,
+type === "link" ? null : content,
+dueDate
             `).run(
                 classId,
                 req.teacher.id,

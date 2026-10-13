@@ -4150,6 +4150,27 @@ router.get(
         }
     }
 );
+router.get("/my-classes", authenticateStudent, (req, res) => {
+    try {
+        const classes = db.prepare(`
+            SELECT cl.id, cl.name, cl.level, cl.room, cl.schedule,
+                   c.name AS course_name,
+                   (SELECT t.full_name FROM teacher_classes tc
+                    JOIN teachers t ON t.id = tc.teacher_id
+                    WHERE tc.class_id = cl.id
+                    ORDER BY tc.is_primary DESC, tc.id DESC LIMIT 1) AS teacher_name
+            FROM enrollments e
+            JOIN classes cl ON cl.id = e.class_id
+            LEFT JOIN courses c ON c.id = cl.course_id
+            WHERE e.student_id = ? AND e.status = 'active'
+        `).all(req.student.id);
+
+        res.json({ classes });
+    } catch (error) {
+        console.error("My classes error:", error);
+        res.status(500).json({ message: "Could not load your class." });
+    }
+});
 /* =========================================================
    EXPORT
 ========================================================= */

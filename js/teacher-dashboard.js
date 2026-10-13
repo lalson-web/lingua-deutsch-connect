@@ -3,7 +3,8 @@
    TEACHER DASHBOARD
    ========================================================= */
 
-const API_URL = "/api";
+
+const API_URL = "https://linguadeutschconnect.cloud/api";
 
 const teacherToken =
     localStorage.getItem("ldc_teacher_token");
