@@ -144,24 +144,6 @@ function safeStudent(student) {
 
 }
 
-if (code.class_id) {
-    const cls = db.prepare(
-        "SELECT id, max_students FROM classes WHERE id = ? AND status = 'active'"
-    ).get(code.class_id);
-
-    if (cls) {
-        const taken = db.prepare(
-            "SELECT COUNT(*) AS n FROM enrollments WHERE class_id = ? AND status = 'active'"
-        ).get(cls.id).n;
-
-        if (taken < Number(cls.max_students || 9999)) {
-            db.prepare(`
-                INSERT INTO enrollments (student_id, class_id, enrollment_date, status)
-                VALUES (?, ?, date('now'), 'active')
-            `).run(studentId, cls.id);
-        }
-    }
-}
 function sendServerError(res, message) {
 
     return res.status(500).json({
@@ -1117,7 +1099,76 @@ router.post(
                             studentId
                         );
 
+                        /*
+                         * Auto-enroll the student in the class
+                         * linked to the access code.
+                         */
 
+                        if (currentCode.class_id) {
+
+                            try {
+
+                                const classRecord =
+                                    db.prepare(`
+                                        SELECT
+                                            id,
+                                            max_students
+                                        FROM classes
+                                        WHERE id = ?
+                                        AND status = 'active'
+                                    `).get(
+                                        currentCode.class_id
+                                    );
+
+
+                                if (classRecord) {
+
+                                    const taken =
+                                        db.prepare(`
+                                            SELECT COUNT(*) AS total
+                                            FROM enrollments
+                                            WHERE class_id = ?
+                                            AND status = 'active'
+                                        `).get(
+                                            classRecord.id
+                                        ).total;
+
+
+                                    if (
+                                        taken <
+                                        Number(
+                                            classRecord.max_students ||
+                                            9999
+                                        )
+                                    ) {
+
+                                        db.prepare(`
+                                            INSERT INTO enrollments (
+                                                student_id,
+                                                class_id,
+                                                enrollment_date,
+                                                status
+                                            )
+                                            VALUES (?, ?, date('now'), 'active')
+                                        `).run(
+                                            studentId,
+                                            classRecord.id
+                                        );
+
+                                    }
+
+                                }
+
+                            } catch (enrollError) {
+
+                                console.warn(
+                                    "Could not auto-enroll student in class:",
+                                    enrollError.message
+                                );
+
+                            }
+
+                        }
                         return studentId;
 
                     });

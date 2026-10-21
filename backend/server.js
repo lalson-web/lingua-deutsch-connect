@@ -160,7 +160,7 @@ app.use(
         limit: "10mb"
     })
 );
-
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 /* =========================================================
    STATIC UPLOADED FILES
@@ -305,6 +305,12 @@ app.use(
    CLASSROOM TEACHER ROUTES
 ========================================================= */
 
+app.use("/api/teacher", require("./routes/teacherResources"));
+
+app.use(
+    "/api/teacher",
+    teacherRoutes
+);
 app.use(
     "/api/teacher",
     teacherRoutes

@@ -4,7 +4,7 @@
    ========================================================= */
 
 
-const API_URL = "https://linguadeutschconnect.cloud/api";
+const API_URL = "https://linguadeutschconnect.com/api";
 
 const teacherToken =
     localStorage.getItem("ldc_teacher_token");
@@ -1183,6 +1183,18 @@ function showSection(
 
     }
 
+      if (sectionName === "tests") {
+
+        renderTestsManager();
+
+    }
+
+
+    if (sectionName === "resources") {
+
+        renderResourcesManager();
+
+    }
 }
 
 
@@ -1624,7 +1636,7 @@ async function loadClassStudents(
                     selectedClassId =
                         classId;
 
-                    showSection(
+                                 showSection(
                         "tests"
                     );
 
@@ -5433,5 +5445,707 @@ await loadTeacherDashboard();
 
 }
 
+/* =========================================================
+   RESOURCES — PDF FILES AND LINKS
+========================================================= */
+
+const MAX_RESOURCE_PDF_MB = 20;
+
+
+function formatFileSize(bytes) {
+
+    const size = Number(bytes || 0);
+
+    if (!size) return "";
+
+    if (size < 1024 * 1024) {
+
+        return `${Math.max(1, Math.round(size / 1024))} KB`;
+
+    }
+
+    return `${(size / 1024 / 1024).toFixed(1)} MB`;
+
+}
+
+
+function renderResourcesManager() {
+
+    const section =
+        document.getElementById("section-resources");
+
+    if (!section) return;
+
+
+    section.innerHTML = `
+
+        <div class="section-heading">
+
+            <div>
+                <span class="eyebrow">CONTENT</span>
+
+                <h2>Resources</h2>
+
+                <p>
+                    Upload PDF files and share useful links
+                    with your class.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="res-toolbar">
+
+            <label>
+                <span>Class</span>
+
+                <select id="resourcesClassSelect">
+                    ${classOptions(true)}
+                </select>
+            </label>
+
+        </div>
+
+
+        <div id="resourcesContent">
+
+            <div class="empty-card">
+
+                <div class="empty-icon">⧉</div>
+
+                <h3>Select a class</h3>
+
+                <p>
+                    Choose a class to upload PDFs and add links.
+                </p>
+
+            </div>
+
+        </div>
+    `;
+
+
+    const select =
+        document.getElementById("resourcesClassSelect");
+
+
+    if (selectedClassId && select) {
+
+        select.value = String(selectedClassId);
+
+        if (select.value) {
+
+            loadResources(select.value);
+
+        }
+
+    }
+
+
+    select?.addEventListener(
+        "change",
+        () => {
+
+            selectedClassId =
+                select.value || null;
+
+            if (selectedClassId) {
+
+                loadResources(selectedClassId);
+
+            } else {
+
+                document
+                    .getElementById("resourcesContent")
+                    .innerHTML = `
+                        <div class="empty-card">
+                            <h3>Select a class</h3>
+                        </div>
+                    `;
+
+            }
+
+        }
+    );
+
+}
+
+
+async function loadResources(classId) {
+
+    const container =
+        document.getElementById("resourcesContent");
+
+    if (!container) return;
+
+
+    container.innerHTML = `
+        <div class="loading-card">
+            Loading resources...
+        </div>
+    `;
+
+
+    try {
+
+        const data =
+            await teacherFetch(
+                `/teacher/classes/${encodeURIComponent(classId)}/resources`
+            );
+
+
+        const resources =
+            Array.isArray(data.resources)
+                ? data.resources
+                : [];
+
+
+        container.innerHTML = `
+
+            <div class="res-forms">
+
+                <form
+                    id="resourcePdfForm"
+                    class="res-panel"
+                    novalidate
+                >
+
+                    <h3>📄 Upload a PDF</h3>
+
+                    <p class="res-hint">
+                        PDF files only, up to ${MAX_RESOURCE_PDF_MB} MB.
+                    </p>
+
+                    <label class="res-field">
+                        <span>Title</span>
+
+                        <input
+                            type="text"
+                            id="resourcePdfTitle"
+                            maxlength="200"
+                            placeholder="e.g. Grammatik Übungen A1"
+                        >
+                    </label>
+
+                    <label class="res-field">
+                        <span>Description (optional)</span>
+
+                        <textarea
+                            id="resourcePdfDescription"
+                            rows="3"
+                            maxlength="500"
+                            placeholder="What is this file about?"
+                        ></textarea>
+                    </label>
+
+                    <label class="res-field">
+                        <span>PDF file</span>
+
+                        <input
+                            type="file"
+                            id="resourcePdfFile"
+                            accept="application/pdf,.pdf"
+                        >
+                    </label>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Upload PDF
+                    </button>
+
+                </form>
+
+
+                <form
+                    id="resourceLinkForm"
+                    class="res-panel"
+                    novalidate
+                >
+
+                    <h3>🔗 Add a link</h3>
+
+                    <p class="res-hint">
+                        Websites, videos, articles, online exercises.
+                    </p>
+
+                    <label class="res-field">
+                        <span>Title</span>
+
+                        <input
+                            type="text"
+                            id="resourceLinkTitle"
+                            maxlength="200"
+                            placeholder="e.g. Dativ Übung online"
+                        >
+                    </label>
+
+                    <label class="res-field">
+                        <span>Link</span>
+
+                        <input
+                            type="text"
+                            id="resourceLinkUrl"
+                            maxlength="2000"
+                            placeholder="https://..."
+                        >
+                    </label>
+
+                    <label class="res-field">
+                        <span>Description (optional)</span>
+
+                        <textarea
+                            id="resourceLinkDescription"
+                            rows="3"
+                            maxlength="500"
+                            placeholder="Why should students open it?"
+                        ></textarea>
+                    </label>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Add Link
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <div class="res-list-header">
+
+                <h3>Shared with this class</h3>
+
+                <strong>${resources.length}</strong>
+
+            </div>
+
+
+            <div
+                id="resourcesList"
+                class="res-list"
+            >
+
+                ${
+                    resources.length
+                        ? resources
+                            .map(renderResourceItem)
+                            .join("")
+                        : `
+                            <div class="empty-card">
+                                Nothing shared yet.
+                                Upload a PDF or add a link above.
+                            </div>
+                        `
+                }
+
+            </div>
+        `;
+
+
+        document
+            .getElementById("resourcePdfForm")
+            ?.addEventListener(
+                "submit",
+                event => uploadResourcePdf(event, classId)
+            );
+
+
+        document
+            .getElementById("resourceLinkForm")
+            ?.addEventListener(
+                "submit",
+                event => addResourceLink(event, classId)
+            );
+
+
+        document
+            .getElementById("resourcesList")
+            ?.addEventListener(
+                "click",
+                event => {
+
+                    const button =
+                        event.target.closest(
+                            ".res-delete-btn"
+                        );
+
+                    if (!button) return;
+
+                    deleteResource(
+                        classId,
+                        button.dataset.resourceId
+                    );
+
+                }
+            );
+
+
+    } catch (error) {
+
+        container.innerHTML = `
+            <div class="empty-card">
+
+                <h3>Could not load resources</h3>
+
+                <p>${escapeHTML(error.message)}</p>
+
+            </div>
+        `;
+
+    }
+
+}
+
+
+function renderResourceItem(resource) {
+
+    const isPdf =
+        resource.type === "pdf";
+
+    const href =
+        String(resource.url || "");
+
+    const safeHref =
+        isPdf || /^https?:\/\//i.test(href)
+            ? href
+            : "";
+
+    let host = "";
+
+    if (!isPdf) {
+
+        try {
+
+            host = new URL(href).hostname;
+
+        } catch {
+
+            host = "";
+
+        }
+
+    }
+
+    const meta = [
+        isPdf ? "PDF" : "Link",
+        isPdf ? formatFileSize(resource.fileSize) : host,
+        resource.createdAt
+            ? formatDateTime(resource.createdAt)
+            : ""
+    ]
+        .filter(Boolean)
+        .join(" · ");
+
+
+    return `
+        <article class="res-item">
+
+            <div class="res-icon">
+                ${isPdf ? "📄" : "🔗"}
+            </div>
+
+
+            <div class="res-info">
+
+                <strong>
+                    ${escapeHTML(resource.title)}
+                </strong>
+
+                ${
+                    resource.description
+                        ? `<p>${escapeHTML(resource.description)}</p>`
+                        : ""
+                }
+
+                <span>
+                    ${escapeHTML(meta)}
+                </span>
+
+            </div>
+
+
+            <div class="res-actions">
+
+                ${
+                    safeHref
+                        ? `
+                            <a
+                                href="${escapeAttribute(safeHref)}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="outline-btn"
+                            >
+                                Open
+                            </a>
+                        `
+                        : ""
+                }
+
+                <button
+                    type="button"
+                    class="res-delete-btn"
+                    data-resource-id="${escapeAttribute(resource.id)}"
+                >
+                    Delete
+                </button>
+
+            </div>
+
+        </article>
+    `;
+
+}
+
+
+async function uploadResourcePdf(event, classId) {
+
+    event.preventDefault();
+
+
+    const form = event.target;
+
+    const file =
+        document.getElementById("resourcePdfFile")
+            ?.files?.[0];
+
+    const title =
+        document.getElementById("resourcePdfTitle")
+            ?.value.trim();
+
+    const description =
+        document.getElementById("resourcePdfDescription")
+            ?.value.trim();
+
+
+    if (!file) {
+
+        showDashboardMessage(
+            "Please choose a PDF file.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (!/\.pdf$/i.test(file.name)) {
+
+        showDashboardMessage(
+            "Only PDF files are allowed.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (file.size > MAX_RESOURCE_PDF_MB * 1024 * 1024) {
+
+        showDashboardMessage(
+            `The PDF is too large. Maximum size is ${MAX_RESOURCE_PDF_MB} MB.`,
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("title", title || "");
+    formData.append("description", description || "");
+
+
+    const button =
+        form.querySelector('button[type="submit"]');
+
+    if (button) {
+
+        button.disabled = true;
+
+        button.textContent = "Uploading...";
+
+    }
+
+
+    try {
+
+        const data =
+            await teacherFetch(
+                `/teacher/classes/${encodeURIComponent(classId)}/resources/pdf`,
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+
+        showDashboardMessage(
+            data.message || "PDF uploaded successfully.",
+            "success"
+        );
+
+        await loadResources(classId);
+
+
+    } catch (error) {
+
+        showDashboardMessage(
+            error.message,
+            "error"
+        );
+
+        if (button) {
+
+            button.disabled = false;
+
+            button.textContent = "Upload PDF";
+
+        }
+
+    }
+
+}
+
+
+async function addResourceLink(event, classId) {
+
+    event.preventDefault();
+
+
+    const form = event.target;
+
+    const title =
+        document.getElementById("resourceLinkTitle")
+            ?.value.trim();
+
+    const url =
+        document.getElementById("resourceLinkUrl")
+            ?.value.trim();
+
+    const description =
+        document.getElementById("resourceLinkDescription")
+            ?.value.trim();
+
+
+    if (!url) {
+
+        showDashboardMessage(
+            "Please enter a link.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const button =
+        form.querySelector('button[type="submit"]');
+
+    if (button) {
+
+        button.disabled = true;
+
+        button.textContent = "Adding...";
+
+    }
+
+
+    try {
+
+        const data =
+            await teacherFetch(
+                `/teacher/classes/${encodeURIComponent(classId)}/resources/link`,
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        title,
+                        url,
+                        description
+                    })
+                }
+            );
+
+
+        showDashboardMessage(
+            data.message || "Link added successfully.",
+            "success"
+        );
+
+        await loadResources(classId);
+
+
+    } catch (error) {
+
+        showDashboardMessage(
+            error.message,
+            "error"
+        );
+
+        if (button) {
+
+            button.disabled = false;
+
+            button.textContent = "Add Link";
+
+        }
+
+    }
+
+}
+
+
+async function deleteResource(classId, resourceId) {
+
+    if (!resourceId) return;
+
+
+    const confirmed =
+        window.confirm(
+            "Delete this resource? Students will no longer see it."
+        );
+
+    if (!confirmed) return;
+
+
+    try {
+
+        const data =
+            await teacherFetch(
+                `/teacher/classes/${encodeURIComponent(classId)}/resources/${encodeURIComponent(resourceId)}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+
+        showDashboardMessage(
+            data.message || "Resource deleted.",
+            "success"
+        );
+
+        await loadResources(classId);
+
+
+    } catch (error) {
+
+        showDashboardMessage(
+            error.message,
+            "error"
+        );
+
+    }
+
+}
 
 initializeTeacherDashboard();

@@ -6749,7 +6749,6 @@ async function viewClass(
 }function updateClassDetailsHeader() {
 
     const c = selectedClassDetails;
-
     if (!c) return;
 
     const set = (id, value) => {
@@ -6764,17 +6763,16 @@ async function viewClass(
 
     set(
         "rosterClassMeta",
-        [
-            getClassCourseName(c),
-            c.level,
-            c.schedule,
-            c.room
-        ]
+        [getClassCourseName(c), c.level, c.schedule, c.room]
             .filter(x => x && x !== "—")
             .join(" • ") || "No details"
     );
 
-    set("rosterStudentCount", classRosterStudents.length);
+    const active = classRosterStudents.filter(
+        e => String(getEnrollmentStatus(e)).toLowerCase() === "active"
+    ).length;
+
+    set("rosterStudentCount", active);
     set("rosterCapacity", getClassMaxStudents(c) || "—");
     set("rosterTeacher", getClassTeacherName(c));
 }
@@ -6827,6 +6825,7 @@ async function loadClassRoster(
 
         classRosterStudents =
             roster;
+            
         updateClassDetailsHeader();
         renderClassRoster(
             classRosterStudents
@@ -7172,54 +7171,36 @@ function closeEnrollStudentModal() {
 
 function populateEnrollmentStudentList() {
 
-    const select =
-        getElement(
-            "enrollStudentSelect"
-        );
+    const select = getElement("enrollStudentSelect");
+    if (!select) return;
 
-    if (!select) {
-        return;
+    const alreadyIn = new Set(
+        classRosterStudents
+            .filter(e => String(getEnrollmentStatus(e)).toLowerCase() === "active")
+            .map(e => String(getEnrollmentStudentId(e)))
+    );
+
+    const available = allStudents.filter(s =>
+        String(getStudentAccountStatus(s)).toLowerCase() === "active" &&
+        !alreadyIn.has(String(getStudentId(s)))
+    );
+
+    select.innerHTML =
+        `<option value="">${available.length ? "Select student" : "No students available"}</option>` +
+        available.map(s => `
+            <option value="${escapeHTML(getStudentId(s))}">
+                ${escapeHTML(getStudentName(s))} — ${escapeHTML(getStudentEmail(s))}
+            </option>
+        `).join("");
+
+    const info = getElement("enrollStudentInfo");
+
+    if (info && selectedClassDetails) {
+        info.textContent =
+            `Enrolling into ${selectedClassDetails.name ?? "this class"}. ` +
+            `Only active students not already in the class are listed.`;
     }
-
-    select.innerHTML = `
-        <option value="">
-            Select Student
-        </option>
-
-        ${
-            allStudents
-                .map(
-                    student => {
-
-                        const id =
-                            getStudentId(
-                                student
-                            );
-
-                        return `
-                            <option
-                                value="${escapeHTML(id)}"
-                            >
-                                ${escapeHTML(
-                                    getStudentName(
-                                        student
-                                    )
-                                )}
-                                —
-                                ${escapeHTML(
-                                    getStudentEmail(
-                                        student
-                                    )
-                                )}
-                            </option>
-                        `;
-                    }
-                )
-                .join("")
-        }
-    `;
 }
-
 async function saveEnrollment() {
 
     if (!selectedClassId) {

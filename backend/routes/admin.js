@@ -730,7 +730,6 @@ router.get(
         }
     }
 );
-
 router.post(
     "/access-codes",
     authenticateAdmin,
@@ -738,18 +737,38 @@ router.post(
         try {
             const {
                 code,
-                courseId,classId,
+                courseId,
+                classId,
                 level = null,
-                paymentStatus =
-                    "pending",
+                paymentStatus = "pending",
                 expiresAt = null
-            } =
-                req.body || {};
+            } = req.body || {};
 
-           let normalizedCourseId =
-           const normalizedClassId = normalizeNullableId(classId);
-let finalLevel = level;
+            let normalizedCourseId = normalizeNullableId(courseId);
+            const normalizedClassId = normalizeNullableId(classId);
+            let finalLevel = level;
+                        if (normalizedClassId) {
 
+                const classExists =
+                    db.prepare(`
+                        SELECT id
+                        FROM classes
+                        WHERE id = ?
+                        LIMIT 1
+                    `).get(
+                        normalizedClassId
+                    );
+
+                if (!classExists) {
+
+                    return res.status(400).json({
+                        success: false,
+                        message: "The selected class does not exist."
+                    });
+
+                }
+
+            }
 if (normalizedClassId) {
     const cls = db.prepare(
         "SELECT id, course_id, level FROM classes WHERE id = ?"
@@ -4444,7 +4463,9 @@ router.patch(
                         JOIN students s
                             ON s.id = e.student_id
                         WHERE e.class_id = ?
-                        ORDER BY s.full_name ASC
+AND e.status = 'active'
+ORDER BY s.full_name ASC
+                       
                     `).all(id);
 
                 return res.json({

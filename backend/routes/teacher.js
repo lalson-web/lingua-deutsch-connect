@@ -1419,7 +1419,8 @@ router.get(
                         s.*,
                         e.id AS enrollment_id,
                         e.status AS enrollment_status,
-                        e.enrollment_date AS enrolled_at
+                       WHERE e.class_id = ?
+                        AND e.status = 'active'
                     FROM enrollments e
                     JOIN students s
                         ON s.id = e.student_id
