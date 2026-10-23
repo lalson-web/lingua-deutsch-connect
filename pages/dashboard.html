@@ -3524,7 +3524,7 @@
                     Your personal German learning space at
                     LINGUA DEUTSCH CONNECT.
                 </p>
-
+<div id="myClassBanner" style="display:none;margin-top:14px;padding:12px 16px;border-radius:14px;background:#eef3ff;color:#1255d8;font-size:13px;font-weight:700;"></div>
             </div>
 
 
@@ -4352,7 +4352,20 @@
 
                 </section>
 
+<section class="dashboard-card full">
 
+    <div class="card-heading">
+        <div>
+            <h2>📎 Class Materials</h2>
+            <p>PDFs, documents, links and lesson notes shared by your teacher.</p>
+        </div>
+    </div>
+
+    <div id="classMaterialsList">
+        <div class="loading-message">Loading materials...</div>
+    </div>
+
+</section>
 
                 <!-- =================================================
                      TESTS
@@ -4664,7 +4677,123 @@
     </footer>
 
 
+<script>
+(function () {
 
+    const API =
+        ["localhost", "127.0.0.1"].includes(location.hostname) && location.port !== "5000"
+            ? "http://localhost:5000/api"
+            : "/api";
+
+    const ORIGIN = API.replace(/\/api$/, "");
+    const token = localStorage.getItem("ldc_student_token");
+
+    const esc = v => String(v ?? "").replace(/[&<>"']/g,
+        c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[c]));
+
+    async function get(path) {
+        const res = await fetch(API + path, {
+            headers: { Authorization: "Bearer " + token }
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.message || "Request failed.");
+        return data;
+    }
+
+    function icon(type) {
+        return {
+            link: "🔗", pdf: "📄", document: "📝", presentation: "📊",
+            spreadsheet: "📈", image: "🖼️", audio: "🎧", video: "🎥", lesson: "📖"
+        }[type] || "📎";
+    }
+
+    function href(url) {
+        return /^https?:\/\//i.test(url || "") ? url : ORIGIN + (url || "");
+    }
+
+    /* ---------- My Class banner ---------- */
+
+    async function loadBanner() {
+        try {
+            const data = await get("/student/my-classes");
+            const classes = data.classes || [];
+            const box = document.getElementById("myClassBanner");
+
+            if (!classes.length) return;
+
+            box.innerHTML = classes.map(c =>
+                `🏫 Your class: <strong>${esc(c.name)}</strong>` +
+                (c.level ? ` (${esc(c.level)})` : "") +
+                (c.teacher_name ? ` · Teacher: ${esc(c.teacher_name)}` : "") +
+                (c.schedule ? ` · ${esc(c.schedule)}` : "")
+            ).join("<br>");
+
+            box.style.display = "block";
+        } catch (e) {
+            console.warn("My class banner:", e.message);
+        }
+    }
+
+    /* ---------- Materials ---------- */
+
+    async function loadMaterials() {
+        const box = document.getElementById("classMaterialsList");
+
+        try {
+            const data = await get("/student/class-materials");
+            const items = data.materials || [];
+
+            if (!items.length) {
+                box.innerHTML = `<div class="empty-message">Your teacher hasn't shared any materials yet.</div>`;
+                return;
+            }
+
+            box.innerHTML = items.map(m => {
+
+                const isLesson = m.type === "lesson";
+
+                const action = isLesson
+                    ? ""
+                    : `<a href="${esc(href(m.url))}" target="_blank" rel="noopener"
+                          class="continue-btn" style="text-decoration:none;display:inline-flex;align-items:center;">
+                          ${m.type === "link" ? "Open link" : "Open / Download"}
+                       </a>`;
+
+                const body = isLesson
+                    ? `<details style="margin-top:8px;">
+                           <summary style="cursor:pointer;color:#1255d8;font-weight:700;font-size:12px;">Read lesson</summary>
+                           <div style="white-space:pre-wrap;margin-top:8px;font-size:13px;line-height:1.6;">${esc(m.content)}</div>
+                       </details>`
+                    : "";
+
+                return `
+                <div class="lesson-item" style="border:1px solid var(--border);border-radius:14px;margin-bottom:9px;">
+                    <div class="lesson-info">
+                        <div class="lesson-title">${icon(m.type)} ${esc(m.title)}</div>
+                        ${m.description ? `<div class="lesson-meta">${esc(m.description)}</div>` : ""}
+                        <div class="lesson-meta">
+                            ${esc(m.class_name || "")}${m.teacher_name ? " · " + esc(m.teacher_name) : ""}
+                            · ${esc(String(m.created_at || "").slice(0, 10))}
+                        </div>
+                        ${body}
+                    </div>
+                    <div class="lesson-actions">${action}</div>
+                </div>`;
+
+            }).join("");
+
+        } catch (e) {
+            box.innerHTML = `<div class="section-error">${esc(e.message)}</div>`;
+        }
+    }
+
+    if (token) {
+        loadBanner();
+        loadMaterials();
+    }
+
+})();
+</script>
     <!-- =====================================================
          JAVASCRIPT
     ====================================================== -->

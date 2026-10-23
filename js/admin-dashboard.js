@@ -3,8 +3,11 @@
    ADMIN DASHBOARD
    FULL REPLACEMENT VERSION
 ========================================================= */
-
-const API_URL = "/api";
+const API_URL =
+    ["localhost", "127.0.0.1"].includes(window.location.hostname) &&
+    window.location.port !== "5000"
+        ? "http://localhost:5000/api"
+        : "/api";
 
 /* =========================================================
    AUTH
@@ -2342,31 +2345,14 @@ async function generateAccessCode(
             form
         );
 
-    const payload = {
+    const classValue = getElement("accessCodeClass")?.value || "";
 
-        courseId:
-            raw.courseId ??
-            raw.course ??
-            getElement(
-                "accessCodeCourse"
-            )?.value ??
-            "",
-  classId: getElement("accessCodeClass")?.value || "",
-        level:
-            raw.level ??
-            getElement(
-                "accessCodeLevel"
-            )?.value ??
-            "",
-
-        expiresAt:
-            raw.expiresAt ??
-            raw.expiryDate ??
-            getElement(
-                "accessCodeExpiresAt"
-            )?.value ??
-            ""
-    };
+const payload = {
+    classId: classValue,
+    courseId: classValue ? "" : (getElement("course")?.value || ""),
+    level: getElement("level")?.value || "",
+    expiresAt: getElement("expiresAt")?.value || ""
+};
 
     try {
 
@@ -4963,6 +4949,7 @@ async function loadClasses() {
         renderFilteredClasses();
 
         populateClassCourseSelects();
+        populateAccessCodeClassSelect();
 
     } catch (error) {
 
@@ -6252,7 +6239,17 @@ function populateClassCourseSelects() {
         }
     );
 }
+function populateAccessCodeClassSelect() {
+    const select = getElement("accessCodeClass");
+    if (!select) return;
 
+    select.innerHTML =
+        `<option value="">No class</option>` +
+        allClasses
+            .filter(c => String(c.status).toLowerCase() === "active")
+            .map(c => `<option value="${escapeHTML(c.id ?? c.class_id)}">${escapeHTML(c.name)} (${escapeHTML(c.level || "")})</option>`)
+            .join("");
+}
 function populateAssignClassSelect() {
 
     const select =
@@ -9254,17 +9251,7 @@ async function initializeAdminDashboard() {
         populateClassCourseSelects();
 
         populateAssignClassSelect();
-  function populateAccessCodeClassSelect() {
-      const select = getElement("accessCodeClass");
-      if (!select) return;
-
-      select.innerHTML =
-          `<option value="">No class</option>` +
-          allClasses
-              .filter(c => String(c.status).toLowerCase() === "active")
-              .map(c => `<option value="${escapeHTML(c.id)}">${escapeHTML(c.name)} (${escapeHTML(c.level || "")})</option>`)
-              .join("");
-  }
+ 
         console.log(
             "LDC Admin Dashboard ready."
         );

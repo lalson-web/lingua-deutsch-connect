@@ -296,7 +296,42 @@
                 </div>
 
             </section>
+<section id="classMaterialsSection" style="margin:24px 0;padding:20px;border:1px solid #353535;border-radius:12px;">
 
+    <h2 style="margin-bottom:6px;">Class Materials</h2>
+    <p style="color:#929292;font-size:13px;margin-bottom:16px;">
+        Share PDFs, documents and links with the students of a class.
+    </p>
+
+    <select id="matClass" style="width:100%;padding:10px;margin-bottom:16px;"></select>
+
+    <div id="matMessage" style="display:none;margin-bottom:12px;padding:10px;border-radius:8px;"></div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
+
+        <form id="matFileForm" style="border:1px solid #353535;border-radius:10px;padding:14px;">
+            <h3 style="margin-bottom:10px;">📄 Upload PDF / Document</h3>
+            <input id="matFileTitle" placeholder="Title" required style="width:100%;padding:9px;margin-bottom:8px;">
+            <input id="matFileDesc" placeholder="Description (optional)" style="width:100%;padding:9px;margin-bottom:8px;">
+            <input id="matFile" type="file" required
+                   accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.jpg,.jpeg,.png,.mp3"
+                   style="width:100%;margin-bottom:10px;">
+            <button type="submit" id="matFileBtn" style="padding:10px 14px;">Upload</button>
+        </form>
+
+        <form id="matLinkForm" style="border:1px solid #353535;border-radius:10px;padding:14px;">
+            <h3 style="margin-bottom:10px;">🔗 Add Link</h3>
+            <input id="matLinkTitle" placeholder="Title" required style="width:100%;padding:9px;margin-bottom:8px;">
+            <input id="matLinkDesc" placeholder="Description (optional)" style="width:100%;padding:9px;margin-bottom:8px;">
+            <input id="matLinkUrl" type="url" placeholder="https://..." required style="width:100%;padding:9px;margin-bottom:10px;">
+            <button type="submit" id="matLinkBtn" style="padding:10px 14px;">Add Link</button>
+        </form>
+
+    </div>
+
+    <div id="matList" style="margin-top:18px;"></div>
+
+</section>
 
             <!-- TESTS -->
 

@@ -3,9 +3,11 @@
    TEACHER DASHBOARD
    ========================================================= */
 
-
-const API_URL = "https://linguadeutschconnect.com/api";
-
+const API_URL =
+    ["localhost", "127.0.0.1"].includes(window.location.hostname) &&
+    window.location.port !== "5000"
+        ? "http://localhost:5000/api"
+        : "/api";
 const teacherToken =
     localStorage.getItem("ldc_teacher_token");
 
@@ -6147,5 +6149,160 @@ async function deleteResource(classId, resourceId) {
     }
 
 }
+(function () {
 
+    const API =
+        ["localhost", "127.0.0.1"].includes(location.hostname) && location.port !== "5000"
+            ? "http://localhost:5000/api"
+            : "/api";
+
+    const ORIGIN = API.replace(/\/api$/, "");
+    const token = () => localStorage.getItem("ldc_teacher_token");
+    const $ = id => document.getElementById(id);
+
+    const esc = v => String(v ?? "").replace(/[&<>"']/g,
+        c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[c]));
+
+    function say(text, ok = true) {
+        const box = $("matMessage");
+        box.textContent = text;
+        box.style.display = "block";
+        box.style.background = ok ? "rgba(53,201,120,.15)" : "rgba(239,83,80,.15)";
+        box.style.color = ok ? "#35c978" : "#ef5350";
+        setTimeout(() => (box.style.display = "none"), 4000);
+    }
+
+    async function api(path, options = {}) {
+        const res = await fetch(API + path, {
+            ...options,
+            headers: { Authorization: "Bearer " + token(), ...(options.headers || {}) }
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.message || "Request failed.");
+        return data;
+    }
+
+    function fileHref(url) {
+        if (!url) return "#";
+        return /^https?:\/\//i.test(url) ? url : ORIGIN + url;
+    }
+
+    async function loadClasses() {
+        const select = $("matClass");
+        try {
+            const data = await api("/teacher/classes");
+            const classes = data.classes || [];
+            select.innerHTML = classes.length
+                ? classes.map(c => `<option value="${esc(c.id)}">${esc(c.name)} (${esc(c.level || "")})</option>`).join("")
+                : `<option value="">No classes assigned</option>`;
+            if (classes.length) loadMaterials();
+        } catch (e) {
+            select.innerHTML = `<option value="">Could not load classes</option>`;
+            say(e.message, false);
+        }
+    }
+
+    async function loadMaterials() {
+        const classId = $("matClass").value;
+        const list = $("matList");
+        if (!classId) { list.innerHTML = ""; return; }
+
+        try {
+            const data = await api(`/teacher/classes/${classId}/materials`);
+            const items = data.materials || [];
+
+            list.innerHTML = items.length
+                ? items.map(m => {
+                    const isLink = m.type === "link";
+                    return `
+                    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;
+                                padding:12px;border:1px solid #353535;border-radius:10px;margin-bottom:8px;">
+                        <div style="min-width:0;">
+                            <strong>${isLink ? "🔗" : "📄"} ${esc(m.title)}</strong>
+                            ${m.description ? `<div style="font-size:12px;color:#929292;">${esc(m.description)}</div>` : ""}
+                            <div style="font-size:11px;color:#666;">${esc(m.file_name || m.url || "")}</div>
+                        </div>
+                        <div style="display:flex;gap:6px;flex-shrink:0;">
+                            <a href="${esc(fileHref(m.url))}" target="_blank" rel="noopener"
+                               style="padding:7px 10px;border:1px solid #d4af37;border-radius:7px;color:#d4af37;text-decoration:none;font-size:12px;">Open</a>
+                            <button type="button" data-del="${esc(m.id)}"
+                               style="padding:7px 10px;border:1px solid #ef5350;border-radius:7px;background:transparent;color:#ef5350;font-size:12px;">Delete</button>
+                        </div>
+                    </div>`;
+                }).join("")
+                : `<div style="color:#929292;text-align:center;padding:20px;">No materials for this class yet.</div>`;
+        } catch (e) {
+            list.innerHTML = "";
+            say(e.message, false);
+        }
+    }
+
+    $("matClass").addEventListener("change", loadMaterials);
+
+    $("matFileForm").addEventListener("submit", async e => {
+        e.preventDefault();
+        const classId = $("matClass").value;
+        const file = $("matFile").files[0];
+        if (!classId || !file) return say("Choose a class and a file.", false);
+
+        const fd = new FormData();
+        fd.append("file", file);
+        fd.append("title", $("matFileTitle").value.trim());
+        fd.append("description", $("matFileDesc").value.trim());
+
+        const btn = $("matFileBtn");
+        btn.disabled = true; btn.textContent = "Uploading...";
+
+        try {
+            await api(`/teacher/classes/${classId}/materials/upload`, { method: "POST", body: fd });
+            $("matFileForm").reset();
+            say("File uploaded. Students in this class can see it now.");
+            loadMaterials();
+        } catch (err) {
+            say(err.message, false);
+        } finally {
+            btn.disabled = false; btn.textContent = "Upload";
+        }
+    });
+
+    $("matLinkForm").addEventListener("submit", async e => {
+        e.preventDefault();
+        const classId = $("matClass").value;
+        if (!classId) return say("Choose a class first.", false);
+
+        try {
+            await api(`/teacher/classes/${classId}/materials`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    type: "link",
+                    title: $("matLinkTitle").value.trim(),
+                    description: $("matLinkDesc").value.trim(),
+                    url: $("matLinkUrl").value.trim()
+                })
+            });
+            $("matLinkForm").reset();
+            say("Link added. Students in this class can see it now.");
+            loadMaterials();
+        } catch (err) {
+            say(err.message, false);
+        }
+    });
+
+    $("matList").addEventListener("click", async e => {
+        const btn = e.target.closest("[data-del]");
+        if (!btn || !confirm("Delete this material?")) return;
+
+        try {
+            await api(`/teacher/classes/${$("matClass").value}/materials/${btn.dataset.del}`, { method: "DELETE" });
+            say("Material deleted.");
+            loadMaterials();
+        } catch (err) {
+            say(err.message, false);
+        }
+    });
+
+    loadClasses();
+
+})();
 initializeTeacherDashboard();

@@ -11,7 +11,11 @@
    CONFIGURATION
 ========================================================= */
 
-const API_URL = "/api";
+const API_URL =
+    ["localhost", "127.0.0.1"].includes(window.location.hostname) &&
+    window.location.port !== "5000"
+        ? "http://localhost:5000/api"
+        : "/api";
 
 const STUDENT_TOKEN_KEY = "ldc_token";
 const STUDENT_DATA_KEY = "ldc_student";

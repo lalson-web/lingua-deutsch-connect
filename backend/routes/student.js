@@ -4141,7 +4141,7 @@ router.get(
                     ON t.id = cm.teacher_id
                 WHERE cm.status = 'published'
                 ORDER BY cm.id DESC
-            `).all(req.student.id);
+            `).all(req.student.studentId);
 
             return res.json({ materials });
         } catch (error) {
@@ -4163,7 +4163,7 @@ router.get("/my-classes", authenticateStudent, (req, res) => {
             JOIN classes cl ON cl.id = e.class_id
             LEFT JOIN courses c ON c.id = cl.course_id
             WHERE e.student_id = ? AND e.status = 'active'
-        `).all(req.student.id);
+      `).all(req.student.studentId);
 
         res.json({ classes });
     } catch (error) {

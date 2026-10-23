@@ -5,7 +5,10 @@
    ATTENDANCE SYSTEM
 ========================================================= */
 
-const API_URL = "/api";
+const API_URL =
+    location.hostname === "localhost" || location.hostname === "127.0.0.1"
+        ? "http://localhost:5000/api"
+        : "/api";
 
 const STUDENT_TOKEN_KEY = "ldc_student_token";
 const STUDENT_DATA_KEY = "ldc_student";

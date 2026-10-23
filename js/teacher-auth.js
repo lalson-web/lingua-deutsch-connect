@@ -1,4 +1,8 @@
-const API_URL = "https://linguadeutschconnect.cloud/api";
+const API_URL =
+    ["localhost", "127.0.0.1"].includes(window.location.hostname) &&
+    window.location.port !== "5000"
+        ? "http://localhost:5000/api"
+        : "/api";
 
 const teacherLoginForm = document.getElementById("teacherLoginForm");
 const teacherMessage = document.getElementById("teacherMessage");
